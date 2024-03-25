@@ -1,0 +1,57 @@
+[PROJECT]
+Target=main.hex
+Processor_Text=PIC18F26K22
+CCSVersion=5.112
+Compiler=PCH
+[Target Data]
+FileList=main.c
+[main.c]
+Type=4
+[mru-list]
+1=main.c
+
+[fileformats]
+forcecoff=0
+
+[ProjectLog]
+Days=3
+D1=21-03-2024
+D1_L=4
+D1_L1=[27633]Project Opened.
+D1_L2=[27633]Project Closed.
+D1_L3=[38774]Project Opened.
+D1_L4=[38774]Project Closed.
+D2=23-03-2024
+D2_L=14
+D2_L1=[11876]Project Opened.
+D2_L2=[11876]Project Closed.
+D2_L3=[69293]Project Opened.
+D2_L4=[69294]Project Closed.
+D2_L5=[73618]Project Opened.
+D2_L6=[73619]Project Closed.
+D2_L7=[78349]Project Opened.
+D2_L8=[78350]Project Closed.
+D2_L9=[78658]Project Opened.
+D2_L10=[78961]Started Editing.
+D2_L11=[79430]Stopped Editing.
+TotalEdit=3
+TotalDebug=0
+D2_E=3
+D2_D=0
+D2_L12=[79511]Project Closed.
+D2_L13=[80574]Project Opened.
+D2_L14=[81214]Project Closed.
+D3=25-03-2024
+D3_L=1
+D3_L1=[49733]Project Opened.
+
+[Opened Files]
+1=main.c
+t1=1
+Count=1
+
+[defines]
+buildcount=3
+[Units]
+Count=1
+1=main (main)

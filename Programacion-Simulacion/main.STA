@@ -1,0 +1,48 @@
+
+ROM used:   1206/65536 (2%)
+            1206/65536 (2%) including unused fragments
+
+            1.1 Average locations per line
+            50.3 Average locations per statement
+
+RAM used:   10/3896 (0%) at main() level
+            21/3896 (1%) worst case
+
+Stack used: 1 worst case (1 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   80    24 100  main.c
+ 1036     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h
+----- -----
+ 1116    24 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0    490  20    6    734  3.8  main
+0     68   3    2             @ITOF
+0    346  14   14             @DIVFF
+0    242  10   11             @MULFF
+0     56   2    4             @SFTOI
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              24
+    Comments                192
+    Volume (V)              747
+    Difficulty (D)          3.5
+    Effort to implement (E) 2613
+    Time to implement (T)   2 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    110
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-0FFFE  1202  64330  
+
+
+
