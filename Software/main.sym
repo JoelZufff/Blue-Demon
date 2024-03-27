@@ -4,15 +4,15 @@
 002     @SCRATCH
 003     @SCRATCH
 005-006 main.ADC
-007-00A @DIVFF.P1
+007-008 @ITOF.P1
 007-00A @SFTOI.P2
-007-008 @ITOF.P3
+007-00A @DIVFF.P3
 007     main.@SCRATCH1
 008     main.@SCRATCH2
 009     main.@SCRATCH3
 00A     main.@SCRATCH4
-00B-00E @MULFF.P1
-00B-00E @DIVFF.P2
+00B-00E @DIVFF.P1
+00B-00E @MULFF.P2
 00F-012 @MULFF.P1
 00F     @DIVFF.@SCRATCH1
 010     @DIVFF.@SCRATCH2
@@ -23,22 +23,27 @@
 014     @DIVFF.@SCRATCH6
 014     @MULFF.@SCRATCH2
 015     @MULFF.@SCRATCH3
+F48     CCPTMRS1
 F49     CCPTMRS0
-F55     CCP_5
+F54     CCP5CON
 F55     CCP_5_LOW
+F55     CCP_5
+F55     CCPR5L
 F56     CCP_5_HIGH
-F58     CCP_4_LOW
+F57     CCP4CON
+F58     CCPR4L
 F58     CCP_4
+F58     CCP_4_LOW
 F59     CCP_4_HIGH
 F5D     CCP3CON
 F5E     CCPR3L
-F5E     CCP_3
 F5E     CCP_3_LOW
+F5E     CCP_3
 F5F     CCP_3_HIGH
 F66     CCP2CON
-F67     CCPR2L
-F67     CCP_2
 F67     CCP_2_LOW
+F67     CCP_2
+F67     CCPR2L
 F68     CCP_2_HIGH
 F78.6   C2OUT
 F79.6   C1OUT
@@ -48,21 +53,21 @@ F94     TRISC
 FBA     T2CON
 FBB     PR2
 FBD     CCP1CON
-FBE     CCP_1
 FBE     CCPR1L
+FBE     CCP_1
 FBE     CCP_1_LOW
 FBF     CCP_1_HIGH
 FC0     ADCON2
 FC2     ADCON0
 FC2.1   DONE
-FE1-FE2 @WRITE_PACKED_MEMORY.P1
-FE1-FE2 @READ_PACKED_MEMORY.P2
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
 FE9-FEA @READ_PROGRAM_MEMORY.P1
 FE9-FEA @READ_PACKED_MEMORY.P2
 FE9-FEA @WRITE_PACKED_MEMORY.P3
 FE9-FEA @WRITE_PROGRAM_MEMORY.P4
-FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
-FF6-FF8 @READ_PROGRAM_MEMORY.P2
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
 
 ROM Allocation:
 000004  @ITOF
@@ -74,18 +79,18 @@ ROM Allocation:
 0002DE  @cinit2
 
 Project Directory:
-    c:\Users\diego\Desktop\Terreneitor\Programacion-Simulacion\
+    C:\Users\diego\Desktop\Terreneitor\Programacion-Simulacion\
 
 Project Files:
-    main.c                                                  [25-mar.-24 13:47  CRC=E5E83BDA]
+    main.c                                                  [27-mar.-24 00:03  CRC=F2E03634]
     ..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h [21-oct.-22 11:06  CRC=D568D24D]
 
-Source signature=90B9E074
+Source signature=9DB1DACE
 Program memory checksum=0000
-Hex file CRC=886F
+Hex file CRC=EAB8
 
 Units:
-    c:\Users\diego\Desktop\Terreneitor\Programacion-Simulacion\main (main)
+    C:\Users\diego\Desktop\Terreneitor\Programacion-Simulacion\main (main)
 
 Compiler Settings:
     Processor:      PIC18F26K22

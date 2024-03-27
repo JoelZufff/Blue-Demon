@@ -34,7 +34,7 @@ D2_L8=[78350]Project Closed.
 D2_L9=[78658]Project Opened.
 D2_L10=[78961]Started Editing.
 D2_L11=[79430]Stopped Editing.
-TotalEdit=3
+TotalEdit=4
 TotalDebug=0
 D2_E=3
 D2_D=0
@@ -42,8 +42,13 @@ D2_L12=[79511]Project Closed.
 D2_L13=[80574]Project Opened.
 D2_L14=[81214]Project Closed.
 D3=25-03-2024
-D3_L=1
+D3_L=4
 D3_L1=[49733]Project Opened.
+D3_L2=[50927]Started Editing.
+D3_L3=[50938]Stopped Editing.
+D3_E=1
+D3_D=0
+D3_L4=[50938]Project Closed.
 
 [Opened Files]
 1=main.c

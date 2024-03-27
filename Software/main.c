@@ -18,12 +18,19 @@ const int16 *ADRES          = 0xFC3;
 #BYTE       CCP1CON         = 0xFBD
 #BYTE       CCPR1L          = 0xFBE
 #BYTE       CCPTMRS0        = 0xF49
+#BYTE       CCPTMRS1        = 0xF48
 
 #BYTE       CCP2CON         = 0xF66
 #BYTE       CCPR2L          = 0xF67
 
 #BYTE       CCP3CON         = 0xF5D
 #BYTE       CCPR3L          = 0xF5E
+
+#BYTE       CCP4CON         = 0xF57
+#BYTE       CCPR4L          = 0xF58
+
+#BYTE       CCP5CON         = 0xF54
+#BYTE       CCPR5L          = 0xF55
 
 #BYTE       T2CON           = 0xFBA
 #BYTE       PR2             = 0xFBB
@@ -52,9 +59,9 @@ void main()
     T2CON       = 0b00000111;
     PR2         = 249;
     
-    CCPTMRS0    = 0b00000000;       // Configuramos CCP1, CCP2 y CCP3 con timer 2
+    CCPTMRS0 = CCPTMRS0 = 0b00000000;       // Configuramos CCPX con timer 2
 
-    CCP1CON = CCP2CON = CCP3CON = 0b10001100;
+    CCP1CON = CCP2CON = CCP3CON = CCP4CON = CCP5CON = 0b10001100;
 
     int16 ADC;
 
@@ -63,7 +70,8 @@ void main()
         ADCON0  = 0b00000011;
         delay_us(10);
         ADC = (*ADRES / 1023.0 * 1000);
-        CCPR1L = ADC >> 2;
+        CCPR1L = CCPR4L = ADC >> 2;
+        CCPR5L = (1000 - ADC) >> 2;
         //printf("ADCON0 = %lu\r\n", (int16) CCPR1L << 2);
 
         ADCON0  = 0b00000111;

@@ -1,9 +1,9 @@
-CCS PCH C Compiler, Version 5.112, 29001               25-mar.-24 13:56
+CCS PCH C Compiler, Version 5.112, 29001               27-mar.-24 00:03
 
-               Filename:   c:\Users\diego\Desktop\Terreneitor\Programacion-Simulacion\main.lst
+               Filename:   C:\Users\diego\Desktop\Terreneitor\Programacion-Simulacion\main.lst
 
-               ROM used:   1206 bytes (2%)
-                           Largest free fragment is 64330
+               ROM used:   1252 bytes (2%)
+                           Largest free fragment is 64284
                RAM used:   10 (0%) at main() level
                            21 (1%) worst case
                Stack used: 1 locations
@@ -382,12 +382,19 @@ CCS PCH C Compiler, Version 5.112, 29001               25-mar.-24 13:56
 .................... #BYTE       CCP1CON         = 0xFBD
 .................... #BYTE       CCPR1L          = 0xFBE
 .................... #BYTE       CCPTMRS0        = 0xF49
+.................... #BYTE       CCPTMRS1        = 0xF48
 .................... 
 .................... #BYTE       CCP2CON         = 0xF66
 .................... #BYTE       CCPR2L          = 0xF67
 .................... 
 .................... #BYTE       CCP3CON         = 0xF5D
 .................... #BYTE       CCPR3L          = 0xF5E
+.................... 
+.................... #BYTE       CCP4CON         = 0xF57
+.................... #BYTE       CCPR4L          = 0xF58
+.................... 
+.................... #BYTE       CCP5CON         = 0xF54
+.................... #BYTE       CCPR5L          = 0xF55
 .................... 
 .................... #BYTE       T2CON           = 0xFBA
 .................... #BYTE       PR2             = 0xFBB
@@ -437,190 +444,210 @@ CCS PCH C Compiler, Version 5.112, 29001               25-mar.-24 13:56
 002F2:  MOVLW  F9
 002F4:  MOVWF  FBB
 ....................     
-....................     CCPTMRS0    = 0b00000000;       // Configuramos CCP1, CCP2 y CCP3 con timer 2
+....................     CCPTMRS0 = CCPTMRS0 = 0b00000000;       // Configuramos CCPX con timer 2
 002F6:  CLRF   x49
 .................... 
-....................     CCP1CON = CCP2CON = CCP3CON = 0b10001100;
+....................     CCP1CON = CCP2CON = CCP3CON = CCP4CON = CCP5CON = 0b10001100;
 002F8:  MOVLW  8C
-002FA:  MOVWF  x5D
-002FC:  MOVFF  F5D,F66
-00300:  MOVFF  F66,FBD
+002FA:  MOVWF  x54
+002FC:  MOVFF  F54,F57
+00300:  MOVFF  F57,F5D
+00304:  MOVFF  F5D,F66
+00308:  MOVFF  F66,FBD
 .................... 
 ....................     int16 ADC;
 .................... 
 ....................     while (TRUE)
 ....................     {
 ....................         ADCON0  = 0b00000011;
-00304:  MOVLW  03
-00306:  MOVWF  FC2
+0030C:  MOVLW  03
+0030E:  MOVWF  FC2
 ....................         delay_us(10);
-00308:  MOVLW  0D
-0030A:  MOVWF  00
-0030C:  DECFSZ 00,F
-0030E:  BRA    030C
+00310:  MOVLW  0D
+00312:  MOVWF  00
+00314:  DECFSZ 00,F
+00316:  BRA    0314
 ....................         ADC = (*ADRES / 1023.0 * 1000);
-00310:  MOVFF  FC4,08
-00314:  MOVFF  FC3,07
-00318:  MOVLB  0
-0031A:  RCALL  0004
-0031C:  MOVFF  03,0A
-00320:  MOVFF  02,09
-00324:  MOVFF  01,08
-00328:  MOVFF  00,07
-0032C:  CLRF   0E
-0032E:  MOVLW  C0
-00330:  MOVWF  0D
-00332:  MOVLW  7F
-00334:  MOVWF  0C
-00336:  MOVLW  88
-00338:  MOVWF  0B
-0033A:  RCALL  0048
-0033C:  MOVFF  03,0A
-00340:  MOVFF  02,09
-00344:  MOVFF  01,08
-00348:  MOVFF  00,07
-0034C:  MOVFF  03,0E
-00350:  MOVFF  02,0D
-00354:  MOVFF  01,0C
-00358:  MOVFF  00,0B
-0035C:  CLRF   12
-0035E:  CLRF   11
-00360:  MOVLW  7A
-00362:  MOVWF  10
-00364:  MOVLW  88
-00366:  MOVWF  0F
-00368:  RCALL  01A2
-0036A:  MOVFF  03,0A
-0036E:  MOVFF  02,09
-00372:  MOVFF  01,08
-00376:  MOVFF  00,07
-0037A:  RCALL  0294
-0037C:  MOVFF  02,06
-00380:  MOVFF  01,05
-....................         CCPR1L = ADC >> 2;
-00384:  RRCF   06,W
-00386:  MOVWF  03
-00388:  RRCF   05,W
-0038A:  MOVWF  02
-0038C:  RRCF   03,F
-0038E:  RRCF   02,F
-00390:  MOVFF  02,FBE
+00318:  MOVFF  FC4,08
+0031C:  MOVFF  FC3,07
+00320:  MOVLB  0
+00322:  RCALL  0004
+00324:  MOVFF  03,0A
+00328:  MOVFF  02,09
+0032C:  MOVFF  01,08
+00330:  MOVFF  00,07
+00334:  CLRF   0E
+00336:  MOVLW  C0
+00338:  MOVWF  0D
+0033A:  MOVLW  7F
+0033C:  MOVWF  0C
+0033E:  MOVLW  88
+00340:  MOVWF  0B
+00342:  RCALL  0048
+00344:  MOVFF  03,0A
+00348:  MOVFF  02,09
+0034C:  MOVFF  01,08
+00350:  MOVFF  00,07
+00354:  MOVFF  03,0E
+00358:  MOVFF  02,0D
+0035C:  MOVFF  01,0C
+00360:  MOVFF  00,0B
+00364:  CLRF   12
+00366:  CLRF   11
+00368:  MOVLW  7A
+0036A:  MOVWF  10
+0036C:  MOVLW  88
+0036E:  MOVWF  0F
+00370:  RCALL  01A2
+00372:  MOVFF  03,0A
+00376:  MOVFF  02,09
+0037A:  MOVFF  01,08
+0037E:  MOVFF  00,07
+00382:  RCALL  0294
+00384:  MOVFF  02,06
+00388:  MOVFF  01,05
+....................         CCPR1L = CCPR4L = ADC >> 2;
+0038C:  RRCF   06,W
+0038E:  MOVWF  03
+00390:  RRCF   05,W
+00392:  MOVWF  02
+00394:  RRCF   03,F
+00396:  RRCF   02,F
+00398:  MOVFF  02,F58
+0039C:  MOVLB  F
+0039E:  MOVFF  F58,FBE
+....................         CCPR5L = (1000 - ADC) >> 2;
+003A2:  MOVLW  E8
+003A4:  BSF    FD8.0
+003A6:  SUBFWB 05,W
+003A8:  MOVWF  07
+003AA:  MOVLW  03
+003AC:  SUBFWB 06,W
+003AE:  MOVWF  08
+003B0:  RRCF   08,W
+003B2:  MOVWF  03
+003B4:  RRCF   07,W
+003B6:  MOVWF  02
+003B8:  RRCF   03,F
+003BA:  RRCF   02,F
+003BC:  MOVFF  02,F55
 ....................         //printf("ADCON0 = %lu\r\n", (int16) CCPR1L << 2);
 .................... 
 ....................         ADCON0  = 0b00000111;
-00394:  MOVLW  07
-00396:  MOVWF  FC2
+003C0:  MOVLW  07
+003C2:  MOVWF  FC2
 ....................         delay_us(10);
-00398:  MOVLW  0D
-0039A:  MOVWF  00
-0039C:  DECFSZ 00,F
-0039E:  BRA    039C
+003C4:  MOVLW  0D
+003C6:  MOVWF  00
+003C8:  DECFSZ 00,F
+003CA:  BRA    03C8
 ....................         ADC = (*ADRES / 1023.0 * 1000);
-003A0:  MOVFF  FC4,08
-003A4:  MOVFF  FC3,07
-003A8:  RCALL  0004
-003AA:  MOVFF  03,0A
-003AE:  MOVFF  02,09
-003B2:  MOVFF  01,08
-003B6:  MOVFF  00,07
-003BA:  CLRF   0E
-003BC:  MOVLW  C0
-003BE:  MOVWF  0D
-003C0:  MOVLW  7F
-003C2:  MOVWF  0C
-003C4:  MOVLW  88
-003C6:  MOVWF  0B
-003C8:  RCALL  0048
-003CA:  MOVFF  03,0A
-003CE:  MOVFF  02,09
-003D2:  MOVFF  01,08
-003D6:  MOVFF  00,07
-003DA:  MOVFF  03,0E
-003DE:  MOVFF  02,0D
-003E2:  MOVFF  01,0C
-003E6:  MOVFF  00,0B
-003EA:  CLRF   12
-003EC:  CLRF   11
-003EE:  MOVLW  7A
-003F0:  MOVWF  10
+003CC:  MOVFF  FC4,08
+003D0:  MOVFF  FC3,07
+003D4:  MOVLB  0
+003D6:  RCALL  0004
+003D8:  MOVFF  03,0A
+003DC:  MOVFF  02,09
+003E0:  MOVFF  01,08
+003E4:  MOVFF  00,07
+003E8:  CLRF   0E
+003EA:  MOVLW  C0
+003EC:  MOVWF  0D
+003EE:  MOVLW  7F
+003F0:  MOVWF  0C
 003F2:  MOVLW  88
-003F4:  MOVWF  0F
-003F6:  RCALL  01A2
+003F4:  MOVWF  0B
+003F6:  RCALL  0048
 003F8:  MOVFF  03,0A
 003FC:  MOVFF  02,09
 00400:  MOVFF  01,08
 00404:  MOVFF  00,07
-00408:  RCALL  0294
-0040A:  MOVFF  02,06
-0040E:  MOVFF  01,05
+00408:  MOVFF  03,0E
+0040C:  MOVFF  02,0D
+00410:  MOVFF  01,0C
+00414:  MOVFF  00,0B
+00418:  CLRF   12
+0041A:  CLRF   11
+0041C:  MOVLW  7A
+0041E:  MOVWF  10
+00420:  MOVLW  88
+00422:  MOVWF  0F
+00424:  RCALL  01A2
+00426:  MOVFF  03,0A
+0042A:  MOVFF  02,09
+0042E:  MOVFF  01,08
+00432:  MOVFF  00,07
+00436:  RCALL  0294
+00438:  MOVFF  02,06
+0043C:  MOVFF  01,05
 ....................         CCPR2L  = ADC >> 2;
-00412:  RRCF   06,W
-00414:  MOVWF  03
-00416:  RRCF   05,W
-00418:  MOVWF  02
-0041A:  RRCF   03,F
-0041C:  RRCF   02,F
-0041E:  MOVFF  02,F67
+00440:  RRCF   06,W
+00442:  MOVWF  03
+00444:  RRCF   05,W
+00446:  MOVWF  02
+00448:  RRCF   03,F
+0044A:  RRCF   02,F
+0044C:  MOVFF  02,F67
 .................... 
 ....................         ADCON0  = 0b00001011;
-00422:  MOVLW  0B
-00424:  MOVWF  FC2
+00450:  MOVLW  0B
+00452:  MOVWF  FC2
 ....................         delay_us(10);
-00426:  MOVLW  0D
-00428:  MOVWF  00
-0042A:  DECFSZ 00,F
-0042C:  BRA    042A
+00454:  MOVLW  0D
+00456:  MOVWF  00
+00458:  DECFSZ 00,F
+0045A:  BRA    0458
 ....................         ADC = (*ADRES / 1023.0 * 1000);
-0042E:  MOVFF  FC4,08
-00432:  MOVFF  FC3,07
-00436:  RCALL  0004
-00438:  MOVFF  03,0A
-0043C:  MOVFF  02,09
-00440:  MOVFF  01,08
-00444:  MOVFF  00,07
-00448:  CLRF   0E
-0044A:  MOVLW  C0
-0044C:  MOVWF  0D
-0044E:  MOVLW  7F
-00450:  MOVWF  0C
-00452:  MOVLW  88
-00454:  MOVWF  0B
-00456:  RCALL  0048
-00458:  MOVFF  03,0A
-0045C:  MOVFF  02,09
-00460:  MOVFF  01,08
-00464:  MOVFF  00,07
-00468:  MOVFF  03,0E
-0046C:  MOVFF  02,0D
-00470:  MOVFF  01,0C
-00474:  MOVFF  00,0B
-00478:  CLRF   12
-0047A:  CLRF   11
-0047C:  MOVLW  7A
-0047E:  MOVWF  10
+0045C:  MOVFF  FC4,08
+00460:  MOVFF  FC3,07
+00464:  RCALL  0004
+00466:  MOVFF  03,0A
+0046A:  MOVFF  02,09
+0046E:  MOVFF  01,08
+00472:  MOVFF  00,07
+00476:  CLRF   0E
+00478:  MOVLW  C0
+0047A:  MOVWF  0D
+0047C:  MOVLW  7F
+0047E:  MOVWF  0C
 00480:  MOVLW  88
-00482:  MOVWF  0F
-00484:  RCALL  01A2
+00482:  MOVWF  0B
+00484:  RCALL  0048
 00486:  MOVFF  03,0A
 0048A:  MOVFF  02,09
 0048E:  MOVFF  01,08
 00492:  MOVFF  00,07
-00496:  RCALL  0294
-00498:  MOVFF  02,06
-0049C:  MOVFF  01,05
+00496:  MOVFF  03,0E
+0049A:  MOVFF  02,0D
+0049E:  MOVFF  01,0C
+004A2:  MOVFF  00,0B
+004A6:  CLRF   12
+004A8:  CLRF   11
+004AA:  MOVLW  7A
+004AC:  MOVWF  10
+004AE:  MOVLW  88
+004B0:  MOVWF  0F
+004B2:  RCALL  01A2
+004B4:  MOVFF  03,0A
+004B8:  MOVFF  02,09
+004BC:  MOVFF  01,08
+004C0:  MOVFF  00,07
+004C4:  RCALL  0294
+004C6:  MOVFF  02,06
+004CA:  MOVFF  01,05
 ....................         CCPR3L  = ADC >> 2;
-004A0:  RRCF   06,W
-004A2:  MOVWF  03
-004A4:  RRCF   05,W
-004A6:  MOVWF  02
-004A8:  RRCF   03,F
-004AA:  RRCF   02,F
-004AC:  MOVFF  02,F5E
-004B0:  MOVLB  F
-004B2:  BRA    0304
+004CE:  RRCF   06,W
+004D0:  MOVWF  03
+004D2:  RRCF   05,W
+004D4:  MOVWF  02
+004D6:  RRCF   03,F
+004D8:  RRCF   02,F
+004DA:  MOVFF  02,F5E
+004DE:  MOVLB  F
+004E0:  BRA    030C
 ....................     }
 .................... }
-004B4:  SLEEP 
+004E2:  SLEEP 
 
 Configuration Fuses:
    Word  1: E200   HSH NOPLLEN PRIMARY FCMEN IESO
