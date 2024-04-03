@@ -1,0 +1,810 @@
+CCS PCH C Compiler, Version 5.112, 29001               02-abr.-24 21:33
+
+               Filename:   C:\Users\diego\Desktop\Terreneitor\Software\main.lst
+
+               ROM used:   1452 bytes (2%)
+                           Largest free fragment is 64084
+               RAM used:   39 (1%) at main() level
+                           48 (1%) worst case
+               Stack used: 2 locations
+               Stack size: 31
+
+*
+00000:  GOTO   03E6
+.................... // --------------- Preprocesadores de microcontrolador -------------- //
+.................... #include    <18F26K22.h>                                                // Libreria del Microcontrolador
+.................... //////////// Standard Header file for the PIC18F26K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F26K22
+*
+00034:  MOVF   28,W
+00036:  ANDLW  07
+00038:  MOVWF  00
+0003A:  RRCF   28,W
+0003C:  MOVWF  01
+0003E:  RRCF   01,F
+00040:  RRCF   01,F
+00042:  MOVLW  1F
+00044:  ANDWF  01,F
+00046:  MOVF   01,W
+00048:  ADDWF  2A,W
+0004A:  MOVWF  FE9
+0004C:  MOVLW  00
+0004E:  ADDWFC 2B,W
+00050:  MOVWF  FEA
+00052:  CLRF   01
+00054:  INCF   01,F
+00056:  INCF   00,F
+00058:  BRA    005C
+0005A:  RLCF   01,F
+0005C:  DECFSZ 00,F
+0005E:  BRA    005A
+00060:  MOVF   29,F
+00062:  BZ    006A
+00064:  MOVF   01,W
+00066:  IORWF  FEF,F
+00068:  BRA    0070
+0006A:  COMF   01,F
+0006C:  MOVF   01,W
+0006E:  ANDWF  FEF,F
+00070:  RETURN 0
+*
+00124:  MOVLW  8E
+00126:  MOVWF  00
+00128:  MOVFF  22,01
+0012C:  MOVFF  21,02
+00130:  CLRF   03
+00132:  MOVF   01,F
+00134:  BNZ   0148
+00136:  MOVFF  02,01
+0013A:  CLRF   02
+0013C:  MOVLW  08
+0013E:  SUBWF  00,F
+00140:  MOVF   01,F
+00142:  BNZ   0148
+00144:  CLRF   00
+00146:  BRA    0158
+00148:  BCF    FD8.0
+0014A:  BTFSC  01.7
+0014C:  BRA    0156
+0014E:  RLCF   02,F
+00150:  RLCF   01,F
+00152:  DECF   00,F
+00154:  BRA    0148
+00156:  BCF    01.7
+00158:  GOTO   0490 (RETURN)
+0015C:  MOVF   21,W
+0015E:  BTFSC  FD8.2
+00160:  BRA    02AC
+00162:  MOVWF  2D
+00164:  MOVF   25,W
+00166:  BTFSC  FD8.2
+00168:  BRA    02AC
+0016A:  SUBWF  2D,F
+0016C:  BNC   0178
+0016E:  MOVLW  7F
+00170:  ADDWF  2D,F
+00172:  BTFSC  FD8.0
+00174:  BRA    02AC
+00176:  BRA    0184
+00178:  MOVLW  81
+0017A:  SUBWF  2D,F
+0017C:  BTFSS  FD8.0
+0017E:  BRA    02AC
+00180:  BTFSC  FD8.2
+00182:  BRA    02AC
+00184:  MOVFF  2D,00
+00188:  CLRF   01
+0018A:  CLRF   02
+0018C:  CLRF   03
+0018E:  CLRF   2C
+00190:  MOVFF  22,2B
+00194:  BSF    2B.7
+00196:  MOVFF  23,2A
+0019A:  MOVFF  24,29
+0019E:  MOVLW  19
+001A0:  MOVWF  2D
+001A2:  MOVF   28,W
+001A4:  SUBWF  29,F
+001A6:  BC    01C2
+001A8:  MOVLW  01
+001AA:  SUBWF  2A,F
+001AC:  BC    01C2
+001AE:  SUBWF  2B,F
+001B0:  BC    01C2
+001B2:  SUBWF  2C,F
+001B4:  BC    01C2
+001B6:  INCF   2C,F
+001B8:  INCF   2B,F
+001BA:  INCF   2A,F
+001BC:  MOVF   28,W
+001BE:  ADDWF  29,F
+001C0:  BRA    0212
+001C2:  MOVF   27,W
+001C4:  SUBWF  2A,F
+001C6:  BC    01EC
+001C8:  MOVLW  01
+001CA:  SUBWF  2B,F
+001CC:  BC    01EC
+001CE:  SUBWF  2C,F
+001D0:  BC    01EC
+001D2:  INCF   2C,F
+001D4:  INCF   2B,F
+001D6:  MOVF   27,W
+001D8:  ADDWF  2A,F
+001DA:  MOVF   28,W
+001DC:  ADDWF  29,F
+001DE:  BNC   0212
+001E0:  INCF   2A,F
+001E2:  BNZ   0212
+001E4:  INCF   2B,F
+001E6:  BNZ   0212
+001E8:  INCF   2C,F
+001EA:  BRA    0212
+001EC:  MOVF   26,W
+001EE:  IORLW  80
+001F0:  SUBWF  2B,F
+001F2:  BC    0210
+001F4:  MOVLW  01
+001F6:  SUBWF  2C,F
+001F8:  BC    0210
+001FA:  INCF   2C,F
+001FC:  MOVF   26,W
+001FE:  IORLW  80
+00200:  ADDWF  2B,F
+00202:  MOVF   27,W
+00204:  ADDWF  2A,F
+00206:  BNC   01DA
+00208:  INCF   2B,F
+0020A:  BNZ   01DA
+0020C:  INCF   2C,F
+0020E:  BRA    01DA
+00210:  BSF    03.0
+00212:  DECFSZ 2D,F
+00214:  BRA    0218
+00216:  BRA    022E
+00218:  BCF    FD8.0
+0021A:  RLCF   29,F
+0021C:  RLCF   2A,F
+0021E:  RLCF   2B,F
+00220:  RLCF   2C,F
+00222:  BCF    FD8.0
+00224:  RLCF   03,F
+00226:  RLCF   02,F
+00228:  RLCF   01,F
+0022A:  RLCF   2E,F
+0022C:  BRA    01A2
+0022E:  BTFSS  2E.0
+00230:  BRA    023E
+00232:  BCF    FD8.0
+00234:  RRCF   01,F
+00236:  RRCF   02,F
+00238:  RRCF   03,F
+0023A:  RRCF   2E,F
+0023C:  BRA    0242
+0023E:  DECF   00,F
+00240:  BZ    02AC
+00242:  BTFSC  2E.7
+00244:  BRA    0282
+00246:  BCF    FD8.0
+00248:  RLCF   29,F
+0024A:  RLCF   2A,F
+0024C:  RLCF   2B,F
+0024E:  RLCF   2C,F
+00250:  MOVF   28,W
+00252:  SUBWF  29,F
+00254:  BC    0264
+00256:  MOVLW  01
+00258:  SUBWF  2A,F
+0025A:  BC    0264
+0025C:  SUBWF  2B,F
+0025E:  BC    0264
+00260:  SUBWF  2C,F
+00262:  BNC   0298
+00264:  MOVF   27,W
+00266:  SUBWF  2A,F
+00268:  BC    0274
+0026A:  MOVLW  01
+0026C:  SUBWF  2B,F
+0026E:  BC    0274
+00270:  SUBWF  2C,F
+00272:  BNC   0298
+00274:  MOVF   26,W
+00276:  IORLW  80
+00278:  SUBWF  2B,F
+0027A:  BC    0282
+0027C:  MOVLW  01
+0027E:  SUBWF  2C,F
+00280:  BNC   0298
+00282:  INCF   03,F
+00284:  BNZ   0298
+00286:  INCF   02,F
+00288:  BNZ   0298
+0028A:  INCF   01,F
+0028C:  BNZ   0298
+0028E:  INCF   00,F
+00290:  BZ    02AC
+00292:  RRCF   01,F
+00294:  RRCF   02,F
+00296:  RRCF   03,F
+00298:  MOVFF  22,2D
+0029C:  MOVF   26,W
+0029E:  XORWF  2D,F
+002A0:  BTFSS  2D.7
+002A2:  BRA    02A8
+002A4:  BSF    01.7
+002A6:  BRA    02B4
+002A8:  BCF    01.7
+002AA:  BRA    02B4
+002AC:  CLRF   00
+002AE:  CLRF   01
+002B0:  CLRF   02
+002B2:  CLRF   03
+002B4:  GOTO   04B0 (RETURN)
+002B8:  MOVF   25,W
+002BA:  BTFSC  FD8.2
+002BC:  BRA    03A0
+002BE:  MOVWF  00
+002C0:  MOVF   29,W
+002C2:  BTFSC  FD8.2
+002C4:  BRA    03A0
+002C6:  ADDWF  00,F
+002C8:  BNC   02D2
+002CA:  MOVLW  81
+002CC:  ADDWF  00,F
+002CE:  BC    03A0
+002D0:  BRA    02DA
+002D2:  MOVLW  7F
+002D4:  SUBWF  00,F
+002D6:  BNC   03A0
+002D8:  BZ    03A0
+002DA:  MOVFF  26,2D
+002DE:  MOVF   2A,W
+002E0:  XORWF  2D,F
+002E2:  BSF    26.7
+002E4:  BSF    2A.7
+002E6:  MOVF   28,W
+002E8:  MULWF  2C
+002EA:  MOVFF  FF4,2F
+002EE:  MOVF   27,W
+002F0:  MULWF  2B
+002F2:  MOVFF  FF4,03
+002F6:  MOVFF  FF3,2E
+002FA:  MULWF  2C
+002FC:  MOVF   FF3,W
+002FE:  ADDWF  2F,F
+00300:  MOVF   FF4,W
+00302:  ADDWFC 2E,F
+00304:  MOVLW  00
+00306:  ADDWFC 03,F
+00308:  MOVF   28,W
+0030A:  MULWF  2B
+0030C:  MOVF   FF3,W
+0030E:  ADDWF  2F,F
+00310:  MOVF   FF4,W
+00312:  ADDWFC 2E,F
+00314:  MOVLW  00
+00316:  CLRF   02
+00318:  ADDWFC 03,F
+0031A:  ADDWFC 02,F
+0031C:  MOVF   26,W
+0031E:  MULWF  2C
+00320:  MOVF   FF3,W
+00322:  ADDWF  2E,F
+00324:  MOVF   FF4,W
+00326:  ADDWFC 03,F
+00328:  MOVLW  00
+0032A:  ADDWFC 02,F
+0032C:  MOVF   26,W
+0032E:  MULWF  2B
+00330:  MOVF   FF3,W
+00332:  ADDWF  03,F
+00334:  MOVF   FF4,W
+00336:  ADDWFC 02,F
+00338:  MOVLW  00
+0033A:  CLRF   01
+0033C:  ADDWFC 01,F
+0033E:  MOVF   28,W
+00340:  MULWF  2A
+00342:  MOVF   FF3,W
+00344:  ADDWF  2E,F
+00346:  MOVF   FF4,W
+00348:  ADDWFC 03,F
+0034A:  MOVLW  00
+0034C:  ADDWFC 02,F
+0034E:  ADDWFC 01,F
+00350:  MOVF   27,W
+00352:  MULWF  2A
+00354:  MOVF   FF3,W
+00356:  ADDWF  03,F
+00358:  MOVF   FF4,W
+0035A:  ADDWFC 02,F
+0035C:  MOVLW  00
+0035E:  ADDWFC 01,F
+00360:  MOVF   26,W
+00362:  MULWF  2A
+00364:  MOVF   FF3,W
+00366:  ADDWF  02,F
+00368:  MOVF   FF4,W
+0036A:  ADDWFC 01,F
+0036C:  INCF   00,F
+0036E:  BTFSC  01.7
+00370:  BRA    037C
+00372:  RLCF   2E,F
+00374:  RLCF   03,F
+00376:  RLCF   02,F
+00378:  RLCF   01,F
+0037A:  DECF   00,F
+0037C:  MOVLW  00
+0037E:  BTFSS  2E.7
+00380:  BRA    0396
+00382:  INCF   03,F
+00384:  ADDWFC 02,F
+00386:  ADDWFC 01,F
+00388:  MOVF   01,W
+0038A:  BNZ   0396
+0038C:  MOVF   02,W
+0038E:  BNZ   0396
+00390:  MOVF   03,W
+00392:  BNZ   0396
+00394:  INCF   00,F
+00396:  BTFSC  2D.7
+00398:  BSF    01.7
+0039A:  BTFSS  2D.7
+0039C:  BCF    01.7
+0039E:  BRA    03A8
+003A0:  CLRF   00
+003A2:  CLRF   01
+003A4:  CLRF   02
+003A6:  CLRF   03
+003A8:  GOTO   04DE (RETURN)
+003AC:  MOVLW  8E
+003AE:  MOVWF  00
+003B0:  MOVF   21,W
+003B2:  SUBWF  00,F
+003B4:  MOVFF  22,02
+003B8:  MOVFF  23,01
+003BC:  BSF    02.7
+003BE:  MOVF   00,F
+003C0:  BZ    03D4
+003C2:  BCF    FD8.0
+003C4:  MOVF   02,F
+003C6:  BNZ   03CC
+003C8:  MOVF   01,F
+003CA:  BZ    03D4
+003CC:  RRCF   02,F
+003CE:  RRCF   01,F
+003D0:  DECFSZ 00,F
+003D2:  BRA    03C2
+003D4:  BTFSS  22.7
+003D6:  BRA    03E2
+003D8:  COMF   01,F
+003DA:  COMF   02,F
+003DC:  INCF   01,F
+003DE:  BTFSC  FD8.2
+003E0:  INCF   02,F
+003E2:  GOTO   04F0 (RETURN)
+.................... 
+.................... #list
+.................... 
+.................... #fuses      INTRC_IO, NOWDT, NOPROTECT, NOLVP, NOMCLR, CCP2C1, CCP3C6   // Fusibles (Multiplexado de P2B en C0)
+.................... #use        delay(clock = 16M, crystal = 16M)                           // Configuracion de frecuencia y delay
+.................... //#use        rs232(rcv = pin_b7, xmit = pin_b6, baud = 9600, bits = 8, parity = n) 
+.................... 
+.................... #define RIGHT   1
+.................... #define LEFT    0
+.................... 
+.................... // --------------------- Direccion de registros --------------------- //
+.................... #BYTE       TRISA           = 0xF92
+.................... #BYTE       TRISB           = 0xF93
+.................... #BYTE       TRISC           = 0xF94
+.................... #BIT        BUTTON          = 0xF80.1
+.................... 
+.................... const int16 *ADRES          = 0xFC3;
+.................... #BYTE       ADCON0          = 0xFC2
+.................... #BIT        DONE            = 0xFC2.1
+.................... #BYTE       ADCON2          = 0xFC0
+.................... 
+.................... #BYTE       CCPTMRS0        = 0xF49
+.................... #BYTE       CCPTMRS1        = 0xF48
+.................... 
+.................... #BYTE       CCP1CON         = 0xFBD
+.................... #BYTE       CCP2CON         = 0xF66
+.................... #BYTE       CCP3CON         = 0xF5D
+.................... #BYTE       CCP4CON         = 0xF57
+.................... 
+.................... #BYTE       T2CON           = 0xFBA
+.................... #BYTE       PR2             = 0xFBB
+.................... 
+.................... // -------------------------- Estructuras --------------------------- //
+.................... struct wheel_t
+.................... {
+....................     int     *DutyCicle;
+....................     long    in_pins[2];
+.................... };
+.................... 
+.................... // ----------------------- Variable Globales ------------------------ //
+.................... struct wheel_t wheels[4] = 
+.................... {
+....................     { 0xFBE, { PIN_B1, PIN_B2 } },  /* Rueda A */ 
+....................     { 0xF67, { PIN_B3, PIN_B4 } },  /* Rueda B */
+....................     { 0xF5E, { PIN_B5, PIN_B6 } },  /* Rueda C */
+....................     { 0xF58, { PIN_C3, PIN_C4 } }   /* Rueda D */
+.................... };
+.................... 
+.................... // -------------------------- Interrupciones ------------------------ //
+.................... 
+.................... 
+.................... // ---------------------------- Funciones --------------------------- //
+.................... void log_init()
+.................... {
+....................     // Configuracion de pines GPIO
+....................     TRISA       = 0b00000011;
+*
+00004:  MOVLW  03
+00006:  MOVWF  F92
+....................     TRISB       = 0b00000000;
+00008:  CLRF   F93
+....................     TRISC       = 0b00000000;
+0000A:  CLRF   F94
+.................... 
+....................     // Configuracion de ADC
+....................     ADCON0      = 0b00000011;
+0000C:  MOVWF  FC2
+....................     ADCON2      = 0b10000000;
+0000E:  MOVLW  80
+00010:  MOVWF  FC0
+.................... 
+....................     // Configuracion de Timers
+....................     T2CON       = 0b00000111;
+00012:  MOVLW  07
+00014:  MOVWF  FBA
+....................     PR2         = 249;
+00016:  MOVLW  F9
+00018:  MOVWF  FBB
+....................     
+....................     // Configuracion de CCPXCON para PWM
+....................     CCPTMRS0 = CCPTMRS0 = 0b00000000;       // Configuramos CCPX con timer 2
+0001A:  MOVLB  F
+0001C:  CLRF   x49
+....................     CCP1CON = CCP2CON = CCP3CON = CCP4CON = 0b00001100;
+0001E:  MOVLW  0C
+00020:  MOVWF  x57
+00022:  MOVFF  F57,F5D
+00026:  MOVFF  F5D,F66
+0002A:  MOVFF  F66,FBD
+0002E:  MOVLB  0
+00030:  GOTO   045C (RETURN)
+.................... }
+.................... 
+.................... void wheel_movement(int wheel_index, int1 direction)
+.................... {
+....................     output_bit(wheels[wheel_index].in_pins[0], direction);
+*
+00072:  MOVF   22,W
+00074:  MULLW  06
+00076:  MOVF   FF3,W
+00078:  CLRF   25
+0007A:  MOVWF  24
+0007C:  MOVLW  02
+0007E:  ADDWF  24,F
+00080:  MOVLW  00
+00082:  ADDWFC 25,F
+00084:  MOVLW  04
+00086:  ADDWF  24,W
+00088:  MOVWF  FE9
+0008A:  MOVLW  00
+0008C:  ADDWFC 25,W
+0008E:  MOVWF  FEA
+00090:  MOVFF  FEC,27
+00094:  MOVF   FED,F
+00096:  MOVFF  FEF,26
+0009A:  MOVF   23,F
+0009C:  BNZ   00A2
+0009E:  MOVLW  00
+000A0:  BRA    00A4
+000A2:  MOVLW  01
+000A4:  MOVFF  26,28
+000A8:  MOVWF  29
+000AA:  MOVLW  0F
+000AC:  MOVWF  2B
+000AE:  MOVLW  89
+000B0:  MOVWF  2A
+000B2:  RCALL  0034
+000B4:  MOVFF  26,28
+000B8:  CLRF   29
+000BA:  MOVLW  0F
+000BC:  MOVWF  2B
+000BE:  MOVLW  92
+000C0:  MOVWF  2A
+000C2:  RCALL  0034
+....................     output_bit(wheels[wheel_index].in_pins[1], !direction);
+000C4:  MOVF   22,W
+000C6:  MULLW  06
+000C8:  MOVF   FF3,W
+000CA:  CLRF   25
+000CC:  MOVWF  24
+000CE:  MOVLW  02
+000D0:  ADDWF  24,F
+000D2:  MOVLW  00
+000D4:  ADDWFC 25,F
+000D6:  MOVLW  02
+000D8:  ADDWF  24,W
+000DA:  MOVWF  01
+000DC:  MOVLW  00
+000DE:  ADDWFC 25,W
+000E0:  MOVWF  03
+000E2:  MOVF   01,W
+000E4:  ADDLW  04
+000E6:  MOVWF  FE9
+000E8:  MOVLW  00
+000EA:  ADDWFC 03,W
+000EC:  MOVWF  FEA
+000EE:  MOVFF  FEC,25
+000F2:  MOVF   FED,F
+000F4:  MOVFF  FEF,24
+000F8:  MOVF   23,F
+000FA:  BZ    0100
+000FC:  MOVLW  00
+000FE:  BRA    0102
+00100:  MOVLW  01
+00102:  MOVFF  24,28
+00106:  MOVWF  29
+00108:  MOVLW  0F
+0010A:  MOVWF  2B
+0010C:  MOVLW  89
+0010E:  MOVWF  2A
+00110:  RCALL  0034
+00112:  MOVFF  24,28
+00116:  CLRF   29
+00118:  MOVLW  0F
+0011A:  MOVWF  2B
+0011C:  MOVLW  92
+0011E:  MOVWF  2A
+00120:  RCALL  0034
+00122:  RETURN 0
+.................... }
+.................... 
+.................... // ------------------------ Codigo Principal ----------------------- //
+.................... void main()
+*
+003E6:  CLRF   FF8
+003E8:  BCF    FD0.7
+003EA:  MOVLB  F
+003EC:  CLRF   x38
+003EE:  CLRF   x39
+003F0:  CLRF   x3A
+003F2:  CLRF   F77
+003F4:  CLRF   F78
+003F6:  CLRF   F79
+003F8:  MOVLW  BE
+003FA:  MOVWF  04
+003FC:  MOVLW  0F
+003FE:  MOVWF  05
+00400:  MOVLW  09
+00402:  MOVWF  06
+00404:  MOVLW  7C
+00406:  MOVWF  07
+00408:  MOVLW  0A
+0040A:  MOVWF  08
+0040C:  MOVLW  7C
+0040E:  MOVWF  09
+00410:  MOVLW  67
+00412:  MOVWF  0A
+00414:  MOVLW  0F
+00416:  MOVWF  0B
+00418:  MOVLW  0B
+0041A:  MOVWF  0C
+0041C:  MOVLW  7C
+0041E:  MOVWF  0D
+00420:  MOVLW  0C
+00422:  MOVWF  0E
+00424:  MOVLW  7C
+00426:  MOVWF  0F
+00428:  MOVLW  5E
+0042A:  MOVWF  10
+0042C:  MOVLW  0F
+0042E:  MOVWF  11
+00430:  MOVLW  0D
+00432:  MOVWF  12
+00434:  MOVLW  7C
+00436:  MOVWF  13
+00438:  MOVLW  0E
+0043A:  MOVWF  14
+0043C:  MOVLW  7C
+0043E:  MOVWF  15
+00440:  MOVLW  58
+00442:  MOVWF  16
+00444:  MOVLW  0F
+00446:  MOVWF  17
+00448:  MOVLW  13
+0044A:  MOVWF  18
+0044C:  MOVLW  7C
+0044E:  MOVWF  19
+00450:  MOVLW  14
+00452:  MOVWF  1A
+00454:  MOVLW  7C
+00456:  MOVWF  1B
+.................... {
+....................     log_init();
+00458:  MOVLB  0
+0045A:  BRA    0004
+.................... 
+....................     int1 direction = LEFT;
+....................     int16 ADC;
+0045C:  BCF    1C.0
+.................... 
+....................     for(int i = 0; i < 4 ; i++)
+0045E:  CLRF   1F
+00460:  MOVF   1F,W
+00462:  SUBLW  03
+00464:  BNC   047A
+....................         wheel_movement(i, direction);
+00466:  MOVLW  00
+00468:  BTFSC  1C.0
+0046A:  MOVLW  01
+0046C:  MOVWF  21
+0046E:  MOVFF  1F,22
+00472:  MOVWF  23
+00474:  RCALL  0072
+00476:  INCF   1F,F
+00478:  BRA    0460
+.................... 
+....................     while (TRUE)
+....................     {
+....................         ADCON0  = 0b00000011;
+0047A:  MOVLW  03
+0047C:  MOVWF  FC2
+....................         delay_us(10);
+0047E:  MOVLW  0D
+00480:  MOVWF  00
+00482:  DECFSZ 00,F
+00484:  BRA    0482
+....................         ADC = (*ADRES / 1023.0 * 1000);
+00486:  MOVFF  FC4,22
+0048A:  MOVFF  FC3,21
+0048E:  BRA    0124
+00490:  MOVFF  03,24
+00494:  MOVFF  02,23
+00498:  MOVFF  01,22
+0049C:  MOVFF  00,21
+004A0:  CLRF   28
+004A2:  MOVLW  C0
+004A4:  MOVWF  27
+004A6:  MOVLW  7F
+004A8:  MOVWF  26
+004AA:  MOVLW  88
+004AC:  MOVWF  25
+004AE:  BRA    015C
+004B0:  MOVFF  03,24
+004B4:  MOVFF  02,23
+004B8:  MOVFF  01,22
+004BC:  MOVFF  00,21
+004C0:  MOVFF  03,28
+004C4:  MOVFF  02,27
+004C8:  MOVFF  01,26
+004CC:  MOVFF  00,25
+004D0:  CLRF   2C
+004D2:  CLRF   2B
+004D4:  MOVLW  7A
+004D6:  MOVWF  2A
+004D8:  MOVLW  88
+004DA:  MOVWF  29
+004DC:  BRA    02B8
+004DE:  MOVFF  03,24
+004E2:  MOVFF  02,23
+004E6:  MOVFF  01,22
+004EA:  MOVFF  00,21
+004EE:  BRA    03AC
+004F0:  MOVFF  02,1E
+004F4:  MOVFF  01,1D
+....................         
+....................         for(int i = 0; i < 4 ; i++)
+004F8:  CLRF   20
+004FA:  MOVF   20,W
+004FC:  SUBLW  03
+004FE:  BNC   054E
+....................             (wheels[i])->DutyCicle = ADC >> 2;
+00500:  MOVF   20,W
+00502:  MULLW  06
+00504:  MOVF   FF3,W
+00506:  CLRF   03
+00508:  ADDLW  04
+0050A:  MOVWF  01
+0050C:  MOVLW  00
+0050E:  ADDWFC 03,F
+00510:  MOVFF  01,21
+00514:  MOVFF  03,22
+00518:  MOVFF  03,FEA
+0051C:  MOVFF  01,FE9
+00520:  MOVFF  FEC,24
+00524:  MOVF   FED,F
+00526:  MOVFF  FEF,23
+0052A:  MOVFF  23,FE9
+0052E:  MOVFF  24,FEA
+00532:  RRCF   1E,W
+00534:  MOVWF  03
+00536:  RRCF   1D,W
+00538:  MOVWF  02
+0053A:  RRCF   03,F
+0053C:  RRCF   02,F
+0053E:  MOVLW  3F
+00540:  ANDWF  03,F
+00542:  MOVFF  02,FEF
+00546:  MOVFF  03,FEC
+0054A:  INCF   20,F
+0054C:  BRA    04FA
+.................... 
+....................         if(BUTTON)
+0054E:  BTFSS  F80.1
+00550:  BRA    05A8
+....................         {
+....................             while(BUTTON);
+00552:  BTFSC  F80.1
+00554:  BRA    0552
+....................             direction ^= 1;
+00556:  MOVLW  00
+00558:  BTFSC  1C.0
+0055A:  MOVLW  01
+0055C:  XORLW  01
+0055E:  BCF    1C.0
+00560:  BTFSC  FE8.0
+00562:  BSF    1C.0
+....................             
+....................             wheel_movement(0, direction);
+00564:  MOVLW  00
+00566:  BTFSC  1C.0
+00568:  MOVLW  01
+0056A:  MOVWF  21
+0056C:  CLRF   22
+0056E:  MOVWF  23
+00570:  RCALL  0072
+....................             wheel_movement(1, direction);
+00572:  MOVLW  00
+00574:  BTFSC  1C.0
+00576:  MOVLW  01
+00578:  MOVWF  21
+0057A:  MOVLW  01
+0057C:  MOVWF  22
+0057E:  MOVFF  21,23
+00582:  RCALL  0072
+....................             wheel_movement(2, direction);
+00584:  MOVLW  00
+00586:  BTFSC  1C.0
+00588:  MOVLW  01
+0058A:  MOVWF  21
+0058C:  MOVLW  02
+0058E:  MOVWF  22
+00590:  MOVFF  21,23
+00594:  RCALL  0072
+....................             wheel_movement(3, direction);
+00596:  MOVLW  00
+00598:  BTFSC  1C.0
+0059A:  MOVLW  01
+0059C:  MOVWF  21
+0059E:  MOVLW  03
+005A0:  MOVWF  22
+005A2:  MOVFF  21,23
+005A6:  RCALL  0072
+....................         }
+005A8:  BRA    047A
+....................     }
+.................... }
+005AA:  SLEEP 
+
+Configuration Fuses:
+   Word  1: E200   HSH NOPLLEN PRIMARY FCMEN IESO
+   Word  2: 3C1E   PUT BROWNOUT BORV19 NOWDT WDT32768
+   Word  3: 3B00   CCP2C1 PBADEN CCP3C6 HFOFST TIMER3C0 CCP2B5 NOMCLR
+   Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB
