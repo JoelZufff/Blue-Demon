@@ -1,0 +1,53 @@
+
+ROM used:   1398/65536 (2%)
+            1398/65536 (2%) including unused fragments
+
+            1.2 Average locations per line
+            43.7 Average locations per statement
+
+RAM used:   41/3896 (1%) at main() level
+            65/3896 (2%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   75    18  56  main.c
+ 1036     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h
+   62    14  44  motor_control.c
+----- -----
+ 1173    32 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     64   2    1    282  4.1  motors_init
+0    176   6   15    224  4.3  motor_movement
+0     62   2    6             @WRITEBITA
+0    244   9   11             @MULFF
+0     58   2    4             @SFTOI
+0     18   1    0     88  1.7  log_init
+0    368  13   13    406  7.7  MAIN
+0     56   2    2             @ITOF
+0    348  12   14             @DIVFF
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               4
+    Statements              32
+    Comments                210
+    Volume (V)              1380
+    Difficulty (D)          16.7
+    Effort to implement (E) 22998
+    Time to implement (T)   21 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   7
+    Maintainability (MI)    58
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-0FFFE  1394  64138  
+
+
+

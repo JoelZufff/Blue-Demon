@@ -1,0 +1,130 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-01B wheels
+01C.0   MAIN.direction
+01D     MAIN.i
+01E     motors_init.number
+01E     MAIN.@SCRATCH1
+01F     MAIN.@SCRATCH2
+020     MAIN.@SCRATCH3
+021     MAIN.@SCRATCH4
+022     MAIN.@SCRATCH5
+023     MAIN.@SCRATCH6
+024     MAIN.@SCRATCH7
+025-028 @DIVFF.P1
+025-026 @ITOF.P2
+025     MAIN.@SCRATCH8
+026     MAIN.@SCRATCH9
+027     MAIN.@SCRATCH10
+028     MAIN.@SCRATCH11
+029-02C @DIVFF.P1
+029-02E motor_movement.motor
+02D     @DIVFF.@SCRATCH1
+02E     @DIVFF.@SCRATCH2
+02F     motor_movement.direction
+02F     @DIVFF.@SCRATCH3
+030-033 motor_movement.velocity
+030     @DIVFF.@SCRATCH4
+031     @DIVFF.@SCRATCH5
+032     @DIVFF.@SCRATCH6
+034-035 motor_movement.aux
+036     @WRITEBITA.P1
+036-039 @SFTOI.P2
+036-039 @MULFF.P3
+036     motor_movement.@SCRATCH1
+037     @WRITEBITA.P1
+037     motor_movement.@SCRATCH2
+038-039 @WRITEBITA.P1
+03A-03D @MULFF.P1
+03E     @MULFF.@SCRATCH1
+03F     @MULFF.@SCRATCH2
+040     @MULFF.@SCRATCH3
+F48     CCPTMRS1
+F49     CCPTMRS0
+F55     CCP_5_LOW
+F55     CCP_5
+F56     CCP_5_HIGH
+F57     CCP4CON
+F58     CCP_4
+F58     CCP_4_LOW
+F59     CCP_4_HIGH
+F5D     CCP3CON
+F5E     CCP_3_LOW
+F5E     CCP_3
+F5F     CCP_3_HIGH
+F66     CCP2CON
+F67     CCP_2
+F67     CCP_2_LOW
+F68     CCP_2_HIGH
+F78.6   C2OUT
+F79.6   C1OUT
+F80.1   BUTTON
+F92     TRISA
+F93     TRISB
+F94     TRISC
+FBA     T2CON
+FBB     PR2
+FBD     CCP1CON
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FC0     ADCON2
+FC2     ADCON0
+FC2.1   DONE
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  log_init
+000016  motors_init
+000056  @ITOF
+00008E  @DIVFF
+0001EA  @WRITEBITA
+000228  @MULFF
+00031C  @SFTOI
+000356  motor_movement
+000406  MAIN
+000406  @cinit1
+000420  @cinit2
+
+Project Directory:
+    C:\Users\diego\Desktop\Terreneitor\Firmware\Code\
+
+Project Files:
+    main.c                                                  [07-abr.-24 18:20  CRC=4E8630C2]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h [21-oct.-22 11:06  CRC=D568D24D]
+    motor_control.c                                         [07-abr.-24 18:20  CRC=4865324A]
+
+Source signature=B4B967A3
+Program memory checksum=0000
+Hex file CRC=611D
+
+Units:
+    C:\Users\diego\Desktop\Terreneitor\Firmware\Code\main (main)
+
+Compiler Settings:
+    Processor:      PIC18F26K22
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Output Files:
+    Errors:      main.err
+    INHX32:      main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Statistics:  main.STA

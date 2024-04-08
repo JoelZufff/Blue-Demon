@@ -1,0 +1,808 @@
+CCS PCH C Compiler, Version 5.112, 29001               07-abr.-24 18:20
+
+               Filename:   C:\Users\diego\Desktop\Terreneitor\Firmware\Code\main.lst
+
+               ROM used:   1398 bytes (2%)
+                           Largest free fragment is 64138
+               RAM used:   41 (1%) at main() level
+                           65 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+00000:  GOTO   0406
+.................... // --------------- Preprocesadores de microcontrolador -------------- //
+.................... #include    <18F26K22.h>                                                // Libreria del Microcontrolador
+.................... //////////// Standard Header file for the PIC18F26K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F26K22
+*
+00056:  MOVLW  8E
+00058:  MOVWF  00
+0005A:  MOVFF  26,01
+0005E:  MOVFF  25,02
+00062:  CLRF   03
+00064:  MOVF   01,F
+00066:  BNZ   007A
+00068:  MOVFF  02,01
+0006C:  CLRF   02
+0006E:  MOVLW  08
+00070:  SUBWF  00,F
+00072:  MOVF   01,F
+00074:  BNZ   007A
+00076:  CLRF   00
+00078:  BRA    008A
+0007A:  BCF    FD8.0
+0007C:  BTFSC  01.7
+0007E:  BRA    0088
+00080:  RLCF   02,F
+00082:  RLCF   01,F
+00084:  DECF   00,F
+00086:  BRA    007A
+00088:  BCF    01.7
+0008A:  GOTO   04FA (RETURN)
+0008E:  MOVF   25,W
+00090:  BTFSC  FD8.2
+00092:  BRA    01DE
+00094:  MOVWF  31
+00096:  MOVF   29,W
+00098:  BTFSC  FD8.2
+0009A:  BRA    01DE
+0009C:  SUBWF  31,F
+0009E:  BNC   00AA
+000A0:  MOVLW  7F
+000A2:  ADDWF  31,F
+000A4:  BTFSC  FD8.0
+000A6:  BRA    01DE
+000A8:  BRA    00B6
+000AA:  MOVLW  81
+000AC:  SUBWF  31,F
+000AE:  BTFSS  FD8.0
+000B0:  BRA    01DE
+000B2:  BTFSC  FD8.2
+000B4:  BRA    01DE
+000B6:  MOVFF  31,00
+000BA:  CLRF   01
+000BC:  CLRF   02
+000BE:  CLRF   03
+000C0:  CLRF   30
+000C2:  MOVFF  26,2F
+000C6:  BSF    2F.7
+000C8:  MOVFF  27,2E
+000CC:  MOVFF  28,2D
+000D0:  MOVLW  19
+000D2:  MOVWF  31
+000D4:  MOVF   2C,W
+000D6:  SUBWF  2D,F
+000D8:  BC    00F4
+000DA:  MOVLW  01
+000DC:  SUBWF  2E,F
+000DE:  BC    00F4
+000E0:  SUBWF  2F,F
+000E2:  BC    00F4
+000E4:  SUBWF  30,F
+000E6:  BC    00F4
+000E8:  INCF   30,F
+000EA:  INCF   2F,F
+000EC:  INCF   2E,F
+000EE:  MOVF   2C,W
+000F0:  ADDWF  2D,F
+000F2:  BRA    0144
+000F4:  MOVF   2B,W
+000F6:  SUBWF  2E,F
+000F8:  BC    011E
+000FA:  MOVLW  01
+000FC:  SUBWF  2F,F
+000FE:  BC    011E
+00100:  SUBWF  30,F
+00102:  BC    011E
+00104:  INCF   30,F
+00106:  INCF   2F,F
+00108:  MOVF   2B,W
+0010A:  ADDWF  2E,F
+0010C:  MOVF   2C,W
+0010E:  ADDWF  2D,F
+00110:  BNC   0144
+00112:  INCF   2E,F
+00114:  BNZ   0144
+00116:  INCF   2F,F
+00118:  BNZ   0144
+0011A:  INCF   30,F
+0011C:  BRA    0144
+0011E:  MOVF   2A,W
+00120:  IORLW  80
+00122:  SUBWF  2F,F
+00124:  BC    0142
+00126:  MOVLW  01
+00128:  SUBWF  30,F
+0012A:  BC    0142
+0012C:  INCF   30,F
+0012E:  MOVF   2A,W
+00130:  IORLW  80
+00132:  ADDWF  2F,F
+00134:  MOVF   2B,W
+00136:  ADDWF  2E,F
+00138:  BNC   010C
+0013A:  INCF   2F,F
+0013C:  BNZ   010C
+0013E:  INCF   30,F
+00140:  BRA    010C
+00142:  BSF    03.0
+00144:  DECFSZ 31,F
+00146:  BRA    014A
+00148:  BRA    0160
+0014A:  BCF    FD8.0
+0014C:  RLCF   2D,F
+0014E:  RLCF   2E,F
+00150:  RLCF   2F,F
+00152:  RLCF   30,F
+00154:  BCF    FD8.0
+00156:  RLCF   03,F
+00158:  RLCF   02,F
+0015A:  RLCF   01,F
+0015C:  RLCF   32,F
+0015E:  BRA    00D4
+00160:  BTFSS  32.0
+00162:  BRA    0170
+00164:  BCF    FD8.0
+00166:  RRCF   01,F
+00168:  RRCF   02,F
+0016A:  RRCF   03,F
+0016C:  RRCF   32,F
+0016E:  BRA    0174
+00170:  DECF   00,F
+00172:  BZ    01DE
+00174:  BTFSC  32.7
+00176:  BRA    01B4
+00178:  BCF    FD8.0
+0017A:  RLCF   2D,F
+0017C:  RLCF   2E,F
+0017E:  RLCF   2F,F
+00180:  RLCF   30,F
+00182:  MOVF   2C,W
+00184:  SUBWF  2D,F
+00186:  BC    0196
+00188:  MOVLW  01
+0018A:  SUBWF  2E,F
+0018C:  BC    0196
+0018E:  SUBWF  2F,F
+00190:  BC    0196
+00192:  SUBWF  30,F
+00194:  BNC   01CA
+00196:  MOVF   2B,W
+00198:  SUBWF  2E,F
+0019A:  BC    01A6
+0019C:  MOVLW  01
+0019E:  SUBWF  2F,F
+001A0:  BC    01A6
+001A2:  SUBWF  30,F
+001A4:  BNC   01CA
+001A6:  MOVF   2A,W
+001A8:  IORLW  80
+001AA:  SUBWF  2F,F
+001AC:  BC    01B4
+001AE:  MOVLW  01
+001B0:  SUBWF  30,F
+001B2:  BNC   01CA
+001B4:  INCF   03,F
+001B6:  BNZ   01CA
+001B8:  INCF   02,F
+001BA:  BNZ   01CA
+001BC:  INCF   01,F
+001BE:  BNZ   01CA
+001C0:  INCF   00,F
+001C2:  BZ    01DE
+001C4:  RRCF   01,F
+001C6:  RRCF   02,F
+001C8:  RRCF   03,F
+001CA:  MOVFF  26,31
+001CE:  MOVF   2A,W
+001D0:  XORWF  31,F
+001D2:  BTFSS  31.7
+001D4:  BRA    01DA
+001D6:  BSF    01.7
+001D8:  BRA    01E6
+001DA:  BCF    01.7
+001DC:  BRA    01E6
+001DE:  CLRF   00
+001E0:  CLRF   01
+001E2:  CLRF   02
+001E4:  CLRF   03
+001E6:  GOTO   051A (RETURN)
+001EA:  MOVF   36,W
+001EC:  ANDLW  07
+001EE:  MOVWF  00
+001F0:  RRCF   36,W
+001F2:  MOVWF  01
+001F4:  RRCF   01,F
+001F6:  RRCF   01,F
+001F8:  MOVLW  1F
+001FA:  ANDWF  01,F
+001FC:  MOVF   01,W
+001FE:  ADDWF  38,W
+00200:  MOVWF  FE9
+00202:  MOVLW  00
+00204:  ADDWFC 39,W
+00206:  MOVWF  FEA
+00208:  CLRF   01
+0020A:  INCF   01,F
+0020C:  INCF   00,F
+0020E:  BRA    0212
+00210:  RLCF   01,F
+00212:  DECFSZ 00,F
+00214:  BRA    0210
+00216:  MOVF   37,F
+00218:  BZ    0220
+0021A:  MOVF   01,W
+0021C:  IORWF  FEF,F
+0021E:  BRA    0226
+00220:  COMF   01,F
+00222:  MOVF   01,W
+00224:  ANDWF  FEF,F
+00226:  RETURN 0
+00228:  MOVF   36,W
+0022A:  BTFSC  FD8.2
+0022C:  BRA    0310
+0022E:  MOVWF  00
+00230:  MOVF   3A,W
+00232:  BTFSC  FD8.2
+00234:  BRA    0310
+00236:  ADDWF  00,F
+00238:  BNC   0242
+0023A:  MOVLW  81
+0023C:  ADDWF  00,F
+0023E:  BC    0310
+00240:  BRA    024A
+00242:  MOVLW  7F
+00244:  SUBWF  00,F
+00246:  BNC   0310
+00248:  BZ    0310
+0024A:  MOVFF  37,3E
+0024E:  MOVF   3B,W
+00250:  XORWF  3E,F
+00252:  BSF    37.7
+00254:  BSF    3B.7
+00256:  MOVF   39,W
+00258:  MULWF  3D
+0025A:  MOVFF  FF4,40
+0025E:  MOVF   38,W
+00260:  MULWF  3C
+00262:  MOVFF  FF4,03
+00266:  MOVFF  FF3,3F
+0026A:  MULWF  3D
+0026C:  MOVF   FF3,W
+0026E:  ADDWF  40,F
+00270:  MOVF   FF4,W
+00272:  ADDWFC 3F,F
+00274:  MOVLW  00
+00276:  ADDWFC 03,F
+00278:  MOVF   39,W
+0027A:  MULWF  3C
+0027C:  MOVF   FF3,W
+0027E:  ADDWF  40,F
+00280:  MOVF   FF4,W
+00282:  ADDWFC 3F,F
+00284:  MOVLW  00
+00286:  CLRF   02
+00288:  ADDWFC 03,F
+0028A:  ADDWFC 02,F
+0028C:  MOVF   37,W
+0028E:  MULWF  3D
+00290:  MOVF   FF3,W
+00292:  ADDWF  3F,F
+00294:  MOVF   FF4,W
+00296:  ADDWFC 03,F
+00298:  MOVLW  00
+0029A:  ADDWFC 02,F
+0029C:  MOVF   37,W
+0029E:  MULWF  3C
+002A0:  MOVF   FF3,W
+002A2:  ADDWF  03,F
+002A4:  MOVF   FF4,W
+002A6:  ADDWFC 02,F
+002A8:  MOVLW  00
+002AA:  CLRF   01
+002AC:  ADDWFC 01,F
+002AE:  MOVF   39,W
+002B0:  MULWF  3B
+002B2:  MOVF   FF3,W
+002B4:  ADDWF  3F,F
+002B6:  MOVF   FF4,W
+002B8:  ADDWFC 03,F
+002BA:  MOVLW  00
+002BC:  ADDWFC 02,F
+002BE:  ADDWFC 01,F
+002C0:  MOVF   38,W
+002C2:  MULWF  3B
+002C4:  MOVF   FF3,W
+002C6:  ADDWF  03,F
+002C8:  MOVF   FF4,W
+002CA:  ADDWFC 02,F
+002CC:  MOVLW  00
+002CE:  ADDWFC 01,F
+002D0:  MOVF   37,W
+002D2:  MULWF  3B
+002D4:  MOVF   FF3,W
+002D6:  ADDWF  02,F
+002D8:  MOVF   FF4,W
+002DA:  ADDWFC 01,F
+002DC:  INCF   00,F
+002DE:  BTFSC  01.7
+002E0:  BRA    02EC
+002E2:  RLCF   3F,F
+002E4:  RLCF   03,F
+002E6:  RLCF   02,F
+002E8:  RLCF   01,F
+002EA:  DECF   00,F
+002EC:  MOVLW  00
+002EE:  BTFSS  3F.7
+002F0:  BRA    0306
+002F2:  INCF   03,F
+002F4:  ADDWFC 02,F
+002F6:  ADDWFC 01,F
+002F8:  MOVF   01,W
+002FA:  BNZ   0306
+002FC:  MOVF   02,W
+002FE:  BNZ   0306
+00300:  MOVF   03,W
+00302:  BNZ   0306
+00304:  INCF   00,F
+00306:  BTFSC  3E.7
+00308:  BSF    01.7
+0030A:  BTFSS  3E.7
+0030C:  BCF    01.7
+0030E:  BRA    0318
+00310:  CLRF   00
+00312:  CLRF   01
+00314:  CLRF   02
+00316:  CLRF   03
+00318:  GOTO   03C8 (RETURN)
+0031C:  MOVLW  8E
+0031E:  MOVWF  00
+00320:  MOVF   36,W
+00322:  SUBWF  00,F
+00324:  MOVFF  37,02
+00328:  MOVFF  38,01
+0032C:  BSF    02.7
+0032E:  MOVF   00,F
+00330:  BZ    0344
+00332:  BCF    FD8.0
+00334:  MOVF   02,F
+00336:  BNZ   033C
+00338:  MOVF   01,F
+0033A:  BZ    0344
+0033C:  RRCF   02,F
+0033E:  RRCF   01,F
+00340:  DECFSZ 00,F
+00342:  BRA    0332
+00344:  BTFSS  37.7
+00346:  BRA    0352
+00348:  COMF   01,F
+0034A:  COMF   02,F
+0034C:  INCF   01,F
+0034E:  BTFSC  FD8.2
+00350:  INCF   02,F
+00352:  GOTO   03DA (RETURN)
+.................... 
+.................... #list
+.................... 
+.................... #fuses      INTRC_IO, NOWDT, NOPROTECT, NOLVP, NOMCLR, CCP2C1, CCP3C6   // Fusibles (Multiplexado de P2B en C0)
+.................... #use        delay(internal = 16MHz)                                     // Configuracion de frecuencia y delay
+.................... //#use        rs232(rcv = pin_b7, xmit = pin_b6, baud = 9600, bits = 8, parity = n) 
+.................... 
+.................... #include    "motor_control.c"
+.................... #define     max_dutycicle   160
+.................... 
+.................... // -------------------- Direcciones de registros -------------------- //
+.................... #BYTE       CCPTMRS0        = 0xF49
+.................... #BYTE       CCPTMRS1        = 0xF48
+.................... 
+.................... #BYTE       CCP1CON         = 0xFBD
+.................... #BYTE       CCP2CON         = 0xF66
+.................... #BYTE       CCP3CON         = 0xF5D
+.................... #BYTE       CCP4CON         = 0xF57
+.................... 
+.................... #BYTE       T2CON           = 0xFBA
+.................... #BYTE       PR2             = 0xFBB
+.................... 
+.................... // -------------------------- Estructuras --------------------------- //
+.................... struct motor_t
+.................... {
+....................     int     *DutyCicle;
+....................     long    IN1_pin;
+....................     long    IN2_pin;
+.................... };
+.................... 
+.................... // ---------------------------- Funciones --------------------------- //
+.................... void motors_init(int number)
+.................... {
+....................     // Configuracion de Timers
+....................     T2CON       = 0b00000100;
+*
+00016:  MOVLW  04
+00018:  MOVWF  FBA
+....................     PR2         = 39;
+0001A:  MOVLW  27
+0001C:  MOVWF  FBB
+....................     
+....................     // Configuracion de CCPXCON para PWM
+....................     CCPTMRS0 = CCPTMRS0 = 0b00000000;       // Configuramos CCPX con timer 2
+0001E:  MOVLB  F
+00020:  CLRF   x49
+....................     
+....................     switch (number)
+00022:  MOVF   1E,W
+00024:  XORLW  04
+00026:  MOVLB  0
+00028:  BZ    0038
+0002A:  XORLW  07
+0002C:  BZ    0040
+0002E:  XORLW  01
+00030:  BZ    0048
+00032:  XORLW  03
+00034:  BZ    004C
+00036:  BRA    0052
+....................     {
+....................         case 4:
+....................             CCP4CON = 0b00001100;
+00038:  MOVLW  0C
+0003A:  MOVLB  F
+0003C:  MOVWF  x57
+0003E:  MOVLB  0
+....................         case 3:
+....................             CCP3CON = 0b00001100;
+00040:  MOVLW  0C
+00042:  MOVLB  F
+00044:  MOVWF  x5D
+00046:  MOVLB  0
+....................         case 2:
+....................             CCP2CON = 0b00001100;
+00048:  MOVLW  0C
+0004A:  MOVWF  F66
+....................         case 1:
+....................             CCP1CON = 0b00001100;
+0004C:  MOVLW  0C
+0004E:  MOVWF  FBD
+....................         break;
+00050:  BRA    0052
+....................         default: break;
+....................     }
+00052:  GOTO   048A (RETURN)
+.................... }
+.................... 
+.................... /*  Donde:
+.................... * direcition    := Booleano para escoger derecha o izquierda
+.................... * speed         := Numero flotante de 0 a 100
+.................... */
+.................... void motor_movement(struct motor_t motor, short direction, float velocity)
+.................... {
+....................     // Establecemos direccion de giro
+....................     output_bit(motor.IN1_pin, direction);
+*
+00356:  MOVF   2F,F
+00358:  BNZ   035E
+0035A:  MOVLW  00
+0035C:  BRA    0360
+0035E:  MOVLW  01
+00360:  MOVFF  2B,36
+00364:  MOVWF  37
+00366:  MOVLW  0F
+00368:  MOVWF  39
+0036A:  MOVLW  89
+0036C:  MOVWF  38
+0036E:  RCALL  01EA
+00370:  MOVFF  2B,36
+00374:  CLRF   37
+00376:  MOVLW  0F
+00378:  MOVWF  39
+0037A:  MOVLW  92
+0037C:  MOVWF  38
+0037E:  RCALL  01EA
+....................     output_bit(motor.IN2_pin, !direction);
+00380:  MOVF   2F,F
+00382:  BZ    0388
+00384:  MOVLW  00
+00386:  BRA    038A
+00388:  MOVLW  01
+0038A:  MOVFF  2D,36
+0038E:  MOVWF  37
+00390:  MOVLW  0F
+00392:  MOVWF  39
+00394:  MOVLW  89
+00396:  MOVWF  38
+00398:  RCALL  01EA
+0039A:  MOVFF  2D,36
+0039E:  CLRF   37
+003A0:  MOVLW  0F
+003A2:  MOVWF  39
+003A4:  MOVLW  92
+003A6:  MOVWF  38
+003A8:  RCALL  01EA
+.................... 
+....................     // Establecemos DC para velocidad
+....................     long aux = max_dutycicle * velocity;  
+003AA:  CLRF   39
+003AC:  CLRF   38
+003AE:  MOVLW  20
+003B0:  MOVWF  37
+003B2:  MOVLW  86
+003B4:  MOVWF  36
+003B6:  MOVFF  33,3D
+003BA:  MOVFF  32,3C
+003BE:  MOVFF  31,3B
+003C2:  MOVFF  30,3A
+003C6:  BRA    0228
+003C8:  MOVFF  03,39
+003CC:  MOVFF  02,38
+003D0:  MOVFF  01,37
+003D4:  MOVFF  00,36
+003D8:  BRA    031C
+003DA:  MOVFF  02,35
+003DE:  MOVFF  01,34
+....................     motor->DutyCicle = aux >> 2;
+003E2:  MOVFF  29,FE9
+003E6:  MOVFF  2A,FEA
+003EA:  RRCF   35,W
+003EC:  MOVWF  03
+003EE:  RRCF   34,W
+003F0:  MOVWF  02
+003F2:  RRCF   03,F
+003F4:  RRCF   02,F
+003F6:  MOVLW  3F
+003F8:  ANDWF  03,F
+003FA:  MOVFF  02,FEF
+003FE:  MOVFF  03,FEC
+00402:  GOTO   0558 (RETURN)
+.................... }
+.................... 
+.................... 
+.................... #define RIGHT   1
+.................... #define LEFT    0
+.................... 
+.................... // --------------------- Direccion de registros --------------------- //
+.................... #BYTE       TRISA           = 0xF92
+.................... #BYTE       TRISB           = 0xF93
+.................... #BYTE       TRISC           = 0xF94
+.................... #BIT        BUTTON          = 0xF80.1
+.................... 
+.................... const int16 *ADRES          = 0xFC3;
+.................... #BYTE       ADCON0          = 0xFC2
+.................... #BIT        DONE            = 0xFC2.1
+.................... #BYTE       ADCON2          = 0xFC0
+.................... 
+.................... // -------------------------- Estructuras --------------------------- //
+.................... 
+.................... 
+.................... // ----------------------- Variable Globales ------------------------ //
+.................... struct motor_t wheels[4] = 
+.................... {
+....................     { 0xFBE, PIN_B1, PIN_B2 },  /* Rueda A */ 
+....................     { 0xF67, PIN_B3, PIN_B4 },  /* Rueda B */
+....................     { 0xF5E, PIN_B5, PIN_B6 },  /* Rueda C */
+....................     { 0xF58, PIN_C3, PIN_C4 }   /* Rueda D */
+.................... };
+.................... 
+.................... // -------------------------- Interrupciones ------------------------ //
+.................... 
+.................... 
+.................... // ---------------------------- Funciones --------------------------- //
+.................... void log_init()
+.................... {
+....................     // Configuracion de pines GPIO
+....................     TRISA       = 0b00000011;
+*
+00004:  MOVLW  03
+00006:  MOVWF  F92
+....................     TRISB       = 0b00000000;
+00008:  CLRF   F93
+....................     TRISC       = 0b00000000;
+0000A:  CLRF   F94
+.................... 
+....................     // Configuracion de ADC
+....................     ADCON0      = 0b00000011;
+0000C:  MOVWF  FC2
+....................     ADCON2      = 0b10000000;
+0000E:  MOVLW  80
+00010:  MOVWF  FC0
+00012:  GOTO   0484 (RETURN)
+.................... }
+.................... 
+.................... // ------------------------ Codigo Principal ----------------------- //
+.................... void main()
+*
+00406:  CLRF   FF8
+00408:  BCF    FD0.7
+0040A:  MOVLW  70
+0040C:  MOVWF  FD3
+0040E:  BCF    F9B.6
+00410:  BCF    F9B.7
+00412:  MOVLB  F
+00414:  CLRF   x38
+00416:  CLRF   x39
+00418:  CLRF   x3A
+0041A:  CLRF   F77
+0041C:  CLRF   F78
+0041E:  CLRF   F79
+00420:  MOVLW  BE
+00422:  MOVWF  04
+00424:  MOVLW  0F
+00426:  MOVWF  05
+00428:  MOVLW  09
+0042A:  MOVWF  06
+0042C:  MOVLW  7C
+0042E:  MOVWF  07
+00430:  MOVLW  0A
+00432:  MOVWF  08
+00434:  MOVLW  7C
+00436:  MOVWF  09
+00438:  MOVLW  67
+0043A:  MOVWF  0A
+0043C:  MOVLW  0F
+0043E:  MOVWF  0B
+00440:  MOVLW  0B
+00442:  MOVWF  0C
+00444:  MOVLW  7C
+00446:  MOVWF  0D
+00448:  MOVLW  0C
+0044A:  MOVWF  0E
+0044C:  MOVLW  7C
+0044E:  MOVWF  0F
+00450:  MOVLW  5E
+00452:  MOVWF  10
+00454:  MOVLW  0F
+00456:  MOVWF  11
+00458:  MOVLW  0D
+0045A:  MOVWF  12
+0045C:  MOVLW  7C
+0045E:  MOVWF  13
+00460:  MOVLW  0E
+00462:  MOVWF  14
+00464:  MOVLW  7C
+00466:  MOVWF  15
+00468:  MOVLW  58
+0046A:  MOVWF  16
+0046C:  MOVLW  0F
+0046E:  MOVWF  17
+00470:  MOVLW  13
+00472:  MOVWF  18
+00474:  MOVLW  7C
+00476:  MOVWF  19
+00478:  MOVLW  14
+0047A:  MOVWF  1A
+0047C:  MOVLW  7C
+0047E:  MOVWF  1B
+.................... {
+....................     log_init();
+00480:  MOVLB  0
+00482:  BRA    0004
+....................     motors_init(4);
+00484:  MOVLW  04
+00486:  MOVWF  1E
+00488:  BRA    0016
+.................... 
+....................     int1 direction = LEFT;
+0048A:  BCF    1C.0
+.................... 
+....................     while (TRUE)
+....................     {
+....................         // Solicitamos y almacenamos lectura de ADC
+....................         DONE = TRUE, delay_us(10);
+0048C:  BSF    FC2.1
+0048E:  MOVLW  0D
+00490:  MOVWF  00
+00492:  DECFSZ 00,F
+00494:  BRA    0492
+....................         //velocity = (*ADRES / 1023.0);
+....................         
+....................         for(int i = 0; i < 4 ; i++)
+00496:  CLRF   1D
+00498:  MOVF   1D,W
+0049A:  SUBLW  03
+0049C:  BNC   055C
+....................             motor_movement( wheels[i], (i < 2 ? direction : !direction), *ADRES / 1023.0 );
+0049E:  MOVF   1D,W
+004A0:  MULLW  06
+004A2:  MOVF   FF3,W
+004A4:  CLRF   03
+004A6:  ADDLW  04
+004A8:  MOVWF  FE9
+004AA:  MOVLW  00
+004AC:  ADDWFC 03,W
+004AE:  MOVWF  FEA
+004B0:  MOVF   FEE,F
+004B2:  MOVF   FEE,F
+004B4:  MOVF   FEE,F
+004B6:  MOVF   FEE,F
+004B8:  MOVFF  FEC,23
+004BC:  MOVF   FED,F
+004BE:  MOVFF  FEF,22
+004C2:  MOVF   FED,F
+004C4:  MOVFF  FEF,21
+004C8:  MOVF   FED,F
+004CA:  MOVFF  FEF,20
+004CE:  MOVF   FED,F
+004D0:  MOVFF  FEF,1F
+004D4:  MOVF   FED,F
+004D6:  MOVFF  FEF,1E
+004DA:  MOVF   1D,W
+004DC:  SUBLW  01
+004DE:  BNC   04E8
+004E0:  MOVLW  00
+004E2:  BTFSC  1C.0
+004E4:  MOVLW  01
+004E6:  BRA    04EE
+004E8:  MOVLW  00
+004EA:  BTFSS  1C.0
+004EC:  MOVLW  01
+004EE:  MOVWF  24
+004F0:  MOVFF  FC4,26
+004F4:  MOVFF  FC3,25
+004F8:  BRA    0056
+004FA:  MOVFF  03,28
+004FE:  MOVFF  02,27
+00502:  MOVFF  01,26
+00506:  MOVFF  00,25
+0050A:  CLRF   2C
+0050C:  MOVLW  C0
+0050E:  MOVWF  2B
+00510:  MOVLW  7F
+00512:  MOVWF  2A
+00514:  MOVLW  88
+00516:  MOVWF  29
+00518:  BRA    008E
+0051A:  MOVFF  03,28
+0051E:  MOVFF  02,27
+00522:  MOVFF  01,26
+00526:  MOVFF  00,25
+0052A:  MOVFF  1E,29
+0052E:  MOVFF  1F,2A
+00532:  MOVFF  20,2B
+00536:  MOVFF  21,2C
+0053A:  MOVFF  22,2D
+0053E:  MOVFF  23,2E
+00542:  MOVFF  24,2F
+00546:  MOVFF  03,33
+0054A:  MOVFF  02,32
+0054E:  MOVFF  01,31
+00552:  MOVFF  00,30
+00556:  BRA    0356
+00558:  INCF   1D,F
+0055A:  BRA    0498
+.................... 
+....................         if(BUTTON)
+0055C:  BTFSS  F80.1
+0055E:  BRA    0572
+....................         {
+....................             while(BUTTON);
+00560:  BTFSC  F80.1
+00562:  BRA    0560
+....................             direction ^= 1;
+00564:  MOVLW  00
+00566:  BTFSC  1C.0
+00568:  MOVLW  01
+0056A:  XORLW  01
+0056C:  BCF    1C.0
+0056E:  BTFSC  FE8.0
+00570:  BSF    1C.0
+....................         }
+00572:  BRA    048C
+....................     }
+.................... }
+00574:  SLEEP 
+
+Configuration Fuses:
+   Word  1: E800   INTRC_IO NOPLLEN PRIMARY FCMEN IESO
+   Word  2: 3C1E   PUT BROWNOUT BORV19 NOWDT WDT32768
+   Word  3: 3B00   CCP2C1 PBADEN CCP3C6 HFOFST TIMER3C0 CCP2B5 NOMCLR
+   Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB
