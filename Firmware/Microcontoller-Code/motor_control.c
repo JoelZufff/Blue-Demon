@@ -47,7 +47,7 @@ void motors_init(int number)
 
 /*  Donde:
 * direcition    := Booleano para escoger derecha o izquierda
-* speed         := Numero flotante de 0 a 100
+* speed         := Numero flotante de 0 a 1
 */
 void motor_movement(struct motor_t motor, short direction, float velocity)
 {
@@ -56,6 +56,6 @@ void motor_movement(struct motor_t motor, short direction, float velocity)
     output_bit(motor.IN2_pin, !direction);
 
     // Establecemos DC para velocidad
-    long aux = max_dutycicle * velocity;  
+    long aux = max_dutycicle * velocity;
     motor->DutyCicle = aux >> 2;
 }

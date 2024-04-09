@@ -2,7 +2,7 @@
 #include    <18F26K22.h>                                                // Libreria del Microcontrolador
 #fuses      INTRC_IO, NOWDT, NOPROTECT, NOLVP, NOMCLR, CCP2C1, CCP3C6   // Fusibles (Multiplexado de P2B en C0)
 #use        delay(internal = 16MHz)                                     // Configuracion de frecuencia y delay
-//#use        rs232(rcv = pin_b7, xmit = pin_b6, baud = 9600, bits = 8, parity = n) 
+#use        rs232(rcv = pin_b7, xmit = pin_b6, baud = 9600, bits = 8, parity = n) 
 
 #include    "motor_control.c"
 
@@ -20,9 +20,6 @@ const int16 *ADRES          = 0xFC3;
 #BIT        DONE            = 0xFC2.1
 #BYTE       ADCON2          = 0xFC0
 
-// -------------------------- Estructuras --------------------------- //
-
-
 // ----------------------- Variable Globales ------------------------ //
 struct motor_t wheels[4] = 
 {
@@ -33,7 +30,32 @@ struct motor_t wheels[4] =
 };
 
 // -------------------------- Interrupciones ------------------------ //
+#int_rda
+void control_instructions()
+{
+    char buffer = getc();
 
+    switch (buffer)
+    {
+        case 'J':       // Recibimos coordenadas de Joysticks
+        {
+            char Joystick[5];
+            gets(Joystick);
+            
+            signed int16 X_coordenate = (Joystick[0] << 8) + Joystick[1]; 
+            signed int16 Y_coordenate = (Joystick[2] << 8) + Joystick[3];
+        }
+        break;
+
+        case 'T':       // Recibimos presion de gatillos
+        {
+
+        }
+        break;
+        
+        default: break;
+    }
+}
 
 // ---------------------------- Funciones --------------------------- //
 void log_init()

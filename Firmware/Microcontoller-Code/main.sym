@@ -14,14 +14,14 @@
 022     MAIN.@SCRATCH5
 023     MAIN.@SCRATCH6
 024     MAIN.@SCRATCH7
-025-028 @DIVFF.P1
-025-026 @ITOF.P2
+025-026 @ITOF.P1
+025-028 @DIVFF.P2
 025     MAIN.@SCRATCH8
 026     MAIN.@SCRATCH9
 027     MAIN.@SCRATCH10
 028     MAIN.@SCRATCH11
-029-02C @DIVFF.P1
 029-02E motor_movement.motor
+029-02C @DIVFF.P1
 02D     @DIVFF.@SCRATCH1
 02E     @DIVFF.@SCRATCH2
 02F     motor_movement.direction
@@ -31,9 +31,9 @@
 031     @DIVFF.@SCRATCH5
 032     @DIVFF.@SCRATCH6
 034-035 motor_movement.aux
-036     @WRITEBITA.P1
-036-039 @SFTOI.P2
-036-039 @MULFF.P3
+036-039 @SFTOI.P1
+036-039 @MULFF.P2
+036     @WRITEBITA.P3
 036     motor_movement.@SCRATCH1
 037     @WRITEBITA.P1
 037     motor_movement.@SCRATCH2
@@ -56,8 +56,8 @@ F5E     CCP_3_LOW
 F5E     CCP_3
 F5F     CCP_3_HIGH
 F66     CCP2CON
-F67     CCP_2
 F67     CCP_2_LOW
+F67     CCP_2
 F68     CCP_2_HIGH
 F78.6   C2OUT
 F79.6   C1OUT
@@ -68,18 +68,18 @@ F94     TRISC
 FBA     T2CON
 FBB     PR2
 FBD     CCP1CON
-FBE     CCP_1
 FBE     CCP_1_LOW
+FBE     CCP_1
 FBF     CCP_1_HIGH
 FC0     ADCON2
 FC2     ADCON0
 FC2.1   DONE
-FE1-FE2 @READ_PACKED_MEMORY.P1
-FE1-FE2 @WRITE_PACKED_MEMORY.P2
-FE9-FEA @WRITE_PACKED_MEMORY.P1
-FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
 FE9-FEA @READ_PACKED_MEMORY.P3
-FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FE9-FEA @WRITE_PACKED_MEMORY.P4
 FF6-FF8 @READ_PROGRAM_MEMORY.P1
 FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
 
@@ -92,24 +92,24 @@ ROM Allocation:
 000228  @MULFF
 00031C  @SFTOI
 000356  motor_movement
-000406  MAIN
 000406  @cinit1
-000420  @cinit2
+000406  MAIN
+000432  @cinit2
 
 Project Directory:
-    C:\Users\diego\Desktop\Terreneitor\Firmware\Code\
+    C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\
 
 Project Files:
-    main.c                                                  [07-abr.-24 18:20  CRC=4E8630C2]
+    main.c                                                  [08-abr.-24 23:11  CRC=8616CFAA]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h [21-oct.-22 11:06  CRC=D568D24D]
-    motor_control.c                                         [07-abr.-24 18:20  CRC=4865324A]
+    motor_control.c                                         [08-abr.-24 15:27  CRC=B386195E]
 
-Source signature=B4B967A3
+Source signature=C28BD4B3
 Program memory checksum=0000
-Hex file CRC=611D
+Hex file CRC=B88D
 
 Units:
-    C:\Users\diego\Desktop\Terreneitor\Firmware\Code\main (main)
+    C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main (main)
 
 Compiler Settings:
     Processor:      PIC18F26K22
