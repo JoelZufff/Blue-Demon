@@ -1,7 +1,5 @@
-Compiling C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main on 08-abr.-24 at 23:11
->>> Warning 242 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\motor_control.c" Line 36(33,34): May be missing a break
->>> Warning 242 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\motor_control.c" Line 38(33,34): May be missing a break
->>> Warning 242 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\motor_control.c" Line 40(33,34): May be missing a break
-      Memory usage:   ROM=2%      RAM=1% - 2%
-      0 Errors,  3 Warnings.
+Compiling C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main on 12-abr.-24 at 21:46
+>>> Warning 240 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main.c" Line 132(42,47): Pointer types do not match
+      Memory usage:   ROM=2%      RAM=2% - 3%
+      0 Errors,  1 Warnings.
 Build Successful.

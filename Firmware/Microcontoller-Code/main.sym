@@ -3,53 +3,63 @@
 001     _RETURN_
 002     @SCRATCH
 003     @SCRATCH
-004-01B wheels
-01C.0   MAIN.direction
-01D     MAIN.i
-01E     motors_init.number
-01E     MAIN.@SCRATCH1
-01F     MAIN.@SCRATCH2
-020     MAIN.@SCRATCH3
-021     MAIN.@SCRATCH4
-022     MAIN.@SCRATCH5
-023     MAIN.@SCRATCH6
-024     MAIN.@SCRATCH7
-025-026 @ITOF.P1
-025-028 @DIVFF.P2
-025     MAIN.@SCRATCH8
-026     MAIN.@SCRATCH9
-027     MAIN.@SCRATCH10
-028     MAIN.@SCRATCH11
-029-02E motor_movement.motor
-029-02C @DIVFF.P1
-02D     @DIVFF.@SCRATCH1
-02E     @DIVFF.@SCRATCH2
-02F     motor_movement.direction
-02F     @DIVFF.@SCRATCH3
-030-033 motor_movement.velocity
-030     @DIVFF.@SCRATCH4
-031     @DIVFF.@SCRATCH5
-032     @DIVFF.@SCRATCH6
-034-035 motor_movement.aux
-036-039 @SFTOI.P1
-036-039 @MULFF.P2
-036     @WRITEBITA.P3
-036     motor_movement.@SCRATCH1
-037     @WRITEBITA.P1
-037     motor_movement.@SCRATCH2
-038-039 @WRITEBITA.P1
-03A-03D @MULFF.P1
-03E     @MULFF.@SCRATCH1
-03F     @MULFF.@SCRATCH2
-040     @MULFF.@SCRATCH3
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017     @INTERRUPT_AREA
+018     @INTERRUPT_AREA
+019-01A strtok.save
+01B-01E _Randseed
+01F-036 tires
+037-03C xbox_controller
+03D     PC
+03E     @WRITEBITA.P1
+03E-043 drive_tires.xbox_controller
+03F     @WRITEBITA.P1
+040-041 @WRITEBITA.P1
+044-045 drive_tires.tires
+046     control_instructions.data
+047-04E control_instructions.XJoystick
+04F-056 control_instructions.YJoystick
+057-05B control_instructions.LeftTrigger
+05C-060 control_instructions.RightTrigger
+061-062 atol.s
+063-064 atol.result
+065     atol.sign
+066     atol.base
+067     atol.index
+068     atol.c
+069-06A @MULS1616.P1
+069     atol.@SCRATCH1
+06A     atol.@SCRATCH2
+06B-06C @MULS1616.P1
+06B     atol.@SCRATCH3
+06D     @MULS1616.@SCRATCH1
+06E     @MULS1616.@SCRATCH2
 F48     CCPTMRS1
 F49     CCPTMRS0
-F55     CCP_5_LOW
 F55     CCP_5
+F55     CCP_5_LOW
 F56     CCP_5_HIGH
 F57     CCP4CON
-F58     CCP_4
 F58     CCP_4_LOW
+F58     CCP_4
 F59     CCP_4_HIGH
 F5D     CCP3CON
 F5E     CCP_3_LOW
@@ -61,52 +71,60 @@ F67     CCP_2
 F68     CCP_2_HIGH
 F78.6   C2OUT
 F79.6   C1OUT
-F80.1   BUTTON
+F89.0   status_LED
 F92     TRISA
 F93     TRISB
 F94     TRISC
+F9D.5   RC1IE
+F9F.5   RC1IP
 FBA     T2CON
 FBB     PR2
 FBD     CCP1CON
 FBE     CCP_1_LOW
 FBE     CCP_1
 FBF     CCP_1_HIGH
-FC0     ADCON2
-FC2     ADCON0
-FC2.1   DONE
-FE1-FE2 @WRITE_PACKED_MEMORY.P1
-FE1-FE2 @READ_PACKED_MEMORY.P2
-FE9-FEA @READ_PROGRAM_MEMORY.P1
-FE9-FEA @WRITE_PROGRAM_MEMORY.P2
-FE9-FEA @READ_PACKED_MEMORY.P3
-FE9-FEA @WRITE_PACKED_MEMORY.P4
-FF6-FF8 @READ_PROGRAM_MEMORY.P1
-FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+FD0.7   IPEN
+FD5     T0CON
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF2     INTCON
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
 
 ROM Allocation:
-000004  log_init
-000016  motors_init
-000056  @ITOF
-00008E  @DIVFF
-0001EA  @WRITEBITA
-000228  @MULFF
-00031C  @SFTOI
-000356  motor_movement
-000406  @cinit1
-000406  MAIN
-000432  @cinit2
+0000BA  @MULS1616
+00010C  atol
+0002DE  control_instructions
+000392  @PUTCHARI_BIU_1
+00039C  request_data
+0003B8  log_init
+0003D8  motors_init
+0003F4  drive_tires
+00040C  @cinit1
+00040C  MAIN
+00043A  @cinit2
+0135  StrtoulGO
+0135  StrtolGO
 
 Project Directory:
     C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\
 
 Project Files:
-    main.c                                                  [08-abr.-24 23:11  CRC=8616CFAA]
+    main.c                                                  [12-abr.-24 21:46  CRC=296BDDD8]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h [21-oct.-22 11:06  CRC=D568D24D]
-    motor_control.c                                         [08-abr.-24 15:27  CRC=B386195E]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h [30-jun.-20 14:21  CRC=452E14BB]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [30-ene.-19 12:26  CRC=897CEC6C]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [06-abr.-20 08:43  CRC=B1605627]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-ene.-08 15:55  CRC=2D1F019F]
+    wheel_control.c                                         [12-abr.-24 21:37  CRC=8333CBB0]
 
-Source signature=C28BD4B3
+Source signature=B266A072
 Program memory checksum=0000
-Hex file CRC=B88D
+Hex file CRC=74E1
 
 Units:
     C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main (main)
