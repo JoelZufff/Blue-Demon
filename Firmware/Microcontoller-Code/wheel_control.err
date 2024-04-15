@@ -1,4 +1,4 @@
-Compiling C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\wheel_control on 12-abr.-24 at 20:09
-*** Error 128 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\wheel_control.c" Line 7(2,6): A #DEVICE required before this line
+Compiling C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\wheel_control on 15-abr.-24 at 00:22
+*** Error 128 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\wheel_control.c" Line 9(2,6): A #DEVICE required before this line
       1 Errors,  0 Warnings.
 Build Failed.

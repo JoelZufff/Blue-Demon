@@ -1,59 +1,70 @@
 
-ROM used:   1234/65536 (2%)
-            1234/65536 (2%) including unused fragments
+ROM used:   4424/65536 (7%)
+            4424/65536 (7%) including unused fragments
 
-            0.4 Average locations per line
-            2.3 Average locations per statement
+            1.4 Average locations per line
+            7.8 Average locations per statement
 
-RAM used:   62/3896 (2%) at main() level
-            111/3896 (3%) worst case
+RAM used:   91/3896 (2%) at main() level
+            149/3896 (4%) worst case
 
-Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack used: 1 worst case (0 in main + 1 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  158    35   6  main.c
+  154    39   7  main.c
  1036     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h
- 1354   359  66  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+ 1354   359  63  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
    32     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
-  435   129  24  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
+  435   129  23  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
    28     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
-  101    17   3  wheel_control.c
+  150    39   7  wheel_control.c
 ----- -----
- 3144   540 Total
+ 3189   566 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
-0     10   0    0             @PUTCHARI_BIU_1
-0     82   3    6             @MULS1616
-0    466  19   11   1817 10.4  atol
-0     28   1    0    141  1.8  motors_init
-0     24   1    8    274  4.6  drive_tires
-0    180   7   27    625  4.3  control_instructions
-0     28   1    0    134  3.0  request_data
-0     32   1    0    158  2.2  log_init
-0    202   8    0    181  4.3  MAIN
+0     42   0    1             @delay_ms1
+0     82   1    6             @MULS1616
+0    242   3   11             @MULFF
+0    618   7   16             @ADDFF
+0    346   4   14             @DIVFF
+0    466   5   11   1817 10.4  atol
+0     30   0    5             @MUL1616
+0    128   1    8    430  4.9  motors_init
+0    336   4   13    414  7.1  motor_movement
+0    118   1   10             @FLT
+0     62   1    6             @WRITEBITA
+0     58   1    4             @SFTOI
+0    114   1    4     70  2.3  motor_shortbrake
+0   1012  11   18   1569  8.5  drive_tires
+0     72   1    2             @SITOF
+0      6   0    0             @const1127
+0    174   2    1    420  3.8  control_instructions
+0     40   0    1     72  2.4  bluetooth_connection
+0     26   0    0    141  1.8  log_init
+0    270   3    3    476  7.5  MAIN
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               7
-    Statements              540
-    Comments                1050
-    Volume (V)              4604
-    Difficulty (D)          31.0
-    Effort to implement (E) 142497
-    Time to implement (T)   2 hours, 12 minutes
-    Est Delivered Bugs (B)  1
-    Cyclomatic Complexity   16
-    Maintainability (MI)    73
+    Functions               9
+    Statements              566
+    Comments                1070
+    Volume (V)              7765
+    Difficulty (D)          47.9
+    Effort to implement (E) 372056
+    Time to implement (T)   5 hours, 44 minutes
+    Est Delivered Bugs (B)  2
+    Cyclomatic Complexity   20
+    Maintainability (MI)    22
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
 00008-000B8   178  0  
-000BA-0FFFE  1052  64298  
+000BA-0FFFE  4242  61108  
 
 
 

@@ -1,16 +1,16 @@
-CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
+CCS PCH C Compiler, Version 5.112, 29001               15-abr.-24 00:22
 
                Filename:   C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main.lst
 
-               ROM used:   1234 bytes (2%)
-                           Largest free fragment is 64298
-               RAM used:   62 (2%) at main() level
-                           111 (3%) worst case
-               Stack used: 0 locations
+               ROM used:   4424 bytes (7%)
+                           Largest free fragment is 61108
+               RAM used:   91 (2%) at main() level
+                           149 (4%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
                Stack size: 31
 
 *
-00000:  GOTO   040C
+00000:  GOTO   103E
 *
 00008:  MOVWF  04
 0000A:  MOVFF  FD8,05
@@ -32,14 +32,14 @@ CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
 00048:  MOVFF  01,0F
 0004C:  MOVFF  02,10
 00050:  MOVFF  03,11
-00054:  BTFSS  FF2.5
+00054:  BTFSS  FF0.3
 00056:  GOTO   0060
-0005A:  BTFSC  FF2.2
-0005C:  GOTO   039C
+0005A:  BTFSC  FF0.0
+0005C:  GOTO   0392
 00060:  BTFSS  F9D.5
 00062:  GOTO   006C
 00066:  BTFSC  F9E.5
-00068:  GOTO   02DE
+00068:  GOTO   02E4
 0006C:  MOVFF  0E,00
 00070:  MOVFF  0F,01
 00074:  MOVFF  10,02
@@ -74,55 +74,799 @@ CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
 .................... //// form are not restricted in any way.                               ////
 .................... ///////////////////////////////////////////////////////////////////////////
 .................... #device PIC18F26K22
-000BA:  MOVF   x6A,W
-000BC:  XORWF  x6C,W
-000BE:  ANDLW  80
-000C0:  MOVWF  x6E
-000C2:  BTFSS  x6A.7
-000C4:  BRA    00D0
-000C6:  COMF   x69,F
-000C8:  COMF   x6A,F
-000CA:  INCF   x69,F
-000CC:  BTFSC  FD8.2
-000CE:  INCF   x6A,F
-000D0:  BTFSS  x6C.7
-000D2:  BRA    00DE
-000D4:  COMF   x6B,F
-000D6:  COMF   x6C,F
-000D8:  INCF   x6B,F
-000DA:  BTFSC  FD8.2
-000DC:  INCF   x6C,F
-000DE:  MOVF   x69,W
-000E0:  MULWF  x6B
-000E2:  MOVFF  FF3,01
-000E6:  MOVFF  FF4,00
-000EA:  MULWF  x6C
-000EC:  MOVF   FF3,W
-000EE:  ADDWF  00,F
-000F0:  MOVF   x6A,W
-000F2:  MULWF  x6B
-000F4:  MOVF   FF3,W
-000F6:  ADDWFC 00,W
-000F8:  MOVWF  02
-000FA:  BTFSS  x6E.7
-000FC:  BRA    0108
-000FE:  COMF   01,F
-00100:  COMF   02,F
-00102:  INCF   01,F
-00104:  BTFSC  FD8.2
-00106:  INCF   02,F
-00108:  GOTO   01E2 (RETURN)
+000BA:  DATA 00,00
+000BC:  DATA 00,00
+000BE:  DATA 00,00
+000C0:  MOVF   x90,W
+000C2:  XORWF  x92,W
+000C4:  ANDLW  80
+000C6:  MOVWF  x94
+000C8:  BTFSS  x90.7
+000CA:  BRA    00D6
+000CC:  COMF   x8F,F
+000CE:  COMF   x90,F
+000D0:  INCF   x8F,F
+000D2:  BTFSC  FD8.2
+000D4:  INCF   x90,F
+000D6:  BTFSS  x92.7
+000D8:  BRA    00E4
+000DA:  COMF   x91,F
+000DC:  COMF   x92,F
+000DE:  INCF   x91,F
+000E0:  BTFSC  FD8.2
+000E2:  INCF   x92,F
+000E4:  MOVF   x8F,W
+000E6:  MULWF  x91
+000E8:  MOVFF  FF3,01
+000EC:  MOVFF  FF4,00
+000F0:  MULWF  x92
+000F2:  MOVF   FF3,W
+000F4:  ADDWF  00,F
+000F6:  MOVF   x90,W
+000F8:  MULWF  x91
+000FA:  MOVF   FF3,W
+000FC:  ADDWFC 00,W
+000FE:  MOVWF  02
+00100:  BTFSS  x94.7
+00102:  BRA    010E
+00104:  COMF   01,F
+00106:  COMF   02,F
+00108:  INCF   01,F
+0010A:  BTFSC  FD8.2
+0010C:  INCF   02,F
+0010E:  GOTO   01E8 (RETURN)
+*
+003D4:  MOVF   5F,W
+003D6:  MULWF  x61
+003D8:  MOVFF  FF3,01
+003DC:  MOVFF  FF4,00
+003E0:  MULWF  x62
+003E2:  MOVF   FF3,W
+003E4:  ADDWF  00,F
+003E6:  MOVF   x60,W
+003E8:  MULWF  x61
+003EA:  MOVF   FF3,W
+003EC:  ADDWFC 00,W
+003EE:  MOVWF  02
+003F0:  RETURN 0
+*
+0049C:  MOVF   x76,W
+0049E:  ANDLW  07
+004A0:  MOVWF  00
+004A2:  RRCF   x76,W
+004A4:  MOVWF  01
+004A6:  RRCF   01,F
+004A8:  RRCF   01,F
+004AA:  MOVLW  1F
+004AC:  ANDWF  01,F
+004AE:  MOVF   01,W
+004B0:  ADDWF  x78,W
+004B2:  MOVWF  FE9
+004B4:  MOVLW  00
+004B6:  ADDWFC x79,W
+004B8:  MOVWF  FEA
+004BA:  CLRF   01
+004BC:  INCF   01,F
+004BE:  INCF   00,F
+004C0:  BRA    04C4
+004C2:  RLCF   01,F
+004C4:  DECFSZ 00,F
+004C6:  BRA    04C2
+004C8:  MOVF   x77,F
+004CA:  BZ    04D2
+004CC:  MOVF   01,W
+004CE:  IORWF  FEF,F
+004D0:  BRA    04D8
+004D2:  COMF   01,F
+004D4:  MOVF   01,W
+004D6:  ANDWF  FEF,F
+004D8:  RETURN 0
+*
+0054C:  MOVLW  8E
+0054E:  MOVWF  00
+00550:  MOVFF  6E,01
+00554:  MOVFF  6D,02
+00558:  CLRF   03
+0055A:  BTFSS  x6E.7
+0055C:  BRA    0568
+0055E:  COMF   01,F
+00560:  COMF   02,F
+00562:  INCF   02,F
+00564:  BNZ   0568
+00566:  INCF   01,F
+00568:  MOVF   01,F
+0056A:  BNZ   057E
+0056C:  MOVFF  02,01
+00570:  CLRF   02
+00572:  MOVLW  08
+00574:  SUBWF  00,F
+00576:  MOVF   01,F
+00578:  BNZ   057E
+0057A:  CLRF   00
+0057C:  BRA    0592
+0057E:  BCF    FD8.0
+00580:  BTFSC  01.7
+00582:  BRA    058C
+00584:  RLCF   02,F
+00586:  RLCF   01,F
+00588:  DECF   00,F
+0058A:  BRA    057E
+0058C:  BTFSC  x6E.7
+0058E:  BRA    0592
+00590:  BCF    01.7
+00592:  RETURN 0
+00594:  MOVF   x74,W
+00596:  BTFSC  FD8.2
+00598:  BRA    067C
+0059A:  MOVWF  00
+0059C:  MOVF   x78,W
+0059E:  BTFSC  FD8.2
+005A0:  BRA    067C
+005A2:  ADDWF  00,F
+005A4:  BNC   05AE
+005A6:  MOVLW  81
+005A8:  ADDWF  00,F
+005AA:  BC    067C
+005AC:  BRA    05B6
+005AE:  MOVLW  7F
+005B0:  SUBWF  00,F
+005B2:  BNC   067C
+005B4:  BZ    067C
+005B6:  MOVFF  75,7C
+005BA:  MOVF   x79,W
+005BC:  XORWF  x7C,F
+005BE:  BSF    x75.7
+005C0:  BSF    x79.7
+005C2:  MOVF   x77,W
+005C4:  MULWF  x7B
+005C6:  MOVFF  FF4,7E
+005CA:  MOVF   x76,W
+005CC:  MULWF  x7A
+005CE:  MOVFF  FF4,03
+005D2:  MOVFF  FF3,7D
+005D6:  MULWF  x7B
+005D8:  MOVF   FF3,W
+005DA:  ADDWF  x7E,F
+005DC:  MOVF   FF4,W
+005DE:  ADDWFC x7D,F
+005E0:  MOVLW  00
+005E2:  ADDWFC 03,F
+005E4:  MOVF   x77,W
+005E6:  MULWF  x7A
+005E8:  MOVF   FF3,W
+005EA:  ADDWF  x7E,F
+005EC:  MOVF   FF4,W
+005EE:  ADDWFC x7D,F
+005F0:  MOVLW  00
+005F2:  CLRF   02
+005F4:  ADDWFC 03,F
+005F6:  ADDWFC 02,F
+005F8:  MOVF   x75,W
+005FA:  MULWF  x7B
+005FC:  MOVF   FF3,W
+005FE:  ADDWF  x7D,F
+00600:  MOVF   FF4,W
+00602:  ADDWFC 03,F
+00604:  MOVLW  00
+00606:  ADDWFC 02,F
+00608:  MOVF   x75,W
+0060A:  MULWF  x7A
+0060C:  MOVF   FF3,W
+0060E:  ADDWF  03,F
+00610:  MOVF   FF4,W
+00612:  ADDWFC 02,F
+00614:  MOVLW  00
+00616:  CLRF   01
+00618:  ADDWFC 01,F
+0061A:  MOVF   x77,W
+0061C:  MULWF  x79
+0061E:  MOVF   FF3,W
+00620:  ADDWF  x7D,F
+00622:  MOVF   FF4,W
+00624:  ADDWFC 03,F
+00626:  MOVLW  00
+00628:  ADDWFC 02,F
+0062A:  ADDWFC 01,F
+0062C:  MOVF   x76,W
+0062E:  MULWF  x79
+00630:  MOVF   FF3,W
+00632:  ADDWF  03,F
+00634:  MOVF   FF4,W
+00636:  ADDWFC 02,F
+00638:  MOVLW  00
+0063A:  ADDWFC 01,F
+0063C:  MOVF   x75,W
+0063E:  MULWF  x79
+00640:  MOVF   FF3,W
+00642:  ADDWF  02,F
+00644:  MOVF   FF4,W
+00646:  ADDWFC 01,F
+00648:  INCF   00,F
+0064A:  BTFSC  01.7
+0064C:  BRA    0658
+0064E:  RLCF   x7D,F
+00650:  RLCF   03,F
+00652:  RLCF   02,F
+00654:  RLCF   01,F
+00656:  DECF   00,F
+00658:  MOVLW  00
+0065A:  BTFSS  x7D.7
+0065C:  BRA    0672
+0065E:  INCF   03,F
+00660:  ADDWFC 02,F
+00662:  ADDWFC 01,F
+00664:  MOVF   01,W
+00666:  BNZ   0672
+00668:  MOVF   02,W
+0066A:  BNZ   0672
+0066C:  MOVF   03,W
+0066E:  BNZ   0672
+00670:  INCF   00,F
+00672:  BTFSC  x7C.7
+00674:  BSF    01.7
+00676:  BTFSS  x7C.7
+00678:  BCF    01.7
+0067A:  BRA    0684
+0067C:  CLRF   00
+0067E:  CLRF   01
+00680:  CLRF   02
+00682:  CLRF   03
+00684:  RETURN 0
+00686:  MOVF   x78,W
+00688:  BTFSC  FD8.2
+0068A:  BRA    07D6
+0068C:  MOVWF  x84
+0068E:  MOVF   x7C,W
+00690:  BTFSC  FD8.2
+00692:  BRA    07D6
+00694:  SUBWF  x84,F
+00696:  BNC   06A2
+00698:  MOVLW  7F
+0069A:  ADDWF  x84,F
+0069C:  BTFSC  FD8.0
+0069E:  BRA    07D6
+006A0:  BRA    06AE
+006A2:  MOVLW  81
+006A4:  SUBWF  x84,F
+006A6:  BTFSS  FD8.0
+006A8:  BRA    07D6
+006AA:  BTFSC  FD8.2
+006AC:  BRA    07D6
+006AE:  MOVFF  84,00
+006B2:  CLRF   01
+006B4:  CLRF   02
+006B6:  CLRF   03
+006B8:  CLRF   x83
+006BA:  MOVFF  79,82
+006BE:  BSF    x82.7
+006C0:  MOVFF  7A,81
+006C4:  MOVFF  7B,80
+006C8:  MOVLW  19
+006CA:  MOVWF  x84
+006CC:  MOVF   x7F,W
+006CE:  SUBWF  x80,F
+006D0:  BC    06EC
+006D2:  MOVLW  01
+006D4:  SUBWF  x81,F
+006D6:  BC    06EC
+006D8:  SUBWF  x82,F
+006DA:  BC    06EC
+006DC:  SUBWF  x83,F
+006DE:  BC    06EC
+006E0:  INCF   x83,F
+006E2:  INCF   x82,F
+006E4:  INCF   x81,F
+006E6:  MOVF   x7F,W
+006E8:  ADDWF  x80,F
+006EA:  BRA    073C
+006EC:  MOVF   x7E,W
+006EE:  SUBWF  x81,F
+006F0:  BC    0716
+006F2:  MOVLW  01
+006F4:  SUBWF  x82,F
+006F6:  BC    0716
+006F8:  SUBWF  x83,F
+006FA:  BC    0716
+006FC:  INCF   x83,F
+006FE:  INCF   x82,F
+00700:  MOVF   x7E,W
+00702:  ADDWF  x81,F
+00704:  MOVF   x7F,W
+00706:  ADDWF  x80,F
+00708:  BNC   073C
+0070A:  INCF   x81,F
+0070C:  BNZ   073C
+0070E:  INCF   x82,F
+00710:  BNZ   073C
+00712:  INCF   x83,F
+00714:  BRA    073C
+00716:  MOVF   x7D,W
+00718:  IORLW  80
+0071A:  SUBWF  x82,F
+0071C:  BC    073A
+0071E:  MOVLW  01
+00720:  SUBWF  x83,F
+00722:  BC    073A
+00724:  INCF   x83,F
+00726:  MOVF   x7D,W
+00728:  IORLW  80
+0072A:  ADDWF  x82,F
+0072C:  MOVF   x7E,W
+0072E:  ADDWF  x81,F
+00730:  BNC   0704
+00732:  INCF   x82,F
+00734:  BNZ   0704
+00736:  INCF   x83,F
+00738:  BRA    0704
+0073A:  BSF    03.0
+0073C:  DECFSZ x84,F
+0073E:  BRA    0742
+00740:  BRA    0758
+00742:  BCF    FD8.0
+00744:  RLCF   x80,F
+00746:  RLCF   x81,F
+00748:  RLCF   x82,F
+0074A:  RLCF   x83,F
+0074C:  BCF    FD8.0
+0074E:  RLCF   03,F
+00750:  RLCF   02,F
+00752:  RLCF   01,F
+00754:  RLCF   x85,F
+00756:  BRA    06CC
+00758:  BTFSS  x85.0
+0075A:  BRA    0768
+0075C:  BCF    FD8.0
+0075E:  RRCF   01,F
+00760:  RRCF   02,F
+00762:  RRCF   03,F
+00764:  RRCF   x85,F
+00766:  BRA    076C
+00768:  DECF   00,F
+0076A:  BZ    07D6
+0076C:  BTFSC  x85.7
+0076E:  BRA    07AC
+00770:  BCF    FD8.0
+00772:  RLCF   x80,F
+00774:  RLCF   x81,F
+00776:  RLCF   x82,F
+00778:  RLCF   x83,F
+0077A:  MOVF   x7F,W
+0077C:  SUBWF  x80,F
+0077E:  BC    078E
+00780:  MOVLW  01
+00782:  SUBWF  x81,F
+00784:  BC    078E
+00786:  SUBWF  x82,F
+00788:  BC    078E
+0078A:  SUBWF  x83,F
+0078C:  BNC   07C2
+0078E:  MOVF   x7E,W
+00790:  SUBWF  x81,F
+00792:  BC    079E
+00794:  MOVLW  01
+00796:  SUBWF  x82,F
+00798:  BC    079E
+0079A:  SUBWF  x83,F
+0079C:  BNC   07C2
+0079E:  MOVF   x7D,W
+007A0:  IORLW  80
+007A2:  SUBWF  x82,F
+007A4:  BC    07AC
+007A6:  MOVLW  01
+007A8:  SUBWF  x83,F
+007AA:  BNC   07C2
+007AC:  INCF   03,F
+007AE:  BNZ   07C2
+007B0:  INCF   02,F
+007B2:  BNZ   07C2
+007B4:  INCF   01,F
+007B6:  BNZ   07C2
+007B8:  INCF   00,F
+007BA:  BZ    07D6
+007BC:  RRCF   01,F
+007BE:  RRCF   02,F
+007C0:  RRCF   03,F
+007C2:  MOVFF  79,84
+007C6:  MOVF   x7D,W
+007C8:  XORWF  x84,F
+007CA:  BTFSS  x84.7
+007CC:  BRA    07D2
+007CE:  BSF    01.7
+007D0:  BRA    07DE
+007D2:  BCF    01.7
+007D4:  BRA    07DE
+007D6:  CLRF   00
+007D8:  CLRF   01
+007DA:  CLRF   02
+007DC:  CLRF   03
+007DE:  RETURN 0
+007E0:  MOVLW  80
+007E2:  BTFSC  FD8.1
+007E4:  XORWF  x70,F
+007E6:  CLRF   x75
+007E8:  CLRF   x76
+007EA:  MOVFF  6C,74
+007EE:  MOVF   x70,W
+007F0:  XORWF  x74,F
+007F2:  MOVF   x6B,W
+007F4:  BTFSC  FD8.2
+007F6:  BRA    09B0
+007F8:  MOVWF  x73
+007FA:  MOVWF  00
+007FC:  MOVF   x6F,W
+007FE:  BTFSC  FD8.2
+00800:  BRA    09C2
+00802:  SUBWF  x73,F
+00804:  BTFSC  FD8.2
+00806:  BRA    090A
+00808:  BNC   0884
+0080A:  MOVFF  70,79
+0080E:  BSF    x79.7
+00810:  MOVFF  71,78
+00814:  MOVFF  72,77
+00818:  CLRF   x76
+0081A:  BCF    FD8.0
+0081C:  RRCF   x79,F
+0081E:  RRCF   x78,F
+00820:  RRCF   x77,F
+00822:  RRCF   x76,F
+00824:  DECFSZ x73,F
+00826:  BRA    0818
+00828:  BTFSS  x74.7
+0082A:  BRA    0832
+0082C:  BSF    x75.0
+0082E:  BRA    09EA
+00830:  BCF    x75.0
+00832:  BCF    x73.0
+00834:  BSF    x75.4
+00836:  CLRF   FEA
+00838:  MOVLW  6E
+0083A:  MOVWF  FE9
+0083C:  BRA    0A10
+0083E:  BCF    x75.4
+00840:  BTFSC  x74.7
+00842:  BRA    0858
+00844:  BTFSS  x73.0
+00846:  BRA    086E
+00848:  RRCF   x79,F
+0084A:  RRCF   x78,F
+0084C:  RRCF   x77,F
+0084E:  RRCF   x76,F
+00850:  INCF   00,F
+00852:  BTFSC  FD8.2
+00854:  BRA    09E0
+00856:  BRA    086E
+00858:  BTFSC  x79.7
+0085A:  BRA    0874
+0085C:  BCF    FD8.0
+0085E:  RLCF   x76,F
+00860:  RLCF   x77,F
+00862:  RLCF   x78,F
+00864:  RLCF   x79,F
+00866:  DECF   00,F
+00868:  BTFSC  FD8.2
+0086A:  BRA    09E0
+0086C:  BRA    0858
+0086E:  BSF    x75.6
+00870:  BRA    0948
+00872:  BCF    x75.6
+00874:  MOVFF  6C,74
+00878:  BTFSS  x6C.7
+0087A:  BRA    0880
+0087C:  BSF    x79.7
+0087E:  BRA    09D2
+00880:  BCF    x79.7
+00882:  BRA    09D2
+00884:  MOVFF  6F,73
+00888:  MOVFF  6F,00
+0088C:  MOVF   x6B,W
+0088E:  SUBWF  x73,F
+00890:  MOVFF  6C,79
+00894:  BSF    x79.7
+00896:  MOVFF  6D,78
+0089A:  MOVFF  6E,77
+0089E:  CLRF   x76
+008A0:  BCF    FD8.0
+008A2:  RRCF   x79,F
+008A4:  RRCF   x78,F
+008A6:  RRCF   x77,F
+008A8:  RRCF   x76,F
+008AA:  DECFSZ x73,F
+008AC:  BRA    089E
+008AE:  BTFSS  x74.7
+008B0:  BRA    08B8
+008B2:  BSF    x75.1
+008B4:  BRA    09EA
+008B6:  BCF    x75.1
+008B8:  BCF    x73.0
+008BA:  BSF    x75.5
+008BC:  CLRF   FEA
+008BE:  MOVLW  72
+008C0:  MOVWF  FE9
+008C2:  BRA    0A10
+008C4:  BCF    x75.5
+008C6:  BTFSC  x74.7
+008C8:  BRA    08DE
+008CA:  BTFSS  x73.0
+008CC:  BRA    08F4
+008CE:  RRCF   x79,F
+008D0:  RRCF   x78,F
+008D2:  RRCF   x77,F
+008D4:  RRCF   x76,F
+008D6:  INCF   00,F
+008D8:  BTFSC  FD8.2
+008DA:  BRA    09E0
+008DC:  BRA    08F4
+008DE:  BTFSC  x79.7
+008E0:  BRA    08FA
+008E2:  BCF    FD8.0
+008E4:  RLCF   x76,F
+008E6:  RLCF   x77,F
+008E8:  RLCF   x78,F
+008EA:  RLCF   x79,F
+008EC:  DECF   00,F
+008EE:  BTFSC  FD8.2
+008F0:  BRA    09E0
+008F2:  BRA    08DE
+008F4:  BSF    x75.7
+008F6:  BRA    0948
+008F8:  BCF    x75.7
+008FA:  MOVFF  70,74
+008FE:  BTFSS  x70.7
+00900:  BRA    0906
+00902:  BSF    x79.7
+00904:  BRA    09D2
+00906:  BCF    x79.7
+00908:  BRA    09D2
+0090A:  MOVFF  70,79
+0090E:  BSF    x79.7
+00910:  MOVFF  71,78
+00914:  MOVFF  72,77
+00918:  BTFSS  x74.7
+0091A:  BRA    0924
+0091C:  BCF    x79.7
+0091E:  BSF    x75.2
+00920:  BRA    09EA
+00922:  BCF    x75.2
+00924:  CLRF   x76
+00926:  BCF    x73.0
+00928:  CLRF   FEA
+0092A:  MOVLW  6E
+0092C:  MOVWF  FE9
+0092E:  BRA    0A10
+00930:  BTFSC  x74.7
+00932:  BRA    096C
+00934:  MOVFF  6C,74
+00938:  BTFSS  x73.0
+0093A:  BRA    0948
+0093C:  RRCF   x79,F
+0093E:  RRCF   x78,F
+00940:  RRCF   x77,F
+00942:  RRCF   x76,F
+00944:  INCF   00,F
+00946:  BZ    09E0
+00948:  BTFSS  x76.7
+0094A:  BRA    0962
+0094C:  INCF   x77,F
+0094E:  BNZ   0962
+00950:  INCF   x78,F
+00952:  BNZ   0962
+00954:  INCF   x79,F
+00956:  BNZ   0962
+00958:  RRCF   x79,F
+0095A:  RRCF   x78,F
+0095C:  RRCF   x77,F
+0095E:  INCF   00,F
+00960:  BZ    09E0
+00962:  BTFSC  x75.6
+00964:  BRA    0872
+00966:  BTFSC  x75.7
+00968:  BRA    08F8
+0096A:  BRA    09A4
+0096C:  MOVLW  80
+0096E:  XORWF  x79,F
+00970:  BTFSS  x79.7
+00972:  BRA    097C
+00974:  BRA    09EA
+00976:  MOVFF  70,74
+0097A:  BRA    0990
+0097C:  MOVFF  6C,74
+00980:  MOVF   x79,F
+00982:  BNZ   0990
+00984:  MOVF   x78,F
+00986:  BNZ   0990
+00988:  MOVF   x77,F
+0098A:  BNZ   0990
+0098C:  CLRF   00
+0098E:  BRA    09D2
+00990:  BTFSC  x79.7
+00992:  BRA    09A4
+00994:  BCF    FD8.0
+00996:  RLCF   x76,F
+00998:  RLCF   x77,F
+0099A:  RLCF   x78,F
+0099C:  RLCF   x79,F
+0099E:  DECFSZ 00,F
+009A0:  BRA    0990
+009A2:  BRA    09E0
+009A4:  BTFSS  x74.7
+009A6:  BRA    09AC
+009A8:  BSF    x79.7
+009AA:  BRA    09D2
+009AC:  BCF    x79.7
+009AE:  BRA    09D2
+009B0:  MOVFF  6F,00
+009B4:  MOVFF  70,79
+009B8:  MOVFF  71,78
+009BC:  MOVFF  72,77
+009C0:  BRA    09D2
+009C2:  MOVFF  6B,00
+009C6:  MOVFF  6C,79
+009CA:  MOVFF  6D,78
+009CE:  MOVFF  6E,77
+009D2:  MOVFF  79,01
+009D6:  MOVFF  78,02
+009DA:  MOVFF  77,03
+009DE:  BRA    0A48
+009E0:  CLRF   00
+009E2:  CLRF   01
+009E4:  CLRF   02
+009E6:  CLRF   03
+009E8:  BRA    0A48
+009EA:  CLRF   x76
+009EC:  COMF   x77,F
+009EE:  COMF   x78,F
+009F0:  COMF   x79,F
+009F2:  COMF   x76,F
+009F4:  INCF   x76,F
+009F6:  BNZ   0A02
+009F8:  INCF   x77,F
+009FA:  BNZ   0A02
+009FC:  INCF   x78,F
+009FE:  BNZ   0A02
+00A00:  INCF   x79,F
+00A02:  BTFSC  x75.0
+00A04:  BRA    0830
+00A06:  BTFSC  x75.1
+00A08:  BRA    08B6
+00A0A:  BTFSC  x75.2
+00A0C:  BRA    0922
+00A0E:  BRA    0976
+00A10:  MOVF   FEF,W
+00A12:  ADDWF  x77,F
+00A14:  BNC   0A20
+00A16:  INCF   x78,F
+00A18:  BNZ   0A20
+00A1A:  INCF   x79,F
+00A1C:  BTFSC  FD8.2
+00A1E:  BSF    x73.0
+00A20:  MOVF   FED,F
+00A22:  MOVF   FEF,W
+00A24:  ADDWF  x78,F
+00A26:  BNC   0A2E
+00A28:  INCF   x79,F
+00A2A:  BTFSC  FD8.2
+00A2C:  BSF    x73.0
+00A2E:  MOVF   FED,F
+00A30:  MOVF   FEF,W
+00A32:  BTFSC  FEF.7
+00A34:  BRA    0A38
+00A36:  XORLW  80
+00A38:  ADDWF  x79,F
+00A3A:  BTFSC  FD8.0
+00A3C:  BSF    x73.0
+00A3E:  BTFSC  x75.4
+00A40:  BRA    083E
+00A42:  BTFSC  x75.5
+00A44:  BRA    08C4
+00A46:  BRA    0930
+00A48:  RETURN 0
+00A4A:  MOVFF  75,7C
+00A4E:  MOVF   x79,W
+00A50:  XORWF  x7C,F
+00A52:  BTFSS  x7C.7
+00A54:  BRA    0A60
+00A56:  BCF    FD8.2
+00A58:  BCF    FD8.0
+00A5A:  BTFSC  x75.7
+00A5C:  BSF    FD8.0
+00A5E:  BRA    0ABE
+00A60:  MOVFF  75,7C
+00A64:  MOVFF  78,7D
+00A68:  MOVF   x74,W
+00A6A:  SUBWF  x7D,F
+00A6C:  BZ    0A7A
+00A6E:  BTFSS  x7C.7
+00A70:  BRA    0ABE
+00A72:  MOVF   FD8,W
+00A74:  XORLW  01
+00A76:  MOVWF  FD8
+00A78:  BRA    0ABE
+00A7A:  MOVFF  79,7D
+00A7E:  MOVF   x75,W
+00A80:  SUBWF  x7D,F
+00A82:  BZ    0A90
+00A84:  BTFSS  x7C.7
+00A86:  BRA    0ABE
+00A88:  MOVF   FD8,W
+00A8A:  XORLW  01
+00A8C:  MOVWF  FD8
+00A8E:  BRA    0ABE
+00A90:  MOVFF  7A,7D
+00A94:  MOVF   x76,W
+00A96:  SUBWF  x7D,F
+00A98:  BZ    0AA6
+00A9A:  BTFSS  x7C.7
+00A9C:  BRA    0ABE
+00A9E:  MOVF   FD8,W
+00AA0:  XORLW  01
+00AA2:  MOVWF  FD8
+00AA4:  BRA    0ABE
+00AA6:  MOVFF  7B,7D
+00AAA:  MOVF   x77,W
+00AAC:  SUBWF  x7D,F
+00AAE:  BZ    0ABC
+00AB0:  BTFSS  x7C.7
+00AB2:  BRA    0ABE
+00AB4:  MOVF   FD8,W
+00AB6:  XORLW  01
+00AB8:  MOVWF  FD8
+00ABA:  BRA    0ABE
+00ABC:  BCF    FD8.0
+00ABE:  RETURN 0
+00AC0:  MOVLW  8E
+00AC2:  MOVWF  00
+00AC4:  MOVF   x74,W
+00AC6:  SUBWF  00,F
+00AC8:  MOVFF  75,02
+00ACC:  MOVFF  76,01
+00AD0:  BSF    02.7
+00AD2:  MOVF   00,F
+00AD4:  BZ    0AE8
+00AD6:  BCF    FD8.0
+00AD8:  MOVF   02,F
+00ADA:  BNZ   0AE0
+00ADC:  MOVF   01,F
+00ADE:  BZ    0AE8
+00AE0:  RRCF   02,F
+00AE2:  RRCF   01,F
+00AE4:  DECFSZ 00,F
+00AE6:  BRA    0AD6
+00AE8:  BTFSS  x75.7
+00AEA:  BRA    0AF6
+00AEC:  COMF   01,F
+00AEE:  COMF   02,F
+00AF0:  INCF   01,F
+00AF2:  BTFSC  FD8.2
+00AF4:  INCF   02,F
+00AF6:  GOTO   0C16 (RETURN)
 .................... 
 .................... #list
 .................... 
-.................... #fuses      INTRC, NOWDT, NOPROTECT, NOLVP, NOMCLR, CCP2C1, CCP3C6      // Fusibles (Multiplexado de P2B en C0)
+.................... #fuses      INTRC, NOWDT, NOPROTECT, NOLVP, CCP2C1, CCP3B5              // Fusibles (Multiplexado de P2B en C0)
 .................... #use        delay(internal = 16MHz)                                     // Configuracion de frecuencia y delay
-.................... #use        rs232(rcv = pin_c7, xmit = pin_c6, baud = 9600, bits = 8, parity = n) 
 *
-00392:  BTFSS  F9E.4
-00394:  BRA    0392
-00396:  MOVWF  FAD
-00398:  GOTO   03A8 (RETURN)
+00472:  CLRF   FEA
+00474:  MOVLW  59
+00476:  MOVWF  FE9
+00478:  MOVF   FEF,W
+0047A:  BZ    0498
+0047C:  MOVLW  05
+0047E:  MOVWF  01
+00480:  CLRF   00
+00482:  DECFSZ 00,F
+00484:  BRA    0482
+00486:  DECFSZ 01,F
+00488:  BRA    0480
+0048A:  MOVLW  2E
+0048C:  MOVWF  00
+0048E:  DECFSZ 00,F
+00490:  BRA    048E
+00492:  BRA    0494
+00494:  DECFSZ FEF,F
+00496:  BRA    047C
+00498:  GOTO   110C (RETURN)
+.................... #use        rs232(rcv = pin_c7, xmit = pin_c6, baud = 9600, bits = 8, parity = n) 
 .................... 
 .................... #include    <stdlib.h>
 .................... ///////////////////////////////////////////////////////////////////////////
@@ -1190,285 +1934,285 @@ CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
 .................... 
 ....................    index = 0;
 *
-0010C:  CLRF   x67
+00112:  CLRF   x8D
 ....................    sign = 0;
-0010E:  CLRF   x65
+00114:  CLRF   x8B
 ....................    base = 10;
-00110:  MOVLW  0A
-00112:  MOVWF  x66
+00116:  MOVLW  0A
+00118:  MOVWF  x8C
 ....................    result = 0;
-00114:  CLRF   x64
-00116:  CLRF   x63
+0011A:  CLRF   x8A
+0011C:  CLRF   x89
 .................... 
 ....................    if (!s)
-00118:  MOVF   x61,W
-0011A:  IORWF  x62,W
-0011C:  BNZ   0126
+0011E:  MOVF   x87,W
+00120:  IORWF  x88,W
+00122:  BNZ   012C
 ....................       return 0;
-0011E:  MOVLW  00
-00120:  MOVWF  01
-00122:  MOVWF  02
-00124:  BRA    02DC
+00124:  MOVLW  00
+00126:  MOVWF  01
+00128:  MOVWF  02
+0012A:  BRA    02E2
 ....................    c = s[index++];
-00126:  MOVF   x67,W
-00128:  INCF   x67,F
-0012A:  ADDWF  x61,W
-0012C:  MOVWF  FE9
-0012E:  MOVLW  00
-00130:  ADDWFC x62,W
-00132:  MOVWF  FEA
-00134:  MOVFF  FEF,68
+0012C:  MOVF   x8D,W
+0012E:  INCF   x8D,F
+00130:  ADDWF  x87,W
+00132:  MOVWF  FE9
+00134:  MOVLW  00
+00136:  ADDWFC x88,W
+00138:  MOVWF  FEA
+0013A:  MOVFF  FEF,8E
 .................... 
 ....................    // increase index if either positive or negative sign is detected
 ....................    if (c == '-')
-00138:  MOVF   x68,W
-0013A:  SUBLW  2D
-0013C:  BNZ   0156
+0013E:  MOVF   x8E,W
+00140:  SUBLW  2D
+00142:  BNZ   015C
 ....................    {
 ....................       sign = 1;         // Set the sign to negative
-0013E:  MOVLW  01
-00140:  MOVWF  x65
+00144:  MOVLW  01
+00146:  MOVWF  x8B
 ....................       c = s[index++];
-00142:  MOVF   x67,W
-00144:  INCF   x67,F
-00146:  ADDWF  x61,W
-00148:  MOVWF  FE9
-0014A:  MOVLW  00
-0014C:  ADDWFC x62,W
-0014E:  MOVWF  FEA
-00150:  MOVFF  FEF,68
+00148:  MOVF   x8D,W
+0014A:  INCF   x8D,F
+0014C:  ADDWF  x87,W
+0014E:  MOVWF  FE9
+00150:  MOVLW  00
+00152:  ADDWFC x88,W
+00154:  MOVWF  FEA
+00156:  MOVFF  FEF,8E
 ....................    }
-00154:  BRA    016E
+0015A:  BRA    0174
 ....................    else if (c == '+')
-00156:  MOVF   x68,W
-00158:  SUBLW  2B
-0015A:  BNZ   016E
+0015C:  MOVF   x8E,W
+0015E:  SUBLW  2B
+00160:  BNZ   0174
 ....................    {
 ....................       c = s[index++];
-0015C:  MOVF   x67,W
-0015E:  INCF   x67,F
-00160:  ADDWF  x61,W
-00162:  MOVWF  FE9
-00164:  MOVLW  00
-00166:  ADDWFC x62,W
-00168:  MOVWF  FEA
-0016A:  MOVFF  FEF,68
+00162:  MOVF   x8D,W
+00164:  INCF   x8D,F
+00166:  ADDWF  x87,W
+00168:  MOVWF  FE9
+0016A:  MOVLW  00
+0016C:  ADDWFC x88,W
+0016E:  MOVWF  FEA
+00170:  MOVFF  FEF,8E
 ....................    }
 .................... 
 ....................    if (c >= '0' && c <= '9')
-0016E:  MOVF   x68,W
-00170:  SUBLW  2F
-00172:  BTFSC  FD8.0
-00174:  BRA    02C0
-00176:  MOVF   x68,W
-00178:  SUBLW  39
-0017A:  BTFSS  FD8.0
-0017C:  BRA    02C0
+00174:  MOVF   x8E,W
+00176:  SUBLW  2F
+00178:  BTFSC  FD8.0
+0017A:  BRA    02C6
+0017C:  MOVF   x8E,W
+0017E:  SUBLW  39
+00180:  BTFSS  FD8.0
+00182:  BRA    02C6
 ....................    {
 ....................       if (c == '0' && (s[index] == 'x' || s[index] == 'X'))
-0017E:  MOVF   x68,W
-00180:  SUBLW  30
-00182:  BNZ   01C0
-00184:  MOVF   x67,W
-00186:  ADDWF  x61,W
-00188:  MOVWF  FE9
-0018A:  MOVLW  00
-0018C:  ADDWFC x62,W
-0018E:  MOVWF  FEA
-00190:  MOVF   FEF,W
-00192:  SUBLW  78
-00194:  BZ    01A8
-00196:  MOVF   x67,W
-00198:  ADDWF  x61,W
-0019A:  MOVWF  FE9
-0019C:  MOVLW  00
-0019E:  ADDWFC x62,W
-001A0:  MOVWF  FEA
-001A2:  MOVF   FEF,W
-001A4:  SUBLW  58
-001A6:  BNZ   01C0
+00184:  MOVF   x8E,W
+00186:  SUBLW  30
+00188:  BNZ   01C6
+0018A:  MOVF   x8D,W
+0018C:  ADDWF  x87,W
+0018E:  MOVWF  FE9
+00190:  MOVLW  00
+00192:  ADDWFC x88,W
+00194:  MOVWF  FEA
+00196:  MOVF   FEF,W
+00198:  SUBLW  78
+0019A:  BZ    01AE
+0019C:  MOVF   x8D,W
+0019E:  ADDWF  x87,W
+001A0:  MOVWF  FE9
+001A2:  MOVLW  00
+001A4:  ADDWFC x88,W
+001A6:  MOVWF  FEA
+001A8:  MOVF   FEF,W
+001AA:  SUBLW  58
+001AC:  BNZ   01C6
 ....................       {
 ....................          base = 16;
-001A8:  MOVLW  10
-001AA:  MOVWF  x66
+001AE:  MOVLW  10
+001B0:  MOVWF  x8C
 ....................          index++;
-001AC:  INCF   x67,F
+001B2:  INCF   x8D,F
 ....................          c = s[index++];
-001AE:  MOVF   x67,W
-001B0:  INCF   x67,F
-001B2:  ADDWF  x61,W
-001B4:  MOVWF  FE9
-001B6:  MOVLW  00
-001B8:  ADDWFC x62,W
-001BA:  MOVWF  FEA
-001BC:  MOVFF  FEF,68
+001B4:  MOVF   x8D,W
+001B6:  INCF   x8D,F
+001B8:  ADDWF  x87,W
+001BA:  MOVWF  FE9
+001BC:  MOVLW  00
+001BE:  ADDWFC x88,W
+001C0:  MOVWF  FEA
+001C2:  MOVFF  FEF,8E
 ....................       }
 .................... 
 ....................       // The number is a decimal number
 ....................       if (base == 10)
-001C0:  MOVF   x66,W
-001C2:  SUBLW  0A
-001C4:  BNZ   0206
+001C6:  MOVF   x8C,W
+001C8:  SUBLW  0A
+001CA:  BNZ   020C
 ....................       {
 ....................          while (c >= '0' && c <= '9')
-001C6:  MOVF   x68,W
-001C8:  SUBLW  2F
-001CA:  BC    0204
-001CC:  MOVF   x68,W
-001CE:  SUBLW  39
-001D0:  BNC   0204
+001CC:  MOVF   x8E,W
+001CE:  SUBLW  2F
+001D0:  BC    020A
+001D2:  MOVF   x8E,W
+001D4:  SUBLW  39
+001D6:  BNC   020A
 ....................          {
 ....................             result = 10*result + (c - '0');
-001D2:  CLRF   x6A
-001D4:  MOVLW  0A
-001D6:  MOVWF  x69
-001D8:  MOVFF  64,6C
-001DC:  MOVFF  63,6B
-001E0:  BRA    00BA
-001E2:  MOVLW  30
-001E4:  SUBWF  x68,W
-001E6:  ADDWF  01,W
-001E8:  MOVWF  x63
-001EA:  MOVLW  00
-001EC:  ADDWFC 02,W
-001EE:  MOVWF  x64
+001D8:  CLRF   x90
+001DA:  MOVLW  0A
+001DC:  MOVWF  x8F
+001DE:  MOVFF  8A,92
+001E2:  MOVFF  89,91
+001E6:  BRA    00C0
+001E8:  MOVLW  30
+001EA:  SUBWF  x8E,W
+001EC:  ADDWF  01,W
+001EE:  MOVWF  x89
+001F0:  MOVLW  00
+001F2:  ADDWFC 02,W
+001F4:  MOVWF  x8A
 ....................             c = s[index++];
-001F0:  MOVF   x67,W
-001F2:  INCF   x67,F
-001F4:  ADDWF  x61,W
-001F6:  MOVWF  FE9
-001F8:  MOVLW  00
-001FA:  ADDWFC x62,W
-001FC:  MOVWF  FEA
-001FE:  MOVFF  FEF,68
-00202:  BRA    01C6
+001F6:  MOVF   x8D,W
+001F8:  INCF   x8D,F
+001FA:  ADDWF  x87,W
+001FC:  MOVWF  FE9
+001FE:  MOVLW  00
+00200:  ADDWFC x88,W
+00202:  MOVWF  FEA
+00204:  MOVFF  FEF,8E
+00208:  BRA    01CC
 ....................          }
 ....................       }
-00204:  BRA    02C0
+0020A:  BRA    02C6
 ....................       else if (base == 16)    // The number is a hexa number
-00206:  MOVF   x66,W
-00208:  SUBLW  10
-0020A:  BNZ   02C0
+0020C:  MOVF   x8C,W
+0020E:  SUBLW  10
+00210:  BNZ   02C6
 ....................       {
 ....................          c = toupper(c);
-0020C:  MOVF   x68,W
-0020E:  SUBLW  60
-00210:  BC    021E
-00212:  MOVF   x68,W
-00214:  SUBLW  7A
-00216:  BNC   021E
-00218:  MOVF   x68,W
-0021A:  ANDLW  DF
-0021C:  BRA    0220
-0021E:  MOVF   x68,W
-00220:  MOVWF  x68
+00212:  MOVF   x8E,W
+00214:  SUBLW  60
+00216:  BC    0224
+00218:  MOVF   x8E,W
+0021A:  SUBLW  7A
+0021C:  BNC   0224
+0021E:  MOVF   x8E,W
+00220:  ANDLW  DF
+00222:  BRA    0226
+00224:  MOVF   x8E,W
+00226:  MOVWF  x8E
 ....................          while ( (c >= '0' && c <= '9') || (c >= 'A' && c <='F'))
-00222:  MOVF   x68,W
-00224:  SUBLW  2F
-00226:  BC    022E
-00228:  MOVF   x68,W
-0022A:  SUBLW  39
-0022C:  BC    023A
-0022E:  MOVF   x68,W
-00230:  SUBLW  40
-00232:  BC    02C0
-00234:  MOVF   x68,W
-00236:  SUBLW  46
-00238:  BNC   02C0
+00228:  MOVF   x8E,W
+0022A:  SUBLW  2F
+0022C:  BC    0234
+0022E:  MOVF   x8E,W
+00230:  SUBLW  39
+00232:  BC    0240
+00234:  MOVF   x8E,W
+00236:  SUBLW  40
+00238:  BC    02C6
+0023A:  MOVF   x8E,W
+0023C:  SUBLW  46
+0023E:  BNC   02C6
 ....................          {
 ....................             if (c >= '0' && c <= '9')
-0023A:  MOVF   x68,W
-0023C:  SUBLW  2F
-0023E:  BC    026E
-00240:  MOVF   x68,W
-00242:  SUBLW  39
-00244:  BNC   026E
+00240:  MOVF   x8E,W
+00242:  SUBLW  2F
+00244:  BC    0274
+00246:  MOVF   x8E,W
+00248:  SUBLW  39
+0024A:  BNC   0274
 ....................                result = (result << 4) + (c - '0');
-00246:  RLCF   x63,W
-00248:  MOVWF  x69
-0024A:  RLCF   x64,W
-0024C:  MOVWF  x6A
-0024E:  RLCF   x69,F
-00250:  RLCF   x6A,F
-00252:  RLCF   x69,F
-00254:  RLCF   x6A,F
-00256:  RLCF   x69,F
-00258:  RLCF   x6A,F
-0025A:  MOVLW  F0
-0025C:  ANDWF  x69,F
-0025E:  MOVLW  30
-00260:  SUBWF  x68,W
-00262:  ADDWF  x69,W
-00264:  MOVWF  x63
-00266:  MOVLW  00
-00268:  ADDWFC x6A,W
-0026A:  MOVWF  x64
-0026C:  BRA    0296
+0024C:  RLCF   x89,W
+0024E:  MOVWF  x8F
+00250:  RLCF   x8A,W
+00252:  MOVWF  x90
+00254:  RLCF   x8F,F
+00256:  RLCF   x90,F
+00258:  RLCF   x8F,F
+0025A:  RLCF   x90,F
+0025C:  RLCF   x8F,F
+0025E:  RLCF   x90,F
+00260:  MOVLW  F0
+00262:  ANDWF  x8F,F
+00264:  MOVLW  30
+00266:  SUBWF  x8E,W
+00268:  ADDWF  x8F,W
+0026A:  MOVWF  x89
+0026C:  MOVLW  00
+0026E:  ADDWFC x90,W
+00270:  MOVWF  x8A
+00272:  BRA    029C
 ....................             else
 ....................                result = (result << 4) + (c - 'A' + 10);
-0026E:  RLCF   x63,W
-00270:  MOVWF  x69
-00272:  RLCF   x64,W
-00274:  MOVWF  x6A
-00276:  RLCF   x69,F
-00278:  RLCF   x6A,F
-0027A:  RLCF   x69,F
-0027C:  RLCF   x6A,F
-0027E:  RLCF   x69,F
-00280:  RLCF   x6A,F
-00282:  MOVLW  F0
-00284:  ANDWF  x69,F
-00286:  MOVLW  41
-00288:  SUBWF  x68,W
-0028A:  ADDLW  0A
-0028C:  ADDWF  x69,W
-0028E:  MOVWF  x63
-00290:  MOVLW  00
-00292:  ADDWFC x6A,W
-00294:  MOVWF  x64
+00274:  RLCF   x89,W
+00276:  MOVWF  x8F
+00278:  RLCF   x8A,W
+0027A:  MOVWF  x90
+0027C:  RLCF   x8F,F
+0027E:  RLCF   x90,F
+00280:  RLCF   x8F,F
+00282:  RLCF   x90,F
+00284:  RLCF   x8F,F
+00286:  RLCF   x90,F
+00288:  MOVLW  F0
+0028A:  ANDWF  x8F,F
+0028C:  MOVLW  41
+0028E:  SUBWF  x8E,W
+00290:  ADDLW  0A
+00292:  ADDWF  x8F,W
+00294:  MOVWF  x89
+00296:  MOVLW  00
+00298:  ADDWFC x90,W
+0029A:  MOVWF  x8A
 .................... 
 ....................             c = s[index++];c = toupper(c);
-00296:  MOVF   x67,W
-00298:  INCF   x67,F
-0029A:  ADDWF  x61,W
-0029C:  MOVWF  FE9
-0029E:  MOVLW  00
-002A0:  ADDWFC x62,W
-002A2:  MOVWF  FEA
-002A4:  MOVFF  FEF,68
-002A8:  MOVF   x68,W
-002AA:  SUBLW  60
-002AC:  BC    02BA
-002AE:  MOVF   x68,W
-002B0:  SUBLW  7A
-002B2:  BNC   02BA
-002B4:  MOVF   x68,W
-002B6:  ANDLW  DF
-002B8:  BRA    02BC
-002BA:  MOVF   x68,W
-002BC:  MOVWF  x68
-002BE:  BRA    0222
+0029C:  MOVF   x8D,W
+0029E:  INCF   x8D,F
+002A0:  ADDWF  x87,W
+002A2:  MOVWF  FE9
+002A4:  MOVLW  00
+002A6:  ADDWFC x88,W
+002A8:  MOVWF  FEA
+002AA:  MOVFF  FEF,8E
+002AE:  MOVF   x8E,W
+002B0:  SUBLW  60
+002B2:  BC    02C0
+002B4:  MOVF   x8E,W
+002B6:  SUBLW  7A
+002B8:  BNC   02C0
+002BA:  MOVF   x8E,W
+002BC:  ANDLW  DF
+002BE:  BRA    02C2
+002C0:  MOVF   x8E,W
+002C2:  MOVWF  x8E
+002C4:  BRA    0228
 ....................          }
 ....................       }
 ....................    }
 .................... 
 ....................    if (base == 10 && sign == 1)
-002C0:  MOVF   x66,W
-002C2:  SUBLW  0A
-002C4:  BNZ   02D4
-002C6:  DECFSZ x65,W
-002C8:  BRA    02D4
+002C6:  MOVF   x8C,W
+002C8:  SUBLW  0A
+002CA:  BNZ   02DA
+002CC:  DECFSZ x8B,W
+002CE:  BRA    02DA
 ....................       result = -result;
-002CA:  COMF   x63,F
-002CC:  COMF   x64,F
-002CE:  INCF   x63,F
-002D0:  BTFSC  FD8.2
-002D2:  INCF   x64,F
+002D0:  COMF   x89,F
+002D2:  COMF   x8A,F
+002D4:  INCF   x89,F
+002D6:  BTFSC  FD8.2
+002D8:  INCF   x8A,F
 .................... 
 ....................    return(result);
-002D4:  MOVFF  63,01
-002D8:  MOVFF  64,02
-002DC:  RETURN 0
+002DA:  MOVFF  89,01
+002DE:  MOVFF  8A,02
+002E2:  RETURN 0
 .................... }
 .................... 
 .................... /* A fast routine to multiply by 10
@@ -2263,10 +3007,12 @@ CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
 .................... #endif
 .................... 
 .................... #include    "wheel_control.c"
-.................... #define     RIGHT   1
-.................... #define     LEFT    0
+.................... #define     FORWARD     1
+.................... #define     BACK        0
 .................... 
-.................... #define     max_dutycicle   160
+.................... #define     max_dutycicle       320
+.................... #define     max_trigger_value   255
+.................... #define     max_joystick_value  32767
 .................... 
 .................... // -------------------- Direcciones de registros -------------------- //
 .................... #BYTE       CCPTMRS0        = 0xF49
@@ -2284,8 +3030,7 @@ CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
 .................... struct bth_conection_t
 .................... {
 ....................     short updated_data;
-....................     short update_request;
-....................     short status;
+....................     short IsConnected;
 .................... };
 .................... 
 .................... struct motor_t
@@ -2297,100 +3042,689 @@ CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
 .................... 
 .................... struct controller_t
 .................... {
-....................     signed long     Joystick[2];
-....................     int             Triggers[2];
+....................     signed long     Joystick[2];    // Entero de -32768 a 32767 (0 eje x, 1 eje y)
+....................     int             Triggers[2];    // Entero de 0 a 255 (0 izquierdo, 1 derecho)
 .................... };
 .................... 
 .................... // ---------------------------- Funciones --------------------------- //
-.................... void motors_init()
+.................... void motors_init(struct motor_t tires[2][2])
 .................... {
 ....................     // Configuracion de Timers
 ....................     T2CON       = 0b00000100;
 *
-003D8:  MOVLW  04
-003DA:  MOVWF  FBA
-....................     PR2         = 39;
-003DC:  MOVLW  27
-003DE:  MOVWF  FBB
+003F2:  MOVLW  04
+003F4:  MOVWF  FBA
+....................     PR2         = 79;
+003F6:  MOVLW  4F
+003F8:  MOVWF  FBB
 ....................     
 ....................     // Configuracion de CCPXCON para PWM
 ....................     CCPTMRS0 = CCPTMRS0 = 0b00000000;       // Configuramos CCPX con timer 2
-003E0:  MOVLB  F
-003E2:  CLRF   x49
+003FA:  MOVLB  F
+003FC:  CLRF   x49
 ....................     
 ....................     // Configiracion de modulo CCPX para PWM
 ....................     CCP4CON = 0b00001100;
-003E4:  MOVLW  0C
-003E6:  MOVWF  x57
+003FE:  MOVLW  0C
+00400:  MOVWF  x57
 ....................     CCP3CON = 0b00001100;
-003E8:  MOVWF  x5D
+00402:  MOVWF  x5D
 ....................     CCP2CON = 0b00001100;
-003EA:  MOVWF  F66
+00404:  MOVWF  F66
 ....................     CCP1CON = 0b00001100;
-003EC:  MOVWF  FBD
-003EE:  MOVLB  0
-003F0:  GOTO   04A6 (RETURN)
+00406:  MOVWF  FBD
+.................... 
+....................     for(int i = 0; i < 2 ; i++)
+00408:  CLRF   5B
+0040A:  MOVF   5B,W
+0040C:  SUBLW  01
+0040E:  BNC   046C
+....................         for(int j = 0; j < 2; j++)
+00410:  CLRF   5C
+00412:  MOVF   5C,W
+00414:  SUBLW  01
+00416:  BNC   0468
+....................             *(tires[i][j].DutyCicle) = 0;
+00418:  MOVLB  0
+0041A:  CLRF   x60
+0041C:  MOVFF  5B,5F
+00420:  CLRF   x62
+00422:  MOVLW  0C
+00424:  MOVWF  x61
+00426:  RCALL  03D4
+00428:  MOVFF  02,5E
+0042C:  MOVFF  01,5D
+00430:  CLRF   x60
+00432:  MOVFF  5C,5F
+00436:  CLRF   x62
+00438:  MOVLW  06
+0043A:  MOVWF  x61
+0043C:  RCALL  03D4
+0043E:  MOVF   01,W
+00440:  ADDWF  5D,F
+00442:  MOVF   02,W
+00444:  ADDWFC 5E,F
+00446:  MOVF   59,W
+00448:  ADDWF  5D,W
+0044A:  MOVWF  FE9
+0044C:  MOVF   5A,W
+0044E:  ADDWFC 5E,W
+00450:  MOVWF  FEA
+00452:  MOVFF  FEC,03
+00456:  MOVF   FED,F
+00458:  MOVFF  FEF,FE9
+0045C:  MOVFF  03,FEA
+00460:  CLRF   FEF
+00462:  INCF   5C,F
+00464:  MOVLB  F
+00466:  BRA    0412
+00468:  INCF   5B,F
+0046A:  BRA    040A
+0046C:  MOVLB  0
+0046E:  GOTO   10E2 (RETURN)
 .................... }
 .................... 
-.................... void motor_movement(struct motor_t motor, short direction, int velocity)
+.................... void motor_movement(struct motor_t *motor, float speed)   // Modo de movimiento normal
 .................... {
+....................     short direction;
+....................     
+....................     if(speed >= 0)           // Movimiento hacia adelante
+*
+00AFA:  CLRF   x77
+00AFC:  CLRF   x76
+00AFE:  CLRF   x75
+00B00:  CLRF   x74
+00B02:  MOVFF  70,7B
+00B06:  MOVFF  6F,7A
+00B0A:  MOVFF  6E,79
+00B0E:  MOVFF  6D,78
+00B12:  RCALL  0A4A
+00B14:  BC    0B18
+00B16:  BNZ   0B1C
+....................         direction = FORWARD;
+00B18:  BSF    x71.0
+00B1A:  BRA    0B40
+....................     else if(speed < 0)      // Movimiento hacia atras
+00B1C:  MOVFF  70,77
+00B20:  MOVFF  6F,76
+00B24:  MOVFF  6E,75
+00B28:  MOVFF  6D,74
+00B2C:  CLRF   x7B
+00B2E:  CLRF   x7A
+00B30:  CLRF   x79
+00B32:  CLRF   x78
+00B34:  RCALL  0A4A
+00B36:  BNC   0B40
+....................     {
+....................         direction = BACK;
+00B38:  BCF    x71.0
+....................         speed = -speed;     // Para calculo de DutyCicle
+00B3A:  MOVF   x6E,W
+00B3C:  XORLW  80
+00B3E:  MOVWF  x6E
+....................     }
+....................     
 ....................     // Establecemos direccion de giro
-....................     output_bit(motor.IN1_pin, direction);
-....................     output_bit(motor.IN2_pin, !direction);
+....................     output_bit(motor->IN1_pin, direction);
+00B40:  MOVLW  02
+00B42:  ADDWF  x6B,W
+00B44:  MOVWF  FE9
+00B46:  MOVLW  00
+00B48:  ADDWFC x6C,W
+00B4A:  MOVWF  FEA
+00B4C:  MOVFF  FEC,75
+00B50:  MOVF   FED,F
+00B52:  MOVFF  FEF,74
+00B56:  MOVLW  00
+00B58:  BTFSC  x71.0
+00B5A:  MOVLW  01
+00B5C:  MOVFF  74,76
+00B60:  MOVWF  x77
+00B62:  MOVLW  0F
+00B64:  MOVWF  x79
+00B66:  MOVLW  89
+00B68:  MOVWF  x78
+00B6A:  RCALL  049C
+00B6C:  MOVFF  74,76
+00B70:  CLRF   x77
+00B72:  MOVLW  0F
+00B74:  MOVWF  x79
+00B76:  MOVLW  92
+00B78:  MOVWF  x78
+00B7A:  RCALL  049C
+....................     output_bit(motor->IN2_pin, !direction);
+00B7C:  MOVLW  04
+00B7E:  ADDWF  x6B,W
+00B80:  MOVWF  FE9
+00B82:  MOVLW  00
+00B84:  ADDWFC x6C,W
+00B86:  MOVWF  FEA
+00B88:  MOVFF  FEC,75
+00B8C:  MOVF   FED,F
+00B8E:  MOVFF  FEF,74
+00B92:  MOVLW  00
+00B94:  BTFSS  x71.0
+00B96:  MOVLW  01
+00B98:  MOVFF  74,76
+00B9C:  MOVWF  x77
+00B9E:  MOVLW  0F
+00BA0:  MOVWF  x79
+00BA2:  MOVLW  89
+00BA4:  MOVWF  x78
+00BA6:  RCALL  049C
+00BA8:  MOVFF  74,76
+00BAC:  CLRF   x77
+00BAE:  MOVLW  0F
+00BB0:  MOVWF  x79
+00BB2:  MOVLW  92
+00BB4:  MOVWF  x78
+00BB6:  RCALL  049C
 .................... 
 ....................     // Establecemos DC para velocidad
-....................     long aux = max_dutycicle * velocity / 100;
-....................     motor->DutyCicle = aux >> 2;
+....................     long aux = max_dutycicle * speed / 100;      // Ver si eliminar
+00BB8:  CLRF   x77
+00BBA:  CLRF   x76
+00BBC:  MOVLW  20
+00BBE:  MOVWF  x75
+00BC0:  MOVLW  87
+00BC2:  MOVWF  x74
+00BC4:  MOVFF  70,7B
+00BC8:  MOVFF  6F,7A
+00BCC:  MOVFF  6E,79
+00BD0:  MOVFF  6D,78
+00BD4:  RCALL  0594
+00BD6:  MOVFF  03,77
+00BDA:  MOVFF  02,76
+00BDE:  MOVFF  01,75
+00BE2:  MOVFF  00,74
+00BE6:  MOVFF  03,7B
+00BEA:  MOVFF  02,7A
+00BEE:  MOVFF  01,79
+00BF2:  MOVFF  00,78
+00BF6:  CLRF   x7F
+00BF8:  CLRF   x7E
+00BFA:  MOVLW  48
+00BFC:  MOVWF  x7D
+00BFE:  MOVLW  85
+00C00:  MOVWF  x7C
+00C02:  RCALL  0686
+00C04:  MOVFF  03,77
+00C08:  MOVFF  02,76
+00C0C:  MOVFF  01,75
+00C10:  MOVFF  00,74
+00C14:  BRA    0AC0
+00C16:  MOVFF  02,73
+00C1A:  MOVFF  01,72
+....................     *(motor->DutyCicle) = aux >> 2;     // Revisar
+00C1E:  MOVFF  6B,FE9
+00C22:  MOVFF  6C,FEA
+00C26:  MOVFF  FEC,03
+00C2A:  MOVF   FED,F
+00C2C:  MOVFF  FEF,FE9
+00C30:  MOVFF  03,FEA
+00C34:  RRCF   x73,W
+00C36:  MOVWF  03
+00C38:  RRCF   x72,W
+00C3A:  MOVWF  02
+00C3C:  RRCF   03,F
+00C3E:  RRCF   02,F
+00C40:  MOVLW  3F
+00C42:  ANDWF  03,F
+00C44:  MOVFF  02,FEF
+00C48:  RETURN 0
 .................... }
 .................... 
-.................... void drive_tires(struct controller_t xbox_controller, struct motor_t tires[2][2])
+.................... void motor_shortbrake(struct motor_t *motor)    // Modo de freno de corto (Solo para emergencias)
 .................... {
-....................     // Establecemos direccion de desplazamiento y velocidad en funcion de triggers
-....................     if(xbox_controller.Triggers[1] >= xbox_controller.Triggers[0])   // Si esta avanzando mas que retrocediendo
-003F4:  MOVF   42,W
-003F6:  SUBWF  43,W
-003F8:  BNC   03FC
-....................     {
-....................         // Avanzar la resta de los 2 triggers
+....................     output_high(motor->IN1_pin);
+*
+004DA:  MOVLW  02
+004DC:  ADDWF  x6B,W
+004DE:  MOVWF  FE9
+004E0:  MOVLW  00
+004E2:  ADDWFC x6C,W
+004E4:  MOVWF  FEA
+004E6:  MOVFF  FEC,6E
+004EA:  MOVF   FED,F
+004EC:  MOVFF  FEF,6D
+004F0:  MOVFF  6D,76
+004F4:  MOVLW  01
+004F6:  MOVWF  x77
+004F8:  MOVLW  0F
+004FA:  MOVWF  x79
+004FC:  MOVLW  89
+004FE:  MOVWF  x78
+00500:  RCALL  049C
+00502:  MOVFF  6D,76
+00506:  CLRF   x77
+00508:  MOVLW  0F
+0050A:  MOVWF  x79
+0050C:  MOVLW  92
+0050E:  MOVWF  x78
+00510:  RCALL  049C
+....................     output_high(motor->IN2_pin);
+00512:  MOVLW  04
+00514:  ADDWF  x6B,W
+00516:  MOVWF  FE9
+00518:  MOVLW  00
+0051A:  ADDWFC x6C,W
+0051C:  MOVWF  FEA
+0051E:  MOVFF  FEC,6E
+00522:  MOVF   FED,F
+00524:  MOVFF  FEF,6D
+00528:  MOVFF  6D,76
+0052C:  MOVLW  01
+0052E:  MOVWF  x77
+00530:  MOVLW  0F
+00532:  MOVWF  x79
+00534:  MOVLW  89
+00536:  MOVWF  x78
+00538:  RCALL  049C
+0053A:  MOVFF  6D,76
+0053E:  CLRF   x77
+00540:  MOVLW  0F
+00542:  MOVWF  x79
+00544:  MOVLW  92
+00546:  MOVWF  x78
+00548:  RCALL  049C
+0054A:  RETURN 0
+.................... }
 .................... 
+.................... void drive_tires(struct controller_t *xbox_controller, struct motor_t tires[2][2])
+.................... {    
+....................     // Si estan presionados los 2 al maximo, aplicamos freno de corto y salimos de funcion
+....................     if((xbox_controller->Triggers[0] == 255) && (xbox_controller->Triggers[1] == 255))
+*
+00C4A:  MOVLW  04
+00C4C:  ADDWF  5B,W
+00C4E:  MOVWF  FE9
+00C50:  MOVLW  00
+00C52:  ADDWFC 5C,W
+00C54:  MOVWF  FEA
+00C56:  INCFSZ FEF,W
+00C58:  BRA    0CCC
+00C5A:  MOVLW  05
+00C5C:  ADDWF  5B,W
+00C5E:  MOVWF  FE9
+00C60:  MOVLW  00
+00C62:  ADDWFC 5C,W
+00C64:  MOVWF  FEA
+00C66:  INCFSZ FEF,W
+00C68:  BRA    0CCC
+....................     {
+....................         // Activamos modo short brake
+....................         motor_shortbrake(&tires[0][0]), motor_shortbrake(&tires[0][1]);
+00C6A:  MOVFF  5D,01
+00C6E:  MOVFF  5E,03
+00C72:  MOVFF  5E,6C
+00C76:  MOVFF  5D,6B
+00C7A:  RCALL  04DA
+00C7C:  MOVLW  06
+00C7E:  ADDWF  5D,W
+00C80:  MOVWF  01
+00C82:  MOVLW  00
+00C84:  ADDWFC 5E,W
+00C86:  MOVWF  03
+00C88:  MOVFF  01,69
+00C8C:  MOVWF  x6A
+00C8E:  MOVWF  x6C
+00C90:  MOVFF  01,6B
+00C94:  RCALL  04DA
+....................         motor_shortbrake(&tires[1][0]), motor_shortbrake(&tires[1][1]);
+00C96:  MOVLW  0C
+00C98:  ADDWF  5D,W
+00C9A:  MOVWF  01
+00C9C:  MOVLW  00
+00C9E:  ADDWFC 5E,W
+00CA0:  MOVWF  03
+00CA2:  MOVFF  01,69
+00CA6:  MOVWF  x6A
+00CA8:  MOVWF  x6C
+00CAA:  MOVFF  01,6B
+00CAE:  RCALL  04DA
+00CB0:  MOVLW  12
+00CB2:  ADDWF  5D,W
+00CB4:  MOVWF  01
+00CB6:  MOVLW  00
+00CB8:  ADDWFC 5E,W
+00CBA:  MOVWF  03
+00CBC:  MOVFF  01,69
+00CC0:  MOVWF  x6A
+00CC2:  MOVWF  x6C
+00CC4:  MOVFF  01,6B
+00CC8:  RCALL  04DA
+....................         
+....................         return;
+00CCA:  BRA    103C
+....................     }
 .................... 
-....................     }
-003FA:  BRA    0408
-....................     else if(xbox_controller.Triggers[1] < xbox_controller.Triggers[0])  // Si esta retrocediendo mas que avanzando
-003FC:  MOVF   42,W
-003FE:  SUBWF  43,W
-00400:  BC    0404
-....................     {
-....................         // Retroceder la suma de los 2 triggers
-....................     }
-00402:  BRA    0408
-....................     else if(xbox_controller.Triggers[0] == 255)      // Si son iguales y estan presionados al maximo
-00404:  INCFSZ 42,W
-00406:  BRA    0408
-....................     {
-....................         // Si retrocede lo mismo que avanza ver si hacer frenado 
-....................     }
-00408:  GOTO   04D0 (RETURN)
+....................     /*  Notas para comprender
+....................     * Llanta contraria al giro, avanza con normalidad a la velocidad indicada (speed)
+....................     * Llanta de apoyo, gira a menor velocidad en funcion de que tan desviado hacia la direccion esta el joystick 
+....................         ∵ (-speed < turning_speed < speed)
+....................     */
+.................... 
+....................     // Si no se aplico freno de corto, calculamos velocidad y direccion de movimiento
 ....................     
-.................... /*
-....................     // Mandamos la instruccion a pines del motor
-....................     output_bit(motor.IN1_pin, direction);
-....................     output_bit(motor.IN2_pin, !direction);
+....................     float speed[2];
+....................     signed long trigger_diff = (signed long) xbox_controller->Triggers[1] - xbox_controller->Triggers[0];
+00CCC:  MOVLW  05
+00CCE:  ADDWF  5B,W
+00CD0:  MOVWF  FE9
+00CD2:  MOVLW  00
+00CD4:  ADDWFC 5C,W
+00CD6:  MOVWF  FEA
+00CD8:  MOVF   FEF,W
+00CDA:  CLRF   x6A
+00CDC:  MOVWF  x69
+00CDE:  MOVLW  04
+00CE0:  ADDWF  5B,W
+00CE2:  MOVWF  FE9
+00CE4:  MOVLW  00
+00CE6:  ADDWFC 5C,W
+00CE8:  MOVWF  FEA
+00CEA:  MOVF   FEF,W
+00CEC:  SUBWF  x69,W
+00CEE:  MOVWF  x67
+00CF0:  MOVLW  00
+00CF2:  SUBWFB x6A,W
+00CF4:  MOVWF  x68
 .................... 
-....................     // Establecemos velocidad en funcion de palanca
-....................     motor->DutyCicle = aux >> 2;
-.................... */
+....................     if(xbox_controller->Joystick[0] >= 0)        // El movimiento es a la derecha o al centro
+00CF6:  MOVFF  5B,FE9
+00CFA:  MOVFF  5C,FEA
+00CFE:  MOVFF  FEC,6A
+00D02:  MOVF   FED,F
+00D04:  MOVFF  FEF,69
+00D08:  BTFSC  x6A.7
+00D0A:  BRA    0E52
+....................     {
+....................         // Llanta izquierda avanza normal
+....................         speed[0] = trigger_diff * 100.0 / max_trigger_value;
+00D0C:  MOVFF  68,6E
+00D10:  MOVFF  67,6D
+00D14:  RCALL  054C
+00D16:  MOVFF  03,77
+00D1A:  MOVFF  02,76
+00D1E:  MOVFF  01,75
+00D22:  MOVFF  00,74
+00D26:  CLRF   x7B
+00D28:  CLRF   x7A
+00D2A:  MOVLW  48
+00D2C:  MOVWF  x79
+00D2E:  MOVLW  85
+00D30:  MOVWF  x78
+00D32:  RCALL  0594
+00D34:  MOVFF  03,6C
+00D38:  MOVFF  02,6B
+00D3C:  MOVFF  01,6A
+00D40:  MOVFF  00,69
+00D44:  MOVFF  03,7B
+00D48:  MOVFF  02,7A
+00D4C:  MOVFF  01,79
+00D50:  MOVFF  00,78
+00D54:  CLRF   x7F
+00D56:  CLRF   x7E
+00D58:  MOVLW  7F
+00D5A:  MOVWF  x7D
+00D5C:  MOVLW  86
+00D5E:  MOVWF  x7C
+00D60:  RCALL  0686
+00D62:  MOVFF  03,62
+00D66:  MOVFF  02,61
+00D6A:  MOVFF  01,60
+00D6E:  MOVFF  00,5F
+....................         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+.................... 
+....................         // Llanta derecha avanza como punto de apoyo para curva, por lo que calculamos velocidad de giro, en funcion de que tan cercano esta al valor maximo o minimo del eje X
+....................         speed[1] = speed[0] - (2 * speed[0] * xbox_controller->Joystick[0] / 32767.0);
+00D72:  CLRF   x77
+00D74:  CLRF   x76
+00D76:  CLRF   x75
+00D78:  MOVLW  80
+00D7A:  MOVWF  x74
+00D7C:  MOVFF  62,7B
+00D80:  MOVFF  61,7A
+00D84:  MOVFF  60,79
+00D88:  MOVFF  5F,78
+00D8C:  RCALL  0594
+00D8E:  MOVFF  03,6C
+00D92:  MOVFF  02,6B
+00D96:  MOVFF  01,6A
+00D9A:  MOVFF  00,69
+00D9E:  MOVFF  5B,FE9
+00DA2:  MOVFF  5C,FEA
+00DA6:  MOVFF  FEC,03
+00DAA:  MOVF   FED,F
+00DAC:  MOVFF  FEF,6D
+00DB0:  MOVFF  03,6E
+00DB4:  CALL   054C
+00DB8:  MOVFF  6C,77
+00DBC:  MOVFF  6B,76
+00DC0:  MOVFF  6A,75
+00DC4:  MOVFF  69,74
+00DC8:  MOVFF  03,7B
+00DCC:  MOVFF  02,7A
+00DD0:  MOVFF  01,79
+00DD4:  MOVFF  00,78
+00DD8:  CALL   0594
+00DDC:  MOVFF  03,6C
+00DE0:  MOVFF  02,6B
+00DE4:  MOVFF  01,6A
+00DE8:  MOVFF  00,69
+00DEC:  MOVFF  03,7B
+00DF0:  MOVFF  02,7A
+00DF4:  MOVFF  01,79
+00DF8:  MOVFF  00,78
+00DFC:  CLRF   x7F
+00DFE:  MOVLW  FE
+00E00:  MOVWF  x7E
+00E02:  MOVLW  7F
+00E04:  MOVWF  x7D
+00E06:  MOVLW  8D
+00E08:  MOVWF  x7C
+00E0A:  RCALL  0686
+00E0C:  MOVFF  FEA,6A
+00E10:  MOVFF  FE9,69
+00E14:  BSF    FD8.1
+00E16:  MOVFF  62,6E
+00E1A:  MOVFF  61,6D
+00E1E:  MOVFF  60,6C
+00E22:  MOVFF  5F,6B
+00E26:  MOVFF  03,72
+00E2A:  MOVFF  02,71
+00E2E:  MOVFF  01,70
+00E32:  MOVFF  00,6F
+00E36:  RCALL  07E0
+00E38:  MOVFF  6A,FEA
+00E3C:  MOVFF  69,FE9
+00E40:  MOVFF  03,66
+00E44:  MOVFF  02,65
+00E48:  MOVFF  01,64
+00E4C:  MOVFF  00,63
+....................         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+....................     }
+00E50:  BRA    0F9C
+....................     else                                        // El movimiento es a la izquierda
+....................     {
+....................         // Llanta derecha avanza normal
+....................         speed[1] = trigger_diff * 100.0 / max_trigger_value;
+00E52:  MOVFF  68,6E
+00E56:  MOVFF  67,6D
+00E5A:  CALL   054C
+00E5E:  MOVFF  03,77
+00E62:  MOVFF  02,76
+00E66:  MOVFF  01,75
+00E6A:  MOVFF  00,74
+00E6E:  CLRF   x7B
+00E70:  CLRF   x7A
+00E72:  MOVLW  48
+00E74:  MOVWF  x79
+00E76:  MOVLW  85
+00E78:  MOVWF  x78
+00E7A:  CALL   0594
+00E7E:  MOVFF  03,6C
+00E82:  MOVFF  02,6B
+00E86:  MOVFF  01,6A
+00E8A:  MOVFF  00,69
+00E8E:  MOVFF  03,7B
+00E92:  MOVFF  02,7A
+00E96:  MOVFF  01,79
+00E9A:  MOVFF  00,78
+00E9E:  CLRF   x7F
+00EA0:  CLRF   x7E
+00EA2:  MOVLW  7F
+00EA4:  MOVWF  x7D
+00EA6:  MOVLW  86
+00EA8:  MOVWF  x7C
+00EAA:  CALL   0686
+00EAE:  MOVFF  03,66
+00EB2:  MOVFF  02,65
+00EB6:  MOVFF  01,64
+00EBA:  MOVFF  00,63
+....................         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+.................... 
+....................         // Llanta izquierda avanza como punto de apoyo para curva, por lo que Calculamos velocidad de giro, en funcion de que tan cercano esta al valor maximo o minimo del eje X
+....................         speed[0] = speed[1] - (2 * speed[1] * xbox_controller->Joystick[0] / 32768.0);
+00EBE:  CLRF   x77
+00EC0:  CLRF   x76
+00EC2:  CLRF   x75
+00EC4:  MOVLW  80
+00EC6:  MOVWF  x74
+00EC8:  MOVFF  66,7B
+00ECC:  MOVFF  65,7A
+00ED0:  MOVFF  64,79
+00ED4:  MOVFF  63,78
+00ED8:  CALL   0594
+00EDC:  MOVFF  03,6C
+00EE0:  MOVFF  02,6B
+00EE4:  MOVFF  01,6A
+00EE8:  MOVFF  00,69
+00EEC:  MOVFF  5B,FE9
+00EF0:  MOVFF  5C,FEA
+00EF4:  MOVFF  FEC,03
+00EF8:  MOVF   FED,F
+00EFA:  MOVFF  FEF,6D
+00EFE:  MOVFF  03,6E
+00F02:  CALL   054C
+00F06:  MOVFF  6C,77
+00F0A:  MOVFF  6B,76
+00F0E:  MOVFF  6A,75
+00F12:  MOVFF  69,74
+00F16:  MOVFF  03,7B
+00F1A:  MOVFF  02,7A
+00F1E:  MOVFF  01,79
+00F22:  MOVFF  00,78
+00F26:  CALL   0594
+00F2A:  MOVFF  03,6C
+00F2E:  MOVFF  02,6B
+00F32:  MOVFF  01,6A
+00F36:  MOVFF  00,69
+00F3A:  MOVFF  03,7B
+00F3E:  MOVFF  02,7A
+00F42:  MOVFF  01,79
+00F46:  MOVFF  00,78
+00F4A:  CLRF   x7F
+00F4C:  CLRF   x7E
+00F4E:  CLRF   x7D
+00F50:  MOVLW  8E
+00F52:  MOVWF  x7C
+00F54:  CALL   0686
+00F58:  MOVFF  FEA,6A
+00F5C:  MOVFF  FE9,69
+00F60:  BSF    FD8.1
+00F62:  MOVFF  66,6E
+00F66:  MOVFF  65,6D
+00F6A:  MOVFF  64,6C
+00F6E:  MOVFF  63,6B
+00F72:  MOVFF  03,72
+00F76:  MOVFF  02,71
+00F7A:  MOVFF  01,70
+00F7E:  MOVFF  00,6F
+00F82:  RCALL  07E0
+00F84:  MOVFF  6A,FEA
+00F88:  MOVFF  69,FE9
+00F8C:  MOVFF  03,62
+00F90:  MOVFF  02,61
+00F94:  MOVFF  01,60
+00F98:  MOVFF  00,5F
+....................         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+....................     }
+.................... 
+....................     // Enviamos movimiento a las llantas //
+....................     motor_movement(&tires[0][0], speed[0]);      // Llanta delantera izquierda
+00F9C:  MOVFF  5D,01
+00FA0:  MOVFF  5E,03
+00FA4:  MOVFF  5E,6C
+00FA8:  MOVFF  5D,6B
+00FAC:  MOVFF  62,70
+00FB0:  MOVFF  61,6F
+00FB4:  MOVFF  60,6E
+00FB8:  MOVFF  5F,6D
+00FBC:  RCALL  0AFA
+....................     motor_movement(&tires[1][0], speed[0]);      // Llanta trasera izquierda
+00FBE:  MOVLW  0C
+00FC0:  ADDWF  5D,W
+00FC2:  MOVWF  01
+00FC4:  MOVLW  00
+00FC6:  ADDWFC 5E,W
+00FC8:  MOVWF  03
+00FCA:  MOVFF  01,69
+00FCE:  MOVWF  x6A
+00FD0:  MOVWF  x6C
+00FD2:  MOVFF  01,6B
+00FD6:  MOVFF  62,70
+00FDA:  MOVFF  61,6F
+00FDE:  MOVFF  60,6E
+00FE2:  MOVFF  5F,6D
+00FE6:  RCALL  0AFA
+....................     
+....................     motor_movement(&tires[0][1], speed[1]);      // Llanta delantera derecha
+00FE8:  MOVLW  06
+00FEA:  ADDWF  5D,W
+00FEC:  MOVWF  01
+00FEE:  MOVLW  00
+00FF0:  ADDWFC 5E,W
+00FF2:  MOVWF  03
+00FF4:  MOVFF  01,69
+00FF8:  MOVWF  x6A
+00FFA:  MOVWF  x6C
+00FFC:  MOVFF  01,6B
+01000:  MOVFF  66,70
+01004:  MOVFF  65,6F
+01008:  MOVFF  64,6E
+0100C:  MOVFF  63,6D
+01010:  RCALL  0AFA
+....................     motor_movement(&tires[1][1], speed[1]);      // Llanta trasera derecha
+01012:  MOVLW  12
+01014:  ADDWF  5D,W
+01016:  MOVWF  01
+01018:  MOVLW  00
+0101A:  ADDWFC 5E,W
+0101C:  MOVWF  03
+0101E:  MOVFF  01,69
+01022:  MOVWF  x6A
+01024:  MOVWF  x6C
+01026:  MOVFF  01,6B
+0102A:  MOVFF  66,70
+0102E:  MOVFF  65,6F
+01032:  MOVFF  64,6E
+01036:  MOVFF  63,6D
+0103A:  RCALL  0AFA
+0103C:  RETURN 0
 .................... }
 .................... 
 .................... /*
-.................... Ir recto: Las 4 llantas giran a la misma velocidad
-.................... Girar hacia un lado: Una llanta gira a una velocidad y la otra a una velocidad menor o directamente en sentido contrario
+.................... Los gatillos establecen la velocidad maxima de giro, y la posicion del joystick establece como se repartira esta velocidad en las llantas, para poder hacer diferentes maniobras, por ejemlo:
 .................... 
-.................... Puedo usar eje y del joystick para definir que tanto se avanza al girar a la derecha o izquierda
-.................... */
+.................... * Cuanto mas pegado al maximo o minimo del eje Y, mayor sera la diferencia de velocidad entre las llantas de la izquierda con las de la derecha
+.................... * Cuanto mas pegado al maximo o minimo del eje X, mayor sera la diferencia de velocidad entre las llantas de arriba y abajo
 .................... 
+.................... Por lo tanto: 
+.................... * La llanta mas lejana a la direccion de movimiento en X tendra mas velocidad que la mas pegada
+.................... * La llanta mas lejana a la direccion de movimiento en Y tendra mas velocidad que la mas pegada
+.................... */ 
 .................... 
-.................... #define     TMR0_val    15535
 .................... 
 .................... // --------------------- Direccion de registros --------------------- //
 .................... #BYTE       TRISA               = 0xF92
@@ -2399,338 +3733,370 @@ CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
 .................... #BIT        status_LED          = 0xF89.0   // LATA
 .................... 
 .................... #BYTE       INTCON              = 0xFF2
+.................... #BIT        INT1IE              = 0xFF0.3   // INTCON3
+.................... #BIT        INTEDG1             = 0xFF1.5   // INTCON2
 .................... #BIT        RC1IE               = 0xF9D.5   // PIE1
 .................... #BIT        IPEN                = 0xFD0.7   // RCON
 .................... #BIT        RC1IP               = 0xF9F.5   // IPR1
-.................... 
-.................... #BYTE       T0CON               = 0xFD5
-.................... const int16 *TMR0               = 0xFD6;
 .................... 
 .................... // ----------------------- Variable Globales ------------------------ //
 .................... struct motor_t  tires[2][2]   = 
 .................... {
 ....................     {   // Llantas delanteras
-....................         { 0xFBE, PIN_B1, PIN_B2 },  // Izquierda
-....................         { 0xF67, PIN_B3, PIN_B4 }   // Derecha
+....................         { 0xFBE, PIN_B3, PIN_B4 },  // Izquierda
+....................         { 0xF67, PIN_B6, PIN_B7 }   // Derecha
 ....................     },
 ....................     {   // Llantas traseras
-....................         { 0xF5E, PIN_B5, PIN_B6 },  // Izquierda
-....................         { 0xF58, PIN_C3, PIN_C4 }   // Derecha
+....................         { 0xF5E, PIN_A4, PIN_A5 },  // Izquierda
+....................         { 0xF58, PIN_A6, PIN_A7 }   // Derecha
 ....................     }
 .................... };
 .................... 
-.................... struct controller_t xbox_controller;
+.................... const struct    controller_t resting_state = { {0, 0}, {0, 0} };
+.................... struct          controller_t xbox_controller;
 .................... 
-.................... struct bth_conection_t PC = { FALSE, FALSE, FALSE };
+.................... struct          bth_conection_t PC = { FALSE, FALSE };
+.................... 
+.................... char            XJoystick[8], YJoystick[8], LeftTrigger[5], RightTrigger[5];
 .................... 
 .................... // -------------------------- Interrupciones ------------------------ //
-.................... #int_rda
+.................... #INT_RDA
 .................... void control_instructions()
 *
-002DE:  BTFSS  F9E.5
-002E0:  BRA    02DE
-002E2:  MOVFF  FAE,46
+002E4:  BTFSS  F9E.5
+002E6:  BRA    02E4
+002E8:  MOVFF  FAE,86
 .................... {
 ....................     int data = getch();
 ....................     
 ....................     if(data == '*')     // Recibimos caracter de inicio de datos
-002E6:  MOVF   46,W
-002E8:  SUBLW  2A
-002EA:  BNZ   038C
-....................     {   
-....................         char XJoystick[8], YJoystick[8], LeftTrigger[5], RightTrigger[5];
-....................         
+002EC:  MOVF   x86,W
+002EE:  SUBLW  2A
+002F0:  BNZ   038C
+....................     {           
 ....................         // Obtenemos cadenas de caracteres con los valores a recibir
 ....................         gets(XJoystick);
-002EC:  CLRF   FEA
-002EE:  MOVLW  47
-002F0:  MOVWF  FE9
-002F2:  CLRF   FED
-002F4:  BTFSS  F9E.5
-002F6:  BRA    02F4
-002F8:  MOVFF  FAE,FEC
-002FC:  MOVLW  0D
-002FE:  SUBWF  FEF,W
-00300:  BNZ   02F4
-00302:  CLRF   FEC
+002F2:  CLRF   FEA
+002F4:  MOVLW  3E
+002F6:  MOVWF  FE9
+002F8:  CLRF   FED
+002FA:  BTFSS  F9E.5
+002FC:  BRA    02FA
+002FE:  MOVFF  FAE,FEC
+00302:  MOVLW  0D
+00304:  SUBWF  FEF,W
+00306:  BNZ   02FA
+00308:  CLRF   FEC
 ....................         gets(YJoystick);
-00304:  CLRF   FEA
-00306:  MOVLW  4F
-00308:  MOVWF  FE9
-0030A:  CLRF   FED
-0030C:  BTFSS  F9E.5
-0030E:  BRA    030C
-00310:  MOVFF  FAE,FEC
-00314:  MOVLW  0D
-00316:  SUBWF  FEF,W
-00318:  BNZ   030C
-0031A:  CLRF   FEC
+0030A:  CLRF   FEA
+0030C:  MOVLW  46
+0030E:  MOVWF  FE9
+00310:  CLRF   FED
+00312:  BTFSS  F9E.5
+00314:  BRA    0312
+00316:  MOVFF  FAE,FEC
+0031A:  MOVLW  0D
+0031C:  SUBWF  FEF,W
+0031E:  BNZ   0312
+00320:  CLRF   FEC
 .................... 
 ....................         gets(LeftTrigger);
-0031C:  CLRF   FEA
-0031E:  MOVLW  57
-00320:  MOVWF  FE9
-00322:  CLRF   FED
-00324:  BTFSS  F9E.5
-00326:  BRA    0324
-00328:  MOVFF  FAE,FEC
-0032C:  MOVLW  0D
-0032E:  SUBWF  FEF,W
-00330:  BNZ   0324
-00332:  CLRF   FEC
+00322:  CLRF   FEA
+00324:  MOVLW  4E
+00326:  MOVWF  FE9
+00328:  CLRF   FED
+0032A:  BTFSS  F9E.5
+0032C:  BRA    032A
+0032E:  MOVFF  FAE,FEC
+00332:  MOVLW  0D
+00334:  SUBWF  FEF,W
+00336:  BNZ   032A
+00338:  CLRF   FEC
 ....................         gets(RightTrigger);
-00334:  CLRF   FEA
-00336:  MOVLW  5C
-00338:  MOVWF  FE9
-0033A:  CLRF   FED
-0033C:  BTFSS  F9E.5
-0033E:  BRA    033C
-00340:  MOVFF  FAE,FEC
-00344:  MOVLW  0D
-00346:  SUBWF  FEF,W
-00348:  BNZ   033C
-0034A:  CLRF   FEC
+0033A:  CLRF   FEA
+0033C:  MOVLW  53
+0033E:  MOVWF  FE9
+00340:  CLRF   FED
+00342:  BTFSS  F9E.5
+00344:  BRA    0342
+00346:  MOVFF  FAE,FEC
+0034A:  MOVLW  0D
+0034C:  SUBWF  FEF,W
+0034E:  BNZ   0342
+00350:  CLRF   FEC
 .................... 
 ....................         // Realizamos la conversion y actualizamos los valores del control
 ....................         xbox_controller.Joystick[0] =  atol(XJoystick);
-0034C:  CLRF   x62
-0034E:  MOVLW  47
-00350:  MOVWF  x61
-00352:  RCALL  010C
-00354:  MOVFF  02,38
-00358:  MOVFF  01,37
+00352:  CLRF   x88
+00354:  MOVLW  3E
+00356:  MOVWF  x87
+00358:  RCALL  0112
+0035A:  MOVFF  02,38
+0035E:  MOVFF  01,37
 ....................         xbox_controller.Joystick[1] =  atol(YJoystick);
-0035C:  CLRF   x62
-0035E:  MOVLW  4F
-00360:  MOVWF  x61
-00362:  RCALL  010C
-00364:  MOVFF  02,3A
-00368:  MOVFF  01,39
+00362:  CLRF   x88
+00364:  MOVLW  46
+00366:  MOVWF  x87
+00368:  RCALL  0112
+0036A:  MOVFF  02,3A
+0036E:  MOVFF  01,39
 ....................         
 ....................         xbox_controller.Triggers[0] =  atol(LeftTrigger);
-0036C:  CLRF   x62
-0036E:  MOVLW  57
-00370:  MOVWF  x61
-00372:  RCALL  010C
-00374:  MOVFF  01,3B
+00372:  CLRF   x88
+00374:  MOVLW  4E
+00376:  MOVWF  x87
+00378:  RCALL  0112
+0037A:  MOVFF  01,3B
 ....................         xbox_controller.Triggers[1] =  atol(RightTrigger);
-00378:  CLRF   x62
-0037A:  MOVLW  5C
-0037C:  MOVWF  x61
-0037E:  RCALL  010C
-00380:  MOVFF  01,3C
+0037E:  CLRF   x88
+00380:  MOVLW  53
+00382:  MOVWF  x87
+00384:  RCALL  0112
+00386:  MOVFF  01,3C
 .................... 
 ....................         // Actualizamos variables de conexion
-....................         PC.updated_data = PC.status = status_LED = TRUE;
-00384:  BSF    F89.0
-00386:  BSF    3D.2
-00388:  BSF    3D.0
-....................         PC.update_request = FALSE;
-0038A:  BCF    3D.1
+....................         PC.updated_data = TRUE;
+0038A:  BSF    3D.0
 ....................     }
 .................... }
 .................... 
-0038C:  BCF    F9E.5
-0038E:  GOTO   006C
-.................... #int_timer0
-.................... void request_data()
-.................... {
-....................     if(PC.update_request)  // No hay conexion (Ver si hacerlo cada x veces que suceda)
-*
-0039C:  BTFSS  3D.1
-0039E:  BRA    03A4
-....................         PC.status = status_LED = FALSE;
-003A0:  BCF    F89.0
-003A2:  BCF    3D.2
-.................... 
-....................     putc('*');
-003A4:  MOVLW  2A
-003A6:  BRA    0392
-....................     PC.update_request = TRUE;
-003A8:  BSF    3D.1
-.................... 
-....................     *TMR0 = TMR0_val;
-003AA:  MOVLW  3C
-003AC:  MOVWF  FD7
-003AE:  MOVLW  AF
-003B0:  MOVWF  FD6
-003B2:  BCF    FF2.2
-003B4:  GOTO   006C
-.................... }
-.................... 
 .................... /* Inforamcion de variables
-.................... * update_request: Boolenao para señalar que se solicito una actualizacion de informacion.
-....................     * update_request = FALSE : Se recibio la actualizacion
-....................     * update_request = TRUE  : Se solicito un actualizacion y no se recibio
-.................... 
 .................... * updated_data: Booleano para señalar que hubo una actualizacion de informacion y no ha sido aplicada.
 ....................     * updated_data = FALSE   : No hay nueva informacion
 ....................     * updated_data = TRUE    : Hay informacion pendiente de aplicar
-.................... 
-.................... * status: Booleano para saber si hay conexion con el dispositivo
+.................... * isConnected: Booleno para saber el estatus de la conexion de bluetooth
 .................... */
+.................... 
+0038C:  BCF    F9E.5
+0038E:  GOTO   006C
+.................... #INT_EXT1
+.................... void bluetooth_connection()
+.................... {
+....................     // Cuando entre por primera vez sera en flanco de subida
+....................     INTEDG1         ^= 1;       // Cambiamos el flanco de deteccion
+00392:  MOVLW  00
+00394:  BTFSC  FF1.5
+00396:  MOVLW  01
+00398:  XORLW  01
+0039A:  BCF    FF1.5
+0039C:  BTFSC  FE8.0
+0039E:  BSF    FF1.5
+....................     PC.IsConnected  ^= 1;       // Cambiamos el estatus de conexion
+003A0:  MOVLW  00
+003A2:  BTFSC  3D.1
+003A4:  MOVLW  01
+003A6:  XORLW  01
+003A8:  BCF    3D.1
+003AA:  BTFSC  FE8.0
+003AC:  BSF    3D.1
+.................... 
+....................     status_LED = PC.IsConnected;    // Actualzamos LED indicador
+003AE:  BCF    F89.0
+003B0:  BTFSC  3D.1
+003B2:  BSF    F89.0
+003B4:  BCF    FF0.0
+003B6:  GOTO   006C
+.................... }
 .................... 
 .................... // ---------------------------- Funciones --------------------------- //
 .................... void log_init()
 .................... {
 ....................     // Configuracion de pines GPIO
 ....................     TRISA       = 0b00000000;
-003B8:  CLRF   F92
-....................     TRISB       = 0b00000000;
-003BA:  CLRF   F93
-....................     TRISC       = 0b00000000;
-003BC:  CLRF   F94
+003BA:  CLRF   F92
+....................     TRISB       = 0b00000010;
+003BC:  MOVLW  02
+003BE:  MOVWF  F93
+....................     TRISC       = 0b11000000;
+003C0:  MOVLW  C0
+003C2:  MOVWF  F94
 .................... 
 ....................     // Configuracion de Interrupciones
-....................     IPEN = RC1IE = RC1IP = TRUE;        // Establecemos la interrupcion de recepcion serial como prioridad
-003BE:  BSF    F9F.5
-003C0:  BSF    F9D.5
-003C2:  BSF    FD0.7
-....................     INTCON      = 0b11100000;
-003C4:  MOVLW  E0
-003C6:  MOVWF  FF2
-.................... 
-....................     // Configuracion de timers
-....................     *TMR0       = TMR0_val;
-003C8:  MOVLW  3C
-003CA:  MOVWF  FD7
-003CC:  MOVLW  AF
-003CE:  MOVWF  FD6
-....................     T0CON       = 0b10000010;
-003D0:  MOVLW  82
-003D2:  MOVWF  FD5
-003D4:  GOTO   04A4 (RETURN)
+....................     IPEN = RC1IE = RC1IP =  TRUE;        // Establecemos la interrupcion de recepcion serial como prioridad
+003C4:  BSF    F9F.5
+003C6:  BSF    F9D.5
+003C8:  BSF    FD0.7
+....................     INT1IE = INTEDG1 = TRUE;            // Activamos INT_EXT1 en flanco de subida 
+003CA:  BSF    FF1.5
+003CC:  BSF    FF0.3
+....................     INTCON = 0b11000000;
+003CE:  MOVWF  FF2
+003D0:  GOTO   10D8 (RETURN)
 .................... }
 .................... 
 .................... // ------------------------ Codigo Principal ----------------------- //
 .................... void main()
 *
-0040C:  CLRF   FF8
-0040E:  BCF    FD0.7
-00410:  BSF    07.7
-00412:  MOVLW  70
-00414:  MOVWF  FD3
-00416:  BCF    F9B.6
-00418:  BCF    F9B.7
-0041A:  BSF    FB8.3
-0041C:  MOVLW  A0
-0041E:  MOVWF  FAF
-00420:  MOVLW  01
-00422:  MOVWF  FB0
-00424:  MOVLW  A6
-00426:  MOVWF  FAC
-00428:  MOVLW  90
-0042A:  MOVWF  FAB
-0042C:  MOVLB  F
-0042E:  CLRF   x38
-00430:  CLRF   x39
-00432:  CLRF   x3A
-00434:  CLRF   F77
-00436:  CLRF   F78
-00438:  CLRF   F79
-0043A:  BRA    0462
-0043C:  DATA 02,00
-0043E:  DATA 19,00
-00440:  DATA 00,18
-00442:  DATA 00,1F
-00444:  DATA BE,0F
-00446:  DATA 09,7C
-00448:  DATA 0A,7C
-0044A:  DATA 67,0F
-0044C:  DATA 0B,7C
-0044E:  DATA 0C,7C
-00450:  DATA 5E,0F
-00452:  DATA 0D,7C
-00454:  DATA 0E,7C
-00456:  DATA 58,0F
-00458:  DATA 13,7C
-0045A:  DATA 14,7C
-0045C:  DATA 01,00
-0045E:  DATA 3D,00
-00460:  DATA 00,00
-00462:  MOVLW  00
-00464:  MOVWF  FF8
-00466:  MOVLW  04
-00468:  MOVWF  FF7
-0046A:  MOVLW  3C
-0046C:  MOVWF  FF6
-0046E:  TBLRD*+
-00470:  MOVF   FF5,W
-00472:  MOVWF  00
-00474:  XORLW  00
-00476:  BZ    049E
-00478:  TBLRD*+
-0047A:  MOVF   FF5,W
-0047C:  MOVWF  01
-0047E:  BTFSC  FE8.7
-00480:  BRA    048C
-00482:  ANDLW  3F
-00484:  MOVWF  FEA
-00486:  TBLRD*+
-00488:  MOVFF  FF5,FE9
-0048C:  BTFSC  01.6
-0048E:  TBLRD*+
-00490:  BTFSS  01.6
-00492:  TBLRD*+
-00494:  MOVFF  FF5,FEE
-00498:  DCFSNZ 00,F
-0049A:  BRA    046E
-0049C:  BRA    0490
-0049E:  CLRF   FF8
+0103E:  CLRF   FF8
+01040:  BCF    FD0.7
+01042:  BSF    07.7
+01044:  MOVLW  70
+01046:  MOVWF  FD3
+01048:  BCF    F9B.6
+0104A:  BCF    F9B.7
+0104C:  BSF    FB8.3
+0104E:  MOVLW  A0
+01050:  MOVWF  FAF
+01052:  MOVLW  01
+01054:  MOVWF  FB0
+01056:  MOVLW  A6
+01058:  MOVWF  FAC
+0105A:  MOVLW  90
+0105C:  MOVWF  FAB
+0105E:  MOVLB  F
+01060:  CLRF   x38
+01062:  CLRF   x39
+01064:  CLRF   x3A
+01066:  CLRF   F77
+01068:  CLRF   F78
+0106A:  CLRF   F79
+0106C:  BRA    1094
+0106E:  DATA 02,00
+01070:  DATA 19,00
+01072:  DATA 00,18
+01074:  DATA 00,1F
+01076:  DATA BE,0F
+01078:  DATA 0B,7C
+0107A:  DATA 0C,7C
+0107C:  DATA 67,0F
+0107E:  DATA 0E,7C
+01080:  DATA 0F,7C
+01082:  DATA 5E,0F
+01084:  DATA 04,7C
+01086:  DATA 05,7C
+01088:  DATA 58,0F
+0108A:  DATA 06,7C
+0108C:  DATA 07,7C
+0108E:  DATA 01,00
+01090:  DATA 3D,00
+01092:  DATA 00,00
+01094:  MOVLW  00
+01096:  MOVWF  FF8
+01098:  MOVLW  10
+0109A:  MOVWF  FF7
+0109C:  MOVLW  6E
+0109E:  MOVWF  FF6
+010A0:  TBLRD*+
+010A2:  MOVF   FF5,W
+010A4:  MOVWF  00
+010A6:  XORLW  00
+010A8:  BZ    10D0
+010AA:  TBLRD*+
+010AC:  MOVF   FF5,W
+010AE:  MOVWF  01
+010B0:  BTFSC  FE8.7
+010B2:  BRA    10BE
+010B4:  ANDLW  3F
+010B6:  MOVWF  FEA
+010B8:  TBLRD*+
+010BA:  MOVFF  FF5,FE9
+010BE:  BTFSC  01.6
+010C0:  TBLRD*+
+010C2:  BTFSS  01.6
+010C4:  TBLRD*+
+010C6:  MOVFF  FF5,FEE
+010CA:  DCFSNZ 00,F
+010CC:  BRA    10A0
+010CE:  BRA    10C2
+010D0:  CLRF   FF8
 .................... {
 ....................     log_init();
-004A0:  MOVLB  0
-004A2:  BRA    03B8
-....................     motors_init();
-004A4:  BRA    03D8
-....................     
-....................     while (TRUE)
+010D2:  MOVLB  0
+010D4:  GOTO   03BA
+....................     motors_init(tires);
+010D8:  CLRF   5A
+010DA:  MOVLW  1F
+010DC:  MOVWF  59
+010DE:  GOTO   03F2
+.................... 
+....................     Connection_animation:
+....................     // Esperamos conexion bluetooth con una animacion del LED indicador
+....................     for(int time = 0; !PC.IsConnected; time++, delay_ms(1))
+010E2:  CLRF   58
+010E4:  BTFSC  3D.1
+010E6:  BRA    1110
 ....................     {
-....................         //*/
-....................         if(!PC.status)
-004A6:  BTFSC  3D.2
-004A8:  BRA    04AC
+....................         if(time == 200)
+010E8:  MOVF   58,W
+010EA:  SUBLW  C8
+010EC:  BNZ   10FE
 ....................         {
-....................             // Si no hay conexion ponemos modo reposo (Detenido y fijo)
-....................             return;
-004AA:  BRA    04D4
+....................             status_LED ^= 1;
+010EE:  MOVLW  00
+010F0:  BTFSC  F89.0
+010F2:  MOVLW  01
+010F4:  XORLW  01
+010F6:  BCF    F89.0
+010F8:  BTFSC  FE8.0
+010FA:  BSF    F89.0
+....................             time = 0;
+010FC:  CLRF   58
+....................         }
+010FE:  MOVF   58,W
+01100:  INCF   58,F
+01102:  MOVLW  01
+01104:  MOVWF  59
+01106:  MOVLB  0
+01108:  GOTO   0472
+0110C:  MOVLB  0
+0110E:  BRA    10E4
+....................     }
+.................... 
+....................     while (TRUE)
+....................     {   
+....................         //*/
+....................         if(!PC.IsConnected)                 // Si no hay conexion ponemos modo reposo (Detenido)
+01110:  BTFSC  3D.1
+01112:  BRA    1132
+....................         {
+....................             // Ver si ponerlo en freno de corto (Pero antes detectar que ya hubo una primera conexion)
+....................             drive_tires(&resting_state, tires);
+01114:  MOVLW  00
+01116:  MOVWF  03
+01118:  MOVLW  BA
+0111A:  MOVWF  59
+0111C:  MOVFF  03,5A
+01120:  MOVFF  03,5C
+01124:  MOVWF  5B
+01126:  CLRF   5E
+01128:  MOVLW  1F
+0112A:  MOVWF  5D
+0112C:  MOVLB  0
+0112E:  RCALL  0C4A
+....................             goto Connection_animation;
+01130:  BRA    10E2
 ....................         }
 .................... 
 ....................         // Si hay conexion
 ....................         if(PC.updated_data)                // Si se actualizo la posicion
-004AC:  BTFSS  3D.0
-004AE:  BRA    04D2
+01132:  BTFSS  3D.0
+01134:  BRA    1148
 ....................         {
-....................             drive_tires(xbox_controller, tires);
-004B0:  MOVFF  37,3E
-004B4:  MOVFF  38,3F
-004B8:  MOVFF  39,40
-004BC:  MOVFF  3A,41
-004C0:  MOVFF  3B,42
-004C4:  MOVFF  3C,43
-004C8:  CLRF   45
-004CA:  MOVLW  1F
-004CC:  MOVWF  44
-004CE:  BRA    03F4
+....................             // Enviamos instrucciones a motores
+....................             drive_tires(&xbox_controller, tires);
+01136:  CLRF   5C
+01138:  MOVLW  37
+0113A:  MOVWF  5B
+0113C:  CLRF   5E
+0113E:  MOVLW  1F
+01140:  MOVWF  5D
+01142:  MOVLB  0
+01144:  RCALL  0C4A
 ....................             PC.updated_data = FALSE;
-004D0:  BCF    3D.0
+01146:  BCF    3D.0
 ....................         }
-004D2:  BRA    04A6
+01148:  BRA    1110
 ....................         //*/
 .................... 
 ....................         /*/ Revision de  almacenamiento de variables
-....................         if(flag)
-....................         {
-....................             printf("Joystick X = %ld | Y = %ld\r\n", Xbox_controller.Joystick[0],  Xbox_controller.Joystick[1]);
-....................             printf("Triggers 1 =  %u | 2 = %u\r\n", Xbox_controller.Triggers[0],  Xbox_controller.Triggers[1]);
-.................... 
-....................             flag  = FALSE;
-....................         }
+....................         printf("Joystick X = %ld | Y = %ld\r\n", xbox_controller.Joystick[0], xbox_controller.Joystick[1]);
+....................         printf("Triggers 1 =  %u | 2 = %u\r\n", xbox_controller.Triggers[0],  xbox_controller.Triggers[1]);
+....................         delay_ms(100);
 ....................         //*/
 ....................     }
 .................... }
 .................... 
-004D4:  SLEEP 
+0114A:  SLEEP 
 .................... /*
 .................... El codigo esta compuesto de las siguientes partes
 .................... 
@@ -2744,7 +4110,7 @@ CCS PCH C Compiler, Version 5.112, 29001               12-abr.-24 21:46
 Configuration Fuses:
    Word  1: E800   INTRC_IO NOPLLEN PRIMARY FCMEN IESO
    Word  2: 3C1E   PUT BROWNOUT BORV19 NOWDT WDT32768
-   Word  3: 3B00   CCP2C1 PBADEN CCP3C6 HFOFST TIMER3C0 CCP2B5 NOMCLR
+   Word  3: BF00   CCP2C1 PBADEN CCP3B5 HFOFST TIMER3C0 CCP2B5 MCLR
    Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
    Word  5: C00F   NOPROTECT NOCPB NOCPD
    Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD

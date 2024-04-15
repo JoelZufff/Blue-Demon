@@ -29,41 +29,102 @@
 01F-036 tires
 037-03C xbox_controller
 03D     PC
-03E     @WRITEBITA.P1
-03E-043 drive_tires.xbox_controller
-03F     @WRITEBITA.P1
-040-041 @WRITEBITA.P1
-044-045 drive_tires.tires
-046     control_instructions.data
-047-04E control_instructions.XJoystick
-04F-056 control_instructions.YJoystick
-057-05B control_instructions.LeftTrigger
-05C-060 control_instructions.RightTrigger
-061-062 atol.s
-063-064 atol.result
-065     atol.sign
-066     atol.base
-067     atol.index
-068     atol.c
-069-06A @MULS1616.P1
-069     atol.@SCRATCH1
-06A     atol.@SCRATCH2
-06B-06C @MULS1616.P1
-06B     atol.@SCRATCH3
-06D     @MULS1616.@SCRATCH1
-06E     @MULS1616.@SCRATCH2
+03E-045 XJoystick
+046-04D YJoystick
+04E-052 LeftTrigger
+053-057 RightTrigger
+058     MAIN.time
+059     @delay_ms1.P1
+059-05A motors_init.tires
+059     MAIN.@SCRATCH1
+05A     MAIN.@SCRATCH2
+05B-05C drive_tires.xbox_controller
+05B     motors_init.i
+05C     motors_init.j
+05D-05E drive_tires.tires
+05D     motors_init.@SCRATCH1
+05E     motors_init.@SCRATCH2
+05F-060 @MUL1616.P1
+05F-066 drive_tires.speed
+05F     motors_init.@SCRATCH3
+060     motors_init.@SCRATCH4
+061-062 @MUL1616.P1
+063     @MUL1616.@SCRATCH1
+067-068 drive_tires.trigger_diff
+069     drive_tires.@SCRATCH1
+06A     drive_tires.@SCRATCH2
+06B-06E @ADDFF.P1
+06B-06C motor_shortbrake.motor
+06B-06C motor_movement.motor
+06B     drive_tires.@SCRATCH3
+06C     drive_tires.@SCRATCH4
+06D-06E @SITOF.P1
+06D-070 motor_movement.speed
+06D     motor_shortbrake.@SCRATCH1
+06E     motor_shortbrake.@SCRATCH2
+06F-072 @ADDFF.P1
+071.0   motor_movement.direction
+072-073 motor_movement.aux
+073     @ADDFF.@SCRATCH1
+074-077 @MULFF.P1
+074-077 @FLT.P2
+074-077 @SFTOI.P3
+074     @ADDFF.@SCRATCH2
+074     motor_movement.@SCRATCH1
+075     @ADDFF.@SCRATCH3
+075     motor_movement.@SCRATCH2
+076     @WRITEBITA.P1
+076     @ADDFF.@SCRATCH4
+076     motor_movement.@SCRATCH3
+077     @WRITEBITA.P1
+077     @ADDFF.@SCRATCH5
+077     motor_movement.@SCRATCH4
+078-07B @MULFF.P1
+078-07B @FLT.P2
+078-07B @DIVFF.P3
+078-079 @WRITEBITA.P4
+078     @ADDFF.@SCRATCH6
+079     @ADDFF.@SCRATCH7
+07A     @ADDFF.@SCRATCH8
+07C-07F @DIVFF.P1
+07C     @MULFF.@SCRATCH1
+07C     @FLT.@SCRATCH1
+07D     @MULFF.@SCRATCH2
+07D     @FLT.@SCRATCH2
+07E     @MULFF.@SCRATCH3
+080     @DIVFF.@SCRATCH1
+081     @DIVFF.@SCRATCH2
+082     @DIVFF.@SCRATCH3
+083     @DIVFF.@SCRATCH4
+084     @DIVFF.@SCRATCH5
+085     @DIVFF.@SCRATCH6
+086     control_instructions.data
+086     bluetooth_connection.@SCRATCH1
+087-088 atol.s
+089-08A atol.result
+08B     atol.sign
+08C     atol.base
+08D     atol.index
+08E     atol.c
+08F-090 @MULS1616.P1
+08F     atol.@SCRATCH1
+090     atol.@SCRATCH2
+091-092 @MULS1616.P1
+091     atol.@SCRATCH3
+093     @MULS1616.@SCRATCH1
+094     @MULS1616.@SCRATCH2
 F48     CCPTMRS1
 F49     CCPTMRS0
 F55     CCP_5
 F55     CCP_5_LOW
 F56     CCP_5_HIGH
 F57     CCP4CON
-F58     CCP_4_LOW
 F58     CCP_4
+F58     CCP_4_LOW
 F59     CCP_4_HIGH
 F5D     CCP3CON
-F5E     CCP_3_LOW
 F5E     CCP_3
+F5E     CCP_3_LOW
 F5F     CCP_3_HIGH
 F66     CCP2CON
 F67     CCP_2_LOW
@@ -84,47 +145,61 @@ FBE     CCP_1_LOW
 FBE     CCP_1
 FBF     CCP_1_HIGH
 FD0.7   IPEN
-FD5     T0CON
-FE1-FE2 @READ_PACKED_MEMORY.P1
-FE1-FE2 @WRITE_PACKED_MEMORY.P2
-FE9-FEA @WRITE_PACKED_MEMORY.P1
-FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
 FE9-FEA @WRITE_PROGRAM_MEMORY.P3
-FE9-FEA @READ_PACKED_MEMORY.P4
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF0.3   INT1IE
+FF1.5   INTEDG1
 FF2     INTCON
 FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
 FF6-FF8 @READ_PROGRAM_MEMORY.P2
 
 ROM Allocation:
-0000BA  @MULS1616
-00010C  atol
-0002DE  control_instructions
-000392  @PUTCHARI_BIU_1
-00039C  request_data
-0003B8  log_init
-0003D8  motors_init
-0003F4  drive_tires
-00040C  @cinit1
-00040C  MAIN
-00043A  @cinit2
+0000BA  resting_state.call
+0000BA  resting_state.data
+0000C0  @MULS1616
+000112  atol
+0002E4  control_instructions
+000392  bluetooth_connection
+0003BA  log_init
+0003D4  @MUL1616
+0003F2  motors_init
+000472  @delay_ms1
+00049C  @WRITEBITA
+0004DA  motor_shortbrake
+00054C  @SITOF
+000594  @MULFF
+000686  @DIVFF
+0007E0  @ADDFF
+000A4A  @FLT
+000AC0  @SFTOI
+000AFA  motor_movement
+000C4A  drive_tires
+00103E  MAIN
+00103E  @cinit1
+00106C  @cinit2
 0135  StrtoulGO
 0135  StrtolGO
+0871  Connection_animation
 
 Project Directory:
     C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\
 
 Project Files:
-    main.c                                                  [12-abr.-24 21:46  CRC=296BDDD8]
+    main.c                                                  [15-abr.-24 00:10  CRC=F7F05F71]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h [21-oct.-22 11:06  CRC=D568D24D]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h [30-jun.-20 14:21  CRC=452E14BB]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [30-ene.-19 12:26  CRC=897CEC6C]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [06-abr.-20 08:43  CRC=B1605627]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-ene.-08 15:55  CRC=2D1F019F]
-    wheel_control.c                                         [12-abr.-24 21:37  CRC=8333CBB0]
+    wheel_control.c                                         [15-abr.-24 00:22  CRC=566182AF]
 
-Source signature=B266A072
+Source signature=27469009
 Program memory checksum=0000
-Hex file CRC=74E1
+Hex file CRC=2E25
 
 Units:
     C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main (main)
