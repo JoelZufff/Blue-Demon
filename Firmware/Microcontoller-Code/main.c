@@ -5,12 +5,13 @@
 #use        rs232(rcv = pin_c7, xmit = pin_c6, baud = 9600, bits = 8, parity = n) 
 
 #include    <stdlib.h>
-#include    "wheel_control.c"
+#include    "motor_control.c"
 
 // --------------------- Direccion de registros --------------------- //
 #BYTE       TRISA               = 0xF92
 #BYTE       TRISB               = 0xF93
 #BYTE       TRISC               = 0xF94
+#BIT        bluetooth_state     = 0xF81.1   // PORTB
 #BIT        status_LED          = 0xF89.0   // LATA
 
 #BYTE       INTCON              = 0xFF2
@@ -38,7 +39,6 @@ struct          controller_t xbox_controller;
 
 struct          bth_conection_t PC = { FALSE, FALSE };
 
-char            XJoystick[8], YJoystick[8], LeftTrigger[5], RightTrigger[5];
 
 // -------------------------- Interrupciones ------------------------ //
 #INT_RDA
@@ -48,6 +48,8 @@ void control_instructions()
     
     if(data == '*')     // Recibimos caracter de inicio de datos
     {           
+        char XJoystick[8], YJoystick[8], LeftTrigger[5], RightTrigger[5];
+        
         // Obtenemos cadenas de caracteres con los valores a recibir
         gets(XJoystick);
         gets(YJoystick);
@@ -77,11 +79,8 @@ void control_instructions()
 #INT_EXT1
 void bluetooth_connection()
 {
-    // Cuando entre por primera vez sera en flanco de subida
-    INTEDG1         ^= 1;       // Cambiamos el flanco de deteccion
-    PC.IsConnected  ^= 1;       // Cambiamos el estatus de conexion
-
-    status_LED = PC.IsConnected;    // Actualzamos LED indicador
+    INTEDG1 ^= TRUE;                            // Cambiamos el flanco de deteccion
+    PC.IsConnected = status_LED = !INTEDG1;     // Cambiamos el estatus de conexion
 }
 
 // ---------------------------- Funciones --------------------------- //
@@ -92,10 +91,14 @@ void log_init()
     TRISB       = 0b00000010;
     TRISC       = 0b11000000;
 
-    // Configuracion de Interrupciones
-    IPEN = RC1IE = RC1IP =  TRUE;        // Establecemos la interrupcion de recepcion serial como prioridad
-    INT1IE = INTEDG1 = TRUE;            // Activamos INT_EXT1 en flanco de subida 
     INTCON = 0b11000000;
+
+    // Configuracion de Interrupciones
+    IPEN = RC1IE = RC1IP =  TRUE;       // Establecemos la interrupcion de recepcion serial como prioridad
+    
+    INT1IE  = TRUE;                 // Activamos INT_EXT1 
+    INTEDG1 = !bluetooth_state;     // TRUE: flanco de subida, cuando el pin state esta en bajo. FALSE: flanco de bajada, cuando el pin state esta en alto
+    PC.IsConnected = bluetooth_state;
 }
 
 // ------------------------ Codigo Principal ----------------------- //
@@ -104,13 +107,13 @@ void main()
     log_init();
     motors_init(tires);
 
-    Connection_animation:
+    Connection_animation:    
     // Esperamos conexion bluetooth con una animacion del LED indicador
     for(int time = 0; !PC.IsConnected; time++, delay_ms(1))
     {
         if(time == 200)
         {
-            status_LED ^= 1;
+            status_LED ^= TRUE;
             time = 0;
         }
     }
@@ -120,8 +123,10 @@ void main()
         //*/
         if(!PC.IsConnected)                 // Si no hay conexion ponemos modo reposo (Detenido)
         {
-            // Ver si ponerlo en freno de corto (Pero antes detectar que ya hubo una primera conexion)
-            drive_tires(&resting_state, tires);
+            // Aplicamos freno de corto cuando no hay conexion
+            motor_movement(&tires[0][0]), motor_movement(&tires[0][1]);
+            motor_movement(&tires[1][0]), motor_movement(&tires[1][1]);
+            
             goto Connection_animation;
         }
 
@@ -147,7 +152,7 @@ El codigo esta compuesto de las siguientes partes
 
     * Interrupcion de recepcion de datos en puerto serial: Recibe los datos actualizados del control de XBOX desde el programa de computadora en C#
 
-    * Interrupcion de timer 0: Desbore de timer de 100 ms que envia el caracter para solicitar una actualizacion de control y confirmar la conexion bluetooth
+    * Interrupcion externa 1: Para detectar pin de state de modulo Bluetooth
 
     * Funcion principal: Inicializa los registros, y mueve las ruedas cuando hay nueva informacion
 */

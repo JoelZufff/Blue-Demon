@@ -2,6 +2,8 @@
 #define     BACK        0
 
 #define     max_dutycicle       320
+#define     min_dutycicle       max_dutycicle / 15
+
 #define     max_trigger_value   255
 #define     max_joystick_value  32767
 
@@ -48,10 +50,7 @@ void motors_init(struct motor_t tires[2][2])
     CCPTMRS0 = CCPTMRS0 = 0b00000000;       // Configuramos CCPX con timer 2
     
     // Configiracion de modulo CCPX para PWM
-    CCP4CON = 0b00001100;
-    CCP3CON = 0b00001100;
-    CCP2CON = 0b00001100;
-    CCP1CON = 0b00001100;
+    CCP4CON = 0b00001100, CCP3CON = 0b00001100, CCP2CON = 0b00001100, CCP1CON = 0b00001100;
 
     for(int i = 0; i < 2 ; i++)
         for(int j = 0; j < 2; j++)
@@ -60,26 +59,18 @@ void motors_init(struct motor_t tires[2][2])
 
 void motor_movement(struct motor_t *motor, float speed)   // Modo de movimiento normal
 {
-    short direction;
-    
-    if(speed >= 0)           // Movimiento hacia adelante
-        direction = FORWARD;
-    else if(speed < 0)      // Movimiento hacia atras
-    {
-        direction = BACK;
-        speed = -speed;     // Para calculo de DutyCicle
-    }
+    short direction = (speed >= 0) ? FORWARD : BACK;
     
     // Establecemos direccion de giro
     output_bit(motor->IN1_pin, direction);
     output_bit(motor->IN2_pin, !direction);
-
+    
     // Establecemos DC para velocidad
-    long aux = max_dutycicle * speed / 100;      // Ver si eliminar
-    *(motor->DutyCicle) = aux >> 2;     // Revisar
+    long aux = ((max_dutycicle - min_dutycicle) * abs(speed) / 100) + min_dutycicle;
+    *(motor->DutyCicle) = aux >> 2;
 }
 
-void motor_shortbrake(struct motor_t *motor)    // Modo de freno de corto (Solo para emergencias)
+void motor_movement(struct motor_t *motor)    // Modo de freno de corto (Solo para emergencias)
 {
     output_high(motor->IN1_pin);
     output_high(motor->IN2_pin);
@@ -91,9 +82,8 @@ void drive_tires(struct controller_t *xbox_controller, struct motor_t tires[2][2
     if((xbox_controller->Triggers[0] == 255) && (xbox_controller->Triggers[1] == 255))
     {
         // Activamos modo short brake
-        motor_shortbrake(&tires[0][0]), motor_shortbrake(&tires[0][1]);
-        motor_shortbrake(&tires[1][0]), motor_shortbrake(&tires[1][1]);
-        
+        motor_movement(&tires[0][0]), motor_movement(&tires[0][1]);
+        motor_movement(&tires[1][0]), motor_movement(&tires[1][1]);
         return;
     }
 
@@ -110,22 +100,16 @@ void drive_tires(struct controller_t *xbox_controller, struct motor_t tires[2][2
 
     if(xbox_controller->Joystick[0] >= 0)        // El movimiento es a la derecha o al centro
     {
-        // Llanta izquierda avanza normal
         speed[0] = trigger_diff * 100.0 / max_trigger_value;
         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-
-        // Llanta derecha avanza como punto de apoyo para curva, por lo que calculamos velocidad de giro, en funcion de que tan cercano esta al valor maximo o minimo del eje X
         speed[1] = speed[0] - (2 * speed[0] * xbox_controller->Joystick[0] / 32767.0);
         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
     }
     else                                        // El movimiento es a la izquierda
     {
-        // Llanta derecha avanza normal
         speed[1] = trigger_diff * 100.0 / max_trigger_value;
         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-
-        // Llanta izquierda avanza como punto de apoyo para curva, por lo que Calculamos velocidad de giro, en funcion de que tan cercano esta al valor maximo o minimo del eje X
-        speed[0] = speed[1] - (2 * speed[1] * xbox_controller->Joystick[0] / 32768.0);
+        speed[0] = speed[1] - (2 * speed[1] * xbox_controller->Joystick[0] / -32768.0);
         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
     }
 

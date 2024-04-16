@@ -1,7 +1,7 @@
-Compiling C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main on 15-abr.-24 at 00:22
->>> Warning 240 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main.c" Line 105(17,22): Pointer types do not match
->>> Warning 240 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main.c" Line 124(41,46): Pointer types do not match
->>> Warning 240 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main.c" Line 132(43,48): Pointer types do not match
+Compiling C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main on 16-abr.-24 at 12:21
+>>> Warning 240 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main.c" Line 108(17,22): Pointer types do not match
+>>> Warning 240 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main.c" Line 137(43,48): Pointer types do not match
+>>> Warning 202 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main.c" Line 37(30,43): Variable never used:   resting_state
       Memory usage:   ROM=7%      RAM=2% - 4%
       0 Errors,  3 Warnings.
 Build Successful.

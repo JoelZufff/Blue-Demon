@@ -1,4 +1,4 @@
-Compiling C:\Users\diego\Desktop\Terreneitor\Firmware\Code\motor_control on 07-abr.-24 at 16:56
-*** Error 128 "C:\Users\diego\Desktop\Terreneitor\Firmware\Code\motor_control.c" Line 4(2,6): A #DEVICE required before this line
+Compiling C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\motor_control on 15-abr.-24 at 23:10
+*** Error 128 "C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\motor_control.c" Line 9(2,6): A #DEVICE required before this line
       1 Errors,  0 Warnings.
 Build Failed.
