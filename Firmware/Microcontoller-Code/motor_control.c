@@ -5,7 +5,7 @@
 #define     min_dutycicle       max_dutycicle / 15
 
 #define     max_trigger_value   255
-#define     max_joystick_value  32767
+#define     max_joystick_value  32767.0
 
 // -------------------- Direcciones de registros -------------------- //
 #BYTE       CCPTMRS0        = 0xF49
@@ -102,7 +102,7 @@ void drive_tires(struct controller_t *xbox_controller, struct motor_t tires[2][2
     {
         speed[0] = trigger_diff * 100.0 / max_trigger_value;
         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-        speed[1] = speed[0] - (2 * speed[0] * xbox_controller->Joystick[0] / 32767.0);
+        speed[1] = speed[0] - (2 * speed[0] * xbox_controller->Joystick[0] / max_joystick_value);
         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
     }
     else                                        // El movimiento es a la izquierda

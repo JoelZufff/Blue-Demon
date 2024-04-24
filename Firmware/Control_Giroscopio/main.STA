@@ -1,0 +1,66 @@
+
+ROM used:   4340/65536 (7%)
+            4340/65536 (7%) including unused fragments
+
+            1.4 Average locations per line
+            8.0 Average locations per statement
+
+RAM used:   67/3896 (2%) at main() level
+            165/3896 (4%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  139    27   5  main.c
+ 1036     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h
+ 1354   359  66  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+   32     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
+  435   129  24  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
+   28     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
+  127    26   5  motor_control.c
+----- -----
+ 3151   541 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     42   0    1             @delay_ms1
+0    242   3   11             @MULFF
+0     54   1    2             @ITOF
+0    618   7   16             @ADDFF
+0    346   4   14             @DIVFF
+0    558   6   19   1549 12.4  strtof
+0     30   0    5             @MUL1616
+0    128   1    8    432  5.4  motors_init
+0    118   1   10             @FLT
+0    416   5   13    363  7.0  motor_movement
+0     62   1    6             @WRITEBITA
+0     58   1    4             @SFTOI
+0   1112  13   20   1131  7.3  drive_tires
+0    128   1   21    359  5.0  control_instructions
+0     24   0    0    108  1.7  log_init
+0    234   3    2    366  7.0  MAIN
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               7
+    Statements              541
+    Comments                1061
+    Volume (V)              6106
+    Difficulty (D)          44.7
+    Effort to implement (E) 272866
+    Time to implement (T)   4 hours, 13 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   20
+    Maintainability (MI)    76
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-000AC   166  0  
+000AE-0FFFE  4170  61192  
+
+
+

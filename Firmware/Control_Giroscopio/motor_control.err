@@ -1,0 +1,4 @@
+Compiling C:\Users\diego\Desktop\Mordu\Firmware\Control_Giroscopio\motor_control on 25-abr.-24 at 01:47
+*** Error 128 "C:\Users\diego\Desktop\Mordu\Firmware\Control_Giroscopio\motor_control.c" Line 12(2,6): A #DEVICE required before this line
+      1 Errors,  0 Warnings.
+Build Failed.

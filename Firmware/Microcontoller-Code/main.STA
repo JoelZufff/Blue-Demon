@@ -1,6 +1,6 @@
 
-ROM used:   4486/65536 (7%)
-            4486/65536 (7%) including unused fragments
+ROM used:   4382/65536 (7%)
+            4382/65536 (7%) including unused fragments
 
             1.4 Average locations per line
             8.0 Average locations per statement
@@ -8,20 +8,20 @@ ROM used:   4486/65536 (7%)
 RAM used:   64/3896 (2%) at main() level
             149/3896 (4%) worst case
 
-Stack used: 1 worst case (0 in main + 1 for interrupts)
+Stack used: 0 worst case (0 in main + 0 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  159    41   7  main.c
+  145    31   6  main.c
  1036     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h
- 1354   359  64  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+ 1354   359  65  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
    32     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
   435   129  23  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
    28     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
   134    30   5  motor_control.c
 ----- -----
- 3178   559 Total
+ 3164   549 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -38,32 +38,31 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     62   1    6             @WRITEBITA
 0     58   1    4             @SFTOI
 0    114   1    4     70  2.3  motor_movement
-0   1020  11   18   1576  8.5  drive_tires
+0   1020  12   18   1576  8.5  drive_tires
 0     72   1    2             @SITOF
-0    174   2   27    540  4.3  control_instructions
-0     34   0    1     59  2.6  bluetooth_connection
-0     36   0    0    195  2.7  log_init
-0    284   3    2    681  8.1  MAIN
+0    176   2   27    568  4.3  control_instructions
+0     24   0    0    108  1.7  log_init
+0    236   3    2    366  7.0  MAIN
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               9
-    Statements              559
-    Comments                1061
-    Volume (V)              8276
-    Difficulty (D)          51.0
-    Effort to implement (E) 422261
-    Time to implement (T)   6 hours, 31 minutes
+    Functions               8
+    Statements              549
+    Comments                1062
+    Volume (V)              7522
+    Difficulty (D)          45.9
+    Effort to implement (E) 344915
+    Time to implement (T)   5 hours, 19 minutes
     Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   18
-    Maintainability (MI)    23
+    Cyclomatic Complexity   17
+    Maintainability (MI)    24
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
-00008-000B8   178  0  
-000BA-0FFFE  4304  61046  
+00008-000AC   166  0  
+000AE-0FFFE  4212  61150  
 
 
 

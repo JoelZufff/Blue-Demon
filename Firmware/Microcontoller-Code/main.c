@@ -1,6 +1,6 @@
 // --------------- Preprocesadores de microcontrolador -------------- //
 #include    <18F26K22.h>                                                // Libreria del Microcontrolador
-#fuses      INTRC, NOWDT, NOPROTECT, NOLVP, CCP2C1, CCP3B5              // Fusibles (Multiplexado de P2B en C0)
+#fuses      INTRC, NOWDT, NOPROTECT, NOLVP, NOMCLR, CCP2C1, CCP3B5      // Fusibles (Multiplexado de P2B en C0)
 #use        delay(internal = 16MHz)                                     // Configuracion de frecuencia y delay
 #use        rs232(rcv = pin_c7, xmit = pin_c6, baud = 9600, bits = 8, parity = n) 
 
@@ -11,7 +11,6 @@
 #BYTE       TRISA               = 0xF92
 #BYTE       TRISB               = 0xF93
 #BYTE       TRISC               = 0xF94
-#BIT        bluetooth_state     = 0xF81.1   // PORTB
 #BIT        status_LED          = 0xF89.0   // LATA
 
 #BYTE       INTCON              = 0xFF2
@@ -34,9 +33,7 @@ struct motor_t  tires[2][2]   =
     }
 };
 
-const struct    controller_t resting_state = { {0, 0}, {0, 0} };
 struct          controller_t xbox_controller;
-
 struct          bth_conection_t PC = { FALSE, FALSE };
 
 
@@ -65,7 +62,7 @@ void control_instructions()
         xbox_controller.Triggers[1] =  atol(RightTrigger);
 
         // Actualizamos variables de conexion
-        PC.updated_data = TRUE;
+        PC.updated_data = PC.IsConnected = TRUE;
     }
 }
 
@@ -76,29 +73,18 @@ void control_instructions()
 * isConnected: Booleno para saber el estatus de la conexion de bluetooth
 */
 
-#INT_EXT1
-void bluetooth_connection()
-{
-    INTEDG1 ^= TRUE;                            // Cambiamos el flanco de deteccion
-    PC.IsConnected = status_LED = !INTEDG1;     // Cambiamos el estatus de conexion
-}
-
 // ---------------------------- Funciones --------------------------- //
 void log_init()
 {
     // Configuracion de pines GPIO
     TRISA       = 0b00000000;
     TRISB       = 0b00000010;
-    TRISC       = 0b11000000;
+    TRISC       = 0b10000000;
 
     INTCON = 0b11000000;
 
     // Configuracion de Interrupciones
     IPEN = RC1IE = RC1IP =  TRUE;       // Establecemos la interrupcion de recepcion serial como prioridad
-    
-    INT1IE  = TRUE;                 // Activamos INT_EXT1 
-    INTEDG1 = !bluetooth_state;     // TRUE: flanco de subida, cuando el pin state esta en bajo. FALSE: flanco de bajada, cuando el pin state esta en alto
-    PC.IsConnected = bluetooth_state;
 }
 
 // ------------------------ Codigo Principal ----------------------- //
@@ -120,8 +106,8 @@ void main()
 
     while (TRUE)
     {   
-        //*/
-        if(!PC.IsConnected)                 // Si no hay conexion ponemos modo reposo (Detenido)
+        /*
+        if(!PC.IsConnected)                 // Si se pierde la conexion
         {
             // Aplicamos freno de corto cuando no hay conexion
             motor_movement(&tires[0][0]), motor_movement(&tires[0][1]);
@@ -129,6 +115,8 @@ void main()
             
             goto Connection_animation;
         }
+        */
+        //*/
 
         // Si hay conexion
         if(PC.updated_data)                // Si se actualizo la posicion
@@ -152,7 +140,7 @@ El codigo esta compuesto de las siguientes partes
 
     * Interrupcion de recepcion de datos en puerto serial: Recibe los datos actualizados del control de XBOX desde el programa de computadora en C#
 
-    * Interrupcion externa 1: Para detectar pin de state de modulo Bluetooth
-
     * Funcion principal: Inicializa los registros, y mueve las ruedas cuando hay nueva informacion
 */
+
+// Falta hacer interrupcion cada 150 ms para revisar conexion y corregir no llegar a velocidad maxima con 2 llantas por falta de precision de joystick, ademas de eliminar la lectura de joystick en Y.

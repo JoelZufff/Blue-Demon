@@ -30,12 +30,12 @@
 037-03C xbox_controller
 03D     PC
 03E     MAIN.time
-03F-040 drive_tires.xbox_controller
 03F     @delay_ms1.P1
+03F-040 drive_tires.xbox_controller
 03F-040 motors_init.tires
 03F     MAIN.@SCRATCH1
-041-042 drive_tires.tires
 041     motors_init.i
+041-042 drive_tires.tires
 042     motors_init.j
 043-04A drive_tires.speed
 043     motors_init.@SCRATCH1
@@ -57,20 +57,20 @@
 052     motor_movement.@SCRATCH2
 055.0   motor_movement.direction
 056-057 motor_movement.aux
-058-05B @MULFF.P1
-058-05B @SFTOI.P2
-058-05B @FLT.P3
+058-05B @SFTOI.P1
+058-05B @FLT.P2
+058-05B @MULFF.P3
 058     motor_movement.@SCRATCH1
 059     motor_movement.@SCRATCH2
 05A     @WRITEBITA.P1
 05A     motor_movement.@SCRATCH3
 05B     @WRITEBITA.P1
 05B     motor_movement.@SCRATCH4
-05C-05F @FLT.P1
-05C-05D @WRITEBITA.P2
-05C-05F @ADDFF.P3
-05C-05F @MULFF.P4
-05C-05F @DIVFF.P5
+05C-05F @DIVFF.P1
+05C-05F @ADDFF.P2
+05C-05F @FLT.P3
+05C-05D @WRITEBITA.P4
+05C-05F @MULFF.P5
 060-063 @ADDFF.P1
 060-063 @DIVFF.P2
 060     @MULFF.@SCRATCH1
@@ -93,7 +93,6 @@
 06A     @ADDFF.@SCRATCH7
 06B     @ADDFF.@SCRATCH8
 06C     control_instructions.data
-06C     bluetooth_connection.@SCRATCH1
 06D-074 control_instructions.XJoystick
 075-07C control_instructions.YJoystick
 07D-081 control_instructions.LeftTrigger
@@ -113,24 +112,23 @@
 094     @MULS1616.@SCRATCH2
 F48     CCPTMRS1
 F49     CCPTMRS0
-F55     CCP_5
 F55     CCP_5_LOW
+F55     CCP_5
 F56     CCP_5_HIGH
 F57     CCP4CON
 F58     CCP_4
 F58     CCP_4_LOW
 F59     CCP_4_HIGH
 F5D     CCP3CON
-F5E     CCP_3
 F5E     CCP_3_LOW
+F5E     CCP_3
 F5F     CCP_3_HIGH
 F66     CCP2CON
-F67     CCP_2_LOW
 F67     CCP_2
+F67     CCP_2_LOW
 F68     CCP_2_HIGH
 F78.6   C2OUT
 F79.6   C1OUT
-F81.1   bluetooth_state
 F89.0   status_LED
 F92     TRISA
 F93     TRISB
@@ -144,62 +142,61 @@ FBE     CCP_1
 FBE     CCP_1_LOW
 FBF     CCP_1_HIGH
 FD0.7   IPEN
-FE1-FE2 @READ_PACKED_MEMORY.P1
-FE1-FE2 @WRITE_PACKED_MEMORY.P2
-FE9-FEA @READ_PACKED_MEMORY.P1
-FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
 FE9-FEA @READ_PROGRAM_MEMORY.P3
 FE9-FEA @WRITE_PACKED_MEMORY.P4
 FF0.3   INT1IE
 FF1.5   INTEDG1
 FF2     INTCON
-FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
-FF6-FF8 @READ_PROGRAM_MEMORY.P2
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
 
 ROM Allocation:
-0000BA  @MULS1616
-00010C  atol
-0002DE  control_instructions
-00038C  bluetooth_connection
-0003AE  log_init
-0003D2  @MUL1616
-0003F0  motors_init
-000470  @delay_ms1
-00049A  @WRITEBITA
-0004D8  motor_movement
-00054A  @SITOF
-000592  @MULFF
-000684  @DIVFF
-0007DE  @ADDFF
-000A48  @FLT
-000AC0  @SFTOI
-000AFA  motor_movement
-000C72  drive_tires
-00106E  @cinit1
-00106E  MAIN
-00109C  @cinit2
+0000AE  @MULS1616
+000100  atol
+0002D2  control_instructions
+000382  log_init
+00039A  @MUL1616
+0003B8  motors_init
+000438  @delay_ms1
+000462  @WRITEBITA
+0004A0  motor_movement
+000512  @SITOF
+00055A  @MULFF
+00064C  @DIVFF
+0007A6  @ADDFF
+000A10  @FLT
+000A88  @SFTOI
+000AC2  motor_movement
+000C3A  drive_tires
+001036  MAIN
+001036  @cinit1
+001064  @cinit2
 0135  StrtoulGO
 0135  StrtolGO
-0889  Connection_animation
+086D  Connection_animation
 
 Project Directory:
-    C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\
+    C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\
 
 Project Files:
-    main.c                                                  [16-abr.-24 12:14  CRC=E638609B]
+    main.c                                                  [25-abr.-24 00:51  CRC=994409F9]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h [21-oct.-22 11:06  CRC=D568D24D]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h [30-jun.-20 14:21  CRC=452E14BB]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [30-ene.-19 12:26  CRC=897CEC6C]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [06-abr.-20 08:43  CRC=B1605627]
     ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-ene.-08 15:55  CRC=2D1F019F]
-    motor_control.c                                         [16-abr.-24 12:21  CRC=92B8CBB0]
+    motor_control.c                                         [16-abr.-24 12:24  CRC=86BCC4D0]
 
-Source signature=8E3D2335
+Source signature=2950BED3
 Program memory checksum=0000
-Hex file CRC=5F6B
+Hex file CRC=EFF0
 
 Units:
-    C:\Users\diego\Desktop\Terreneitor\Firmware\Microcontoller-Code\main (main)
+    C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\main (main)
 
 Compiler Settings:
     Processor:      PIC18F26K22
