@@ -1,27 +1,27 @@
 
-ROM used:   4382/65536 (7%)
-            4382/65536 (7%) including unused fragments
+ROM used:   4460/65536 (7%)
+            4460/65536 (7%) including unused fragments
 
             1.4 Average locations per line
-            8.0 Average locations per statement
+            7.9 Average locations per statement
 
-RAM used:   64/3896 (2%) at main() level
-            149/3896 (4%) worst case
+RAM used:   62/3896 (2%) at main() level
+            139/3896 (4%) worst case
 
-Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack used: 1 worst case (0 in main + 1 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  145    31   6  main.c
+  169    45   8  main.c
  1036     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h
- 1354   359  65  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+ 1354   359  64  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
    32     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
   435   129  23  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
    28     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
-  134    30   5  motor_control.c
+  135    30   5  motor_control.c
 ----- -----
- 3164   549 Total
+ 3189   563 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -38,31 +38,32 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     62   1    6             @WRITEBITA
 0     58   1    4             @SFTOI
 0    114   1    4     70  2.3  motor_movement
-0   1020  12   18   1576  8.5  drive_tires
+0   1020  11   18   1526  8.5  drive_tires
 0     72   1    2             @SITOF
-0    176   2   27    568  4.3  control_instructions
-0     24   0    0    108  1.7  log_init
-0    236   3    2    366  7.0  MAIN
+0    152   2   19    562  5.3  control_instructions
+0     26   0    0    123  3.4  connection_check
+0     38   0    0    181  2.3  log_init
+0    286   3    2    710  8.2  MAIN
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               8
-    Statements              549
-    Comments                1062
-    Volume (V)              7522
-    Difficulty (D)          45.9
-    Effort to implement (E) 344915
-    Time to implement (T)   5 hours, 19 minutes
+    Functions               9
+    Statements              563
+    Comments                1067
+    Volume (V)              8397
+    Difficulty (D)          52.0
+    Effort to implement (E) 436554
+    Time to implement (T)   6 hours, 44 minutes
     Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   17
-    Maintainability (MI)    24
+    Cyclomatic Complexity   20
+    Maintainability (MI)    22
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
-00008-000AC   166  0  
-000AE-0FFFE  4212  61150  
+00008-000B8   178  0  
+000BA-0FFFE  4278  61072  
 
 
 

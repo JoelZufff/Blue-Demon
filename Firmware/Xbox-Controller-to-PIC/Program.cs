@@ -8,7 +8,8 @@ namespace Xbox_Controller_to_PIC
     internal class Program
     {
         // Timer
-        public static Timer Send_timer = new Timer(100);
+        public static Timer Send_timer = new Timer(40);
+
         // Puerto Serial
         public static SerialPort Terreneitor = new SerialPort("COM8", 9600, Parity.None, 8, StopBits.One);
         // Control de xbox
@@ -26,7 +27,7 @@ namespace Xbox_Controller_to_PIC
             {
                 try
                 {
-                    Terreneitor.Write("*" + Joystick[0].ToString() + "\r" + Joystick[1].ToString() + "\r" + Triggers[0].ToString() + "\r" + Triggers[1].ToString() + "\r");
+                    Terreneitor.Write("*" + Joystick[0].ToString() + "\r" + Triggers[0].ToString() + "\r" + Triggers[1].ToString() + "\r");
                 }
                 catch 
                 {

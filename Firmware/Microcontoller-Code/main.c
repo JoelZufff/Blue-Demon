@@ -15,10 +15,16 @@
 
 #BYTE       INTCON              = 0xFF2
 #BIT        INT1IE              = 0xFF0.3   // INTCON3
+
 #BIT        INTEDG1             = 0xFF1.5   // INTCON2
 #BIT        RC1IE               = 0xF9D.5   // PIE1
 #BIT        IPEN                = 0xFD0.7   // RCON
 #BIT        RC1IP               = 0xF9F.5   // IPR1
+
+#BYTE       T0CON               = 0xFD5
+#BIT        TMR0ON              = 0xFD5.7   // T0CON
+const int16 *TMR0               = 0xFD6;
+#BIT        TMR0IP              = 0xFF1.2   // INTCON2
 
 // ----------------------- Variable Globales ------------------------ //
 struct motor_t  tires[2][2]   = 
@@ -36,7 +42,6 @@ struct motor_t  tires[2][2]   =
 struct          controller_t xbox_controller;
 struct          bth_conection_t PC = { FALSE, FALSE };
 
-
 // -------------------------- Interrupciones ------------------------ //
 #INT_RDA
 void control_instructions()
@@ -45,25 +50,36 @@ void control_instructions()
     
     if(data == '*')     // Recibimos caracter de inicio de datos
     {           
-        char XJoystick[8], YJoystick[8], LeftTrigger[5], RightTrigger[5];
+        char XJoystick[8], LeftTrigger[5], RightTrigger[5];
         
         // Obtenemos cadenas de caracteres con los valores a recibir
         gets(XJoystick);
-        gets(YJoystick);
-
         gets(LeftTrigger);
         gets(RightTrigger);
 
         // Realizamos la conversion y actualizamos los valores del control
-        xbox_controller.Joystick[0] =  atol(XJoystick);
-        xbox_controller.Joystick[1] =  atol(YJoystick);
-        
+        xbox_controller.JoystickX   =  atol(XJoystick);        
         xbox_controller.Triggers[0] =  atol(LeftTrigger);
         xbox_controller.Triggers[1] =  atol(RightTrigger);
 
+        if(!PC.IsConnected)     // Si no habia conexion
+            *TMR0 = 40535, TMR0ON = TRUE;
+
         // Actualizamos variables de conexion
-        PC.updated_data = PC.IsConnected = TRUE;
+        PC.updated_data = PC.IsConnected = PC.Check = TRUE;
     }
+}
+
+#INT_TIMER0
+void connection_check()
+{
+    if(PC.Check)        // Hubo confirmacion de conexion
+    {
+        PC.Check = FALSE;       // Solicitamos nueva confirmacion
+        *TMR0 = 40535;
+    }
+    else                // No hubo confirmacion de conexion
+        PC.IsConnected = TMR0ON = FALSE;    // Desactivamos timer y booleano de conexion
 }
 
 /* Inforamcion de variables
@@ -81,10 +97,15 @@ void log_init()
     TRISB       = 0b00000010;
     TRISC       = 0b10000000;
 
-    INTCON = 0b11000000;
+    INTCON = 0b11100000;
+
+    // Interrupcion de timer 0 para comprobar conexion
+    T0CON = 0b00000011;     // 10 Hz
+    *TMR0 = 40535;
 
     // Configuracion de Interrupciones
     IPEN = RC1IE = RC1IP =  TRUE;       // Establecemos la interrupcion de recepcion serial como prioridad
+    TMR0IP = FALSE;
 }
 
 // ------------------------ Codigo Principal ----------------------- //
@@ -104,9 +125,11 @@ void main()
         }
     }
 
+    status_LED = TRUE;      // Ya hubo conexion
+
     while (TRUE)
     {   
-        /*
+        //*/
         if(!PC.IsConnected)                 // Si se pierde la conexion
         {
             // Aplicamos freno de corto cuando no hay conexion
@@ -115,8 +138,6 @@ void main()
             
             goto Connection_animation;
         }
-        */
-        //*/
 
         // Si hay conexion
         if(PC.updated_data)                // Si se actualizo la posicion
@@ -139,6 +160,8 @@ void main()
 El codigo esta compuesto de las siguientes partes
 
     * Interrupcion de recepcion de datos en puerto serial: Recibe los datos actualizados del control de XBOX desde el programa de computadora en C#
+
+    * Interrupcion de Timer 0: Se activa al detectar por primera vez la conexion, y monitorea la continuidad de la conexion
 
     * Funcion principal: Inicializa los registros, y mueve las ruedas cuando hay nueva informacion
 */

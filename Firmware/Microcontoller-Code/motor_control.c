@@ -24,6 +24,7 @@ struct bth_conection_t
 {
     short updated_data;
     short IsConnected;
+    short Check;
 };
 
 struct motor_t
@@ -35,8 +36,8 @@ struct motor_t
 
 struct controller_t
 {
-    signed long     Joystick[2];    // Entero de -32768 a 32767 (0 eje x, 1 eje y)
-    int             Triggers[2];    // Entero de 0 a 255 (0 izquierdo, 1 derecho)
+    signed long         JoystickX;      // Entero de -32768 a 32767 (0 eje x, 1 eje y)
+    int                 Triggers[2];    // Entero de 0 a 255 (0 izquierdo, 1 derecho)
 };
 
 // ---------------------------- Funciones --------------------------- //
@@ -98,18 +99,18 @@ void drive_tires(struct controller_t *xbox_controller, struct motor_t tires[2][2
     float speed[2];
     signed long trigger_diff = (signed long) xbox_controller->Triggers[1] - xbox_controller->Triggers[0];
 
-    if(xbox_controller->Joystick[0] >= 0)        // El movimiento es a la derecha o al centro
+    if(xbox_controller->JoystickX >= 0)        // El movimiento es a la derecha o al centro
     {
         speed[0] = trigger_diff * 100.0 / max_trigger_value;
         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-        speed[1] = speed[0] - (2 * speed[0] * xbox_controller->Joystick[0] / max_joystick_value);
+        speed[1] = speed[0] - (2 * speed[0] * xbox_controller->JoystickX / max_joystick_value);
         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
     }
     else                                        // El movimiento es a la izquierda
     {
         speed[1] = trigger_diff * 100.0 / max_trigger_value;
         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-        speed[0] = speed[1] - (2 * speed[1] * xbox_controller->Joystick[0] / -32768.0);
+        speed[0] = speed[1] - (2 * speed[1] * xbox_controller->JoystickX / -32768.0);
         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
     }
 

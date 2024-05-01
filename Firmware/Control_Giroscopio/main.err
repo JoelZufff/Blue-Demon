@@ -1,9 +1,0 @@
-Compiling C:\Users\diego\Desktop\Mordu\Firmware\Control_Giroscopio\main on 25-abr.-24 at 01:47
->>> Warning 240 "C:\Users\diego\Desktop\Mordu\Firmware\Control_Giroscopio\main.c" Line 88(17,22): Pointer types do not match
->>> Warning 240 "C:\Users\diego\Desktop\Mordu\Firmware\Control_Giroscopio\main.c" Line 119(37,42): Pointer types do not match
->>> Warning 216 "C:\Users\diego\Desktop\Mordu\Firmware\Control_Giroscopio\main.c" Line 130(1,2): Interrupts disabled during call to prevent re-entrancy:  (@MULFF)
->>> Warning 216 "C:\Users\diego\Desktop\Mordu\Firmware\Control_Giroscopio\main.c" Line 130(1,2): Interrupts disabled during call to prevent re-entrancy:  (@DIVFF)
->>> Warning 216 "C:\Users\diego\Desktop\Mordu\Firmware\Control_Giroscopio\main.c" Line 130(1,2): Interrupts disabled during call to prevent re-entrancy:  (@ADDFF)
-      Memory usage:   ROM=7%      RAM=2% - 4%
-      0 Errors,  5 Warnings.
-Build Successful.
