@@ -1,9 +1,9 @@
 
-ROM used:   4460/65536 (7%)
-            4460/65536 (7%) including unused fragments
+ROM used:   4776/65536 (7%)
+            4776/65536 (7%) including unused fragments
 
-            1.4 Average locations per line
-            7.9 Average locations per statement
+            1.5 Average locations per line
+            8.3 Average locations per statement
 
 RAM used:   62/3896 (2%) at main() level
             139/3896 (4%) worst case
@@ -13,22 +13,22 @@ Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  169    45   8  main.c
+  170    45   8  main.c
  1036     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F26K22.h
- 1354   359  64  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+ 1354   359  62  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
    32     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
-  435   129  23  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
+  435   129  22  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
    28     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
-  135    30   5  motor_control.c
+  165    44   8  motor_control.c
 ----- -----
- 3189   563 Total
+ 3220   577 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
 0     42   0    1             @delay_ms1
 0     82   1    6             @MULS1616
 0    242   3   11             @MULFF
-0    618   7   16             @ADDFF
+0    618   6   16             @ADDFF
 0    346   4   14             @DIVFF
 0    466   5   11   1817 10.4  atol
 0     30   0    5             @MUL1616
@@ -38,7 +38,7 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     62   1    6             @WRITEBITA
 0     58   1    4             @SFTOI
 0    114   1    4     70  2.3  motor_movement
-0   1020  11   18   1526  8.5  drive_tires
+0   1336  14   18   2424  9.5  drive_tires
 0     72   1    2             @SITOF
 0    152   2   19    562  5.3  control_instructions
 0     26   0    0    123  3.4  connection_check
@@ -48,22 +48,22 @@ Page ROM  %  RAM    Vol Diff  Functions:
 
 Program metrics:
     Functions               9
-    Statements              563
-    Comments                1067
-    Volume (V)              8397
-    Difficulty (D)          52.0
-    Effort to implement (E) 436554
-    Time to implement (T)   6 hours, 44 minutes
+    Statements              577
+    Comments                1078
+    Volume (V)              9497
+    Difficulty (D)          53.2
+    Effort to implement (E) 505320
+    Time to implement (T)   7 hours, 48 minutes
     Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   20
-    Maintainability (MI)    22
+    Cyclomatic Complexity   24
+    Maintainability (MI)    19
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
 00008-000B8   178  0  
-000BA-0FFFE  4278  61072  
+000BA-0FFFE  4594  60756  
 
 
 

@@ -1,6 +1,6 @@
-Compiling C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\main on 28-abr.-24 at 23:23
->>> Warning 240 "C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\main.c" Line 114(17,22): Pointer types do not match
->>> Warning 240 "C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\main.c" Line 145(43,48): Pointer types do not match
+Compiling C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\main on 01-may.-24 at 12:00
+>>> Warning 240 "C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\main.c" Line 115(17,22): Pointer types do not match
+>>> Warning 240 "C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\main.c" Line 146(43,48): Pointer types do not match
       Memory usage:   ROM=7%      RAM=2% - 4%
       0 Errors,  2 Warnings.
 Build Successful.

@@ -6,6 +6,7 @@
 
 #define     max_trigger_value   255
 #define     max_joystick_value  32767.0
+#define     min_joystick_value  1200
 
 // -------------------- Direcciones de registros -------------------- //
 #BYTE       CCPTMRS0        = 0xF49
@@ -87,7 +88,7 @@ void drive_tires(struct controller_t *xbox_controller, struct motor_t tires[2][2
         motor_movement(&tires[1][0]), motor_movement(&tires[1][1]);
         return;
     }
-
+    
     /*  Notas para comprender
     * Llanta contraria al giro, avanza con normalidad a la velocidad indicada (speed)
     * Llanta de apoyo, gira a menor velocidad en funcion de que tan desviado hacia la direccion esta el joystick 
@@ -97,21 +98,50 @@ void drive_tires(struct controller_t *xbox_controller, struct motor_t tires[2][2
     // Si no se aplico freno de corto, calculamos velocidad y direccion de movimiento
     
     float speed[2];
-    signed long trigger_diff = (signed long) xbox_controller->Triggers[1] - xbox_controller->Triggers[0];
+    
+    if((xbox_controller->Triggers[0] == 0) && (xbox_controller->Triggers[1] == 0))
+    {
+        // Giro en propio eje
 
-    if(xbox_controller->JoystickX >= 0)        // El movimiento es a la derecha o al centro
-    {
-        speed[0] = trigger_diff * 100.0 / max_trigger_value;
-        // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-        speed[1] = speed[0] - (2 * speed[0] * xbox_controller->JoystickX / max_joystick_value);
-        // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+        if(xbox_controller->JoystickX > 15000)        // El movimiento es a la derecha
+        {
+            speed[0] = 50;
+            // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+            speed[1] = -50;
+            // Velocidad - (Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+        }
+        else if(xbox_controller->JoystickX < -15000)   // El movimiento es a la izquierda
+        {
+            speed[1] = 50;
+            // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+            speed[0] = -50;
+            // Velocidad - (Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+        }
+        else        // El movimiento es recto
+            speed[0] = speed[1] = 0;
+            // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
     }
-    else                                        // El movimiento es a la izquierda
+    else
     {
-        speed[1] = trigger_diff * 100.0 / max_trigger_value;
-        // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-        speed[0] = speed[1] - (2 * speed[1] * xbox_controller->JoystickX / -32768.0);
-        // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+        signed long trigger_diff = (signed long) xbox_controller->Triggers[1] - xbox_controller->Triggers[0];
+
+        if(xbox_controller->JoystickX > min_joystick_value)        // El movimiento es a la derecha
+        {
+            speed[0] = trigger_diff * 100.0 / max_trigger_value;
+            // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+            speed[1] = speed[0] - (speed[0] * (xbox_controller->JoystickX - min_joystick_value) / (max_joystick_value - min_joystick_value));
+            // Velocidad - (Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+        }
+        else if(xbox_controller->JoystickX < -min_joystick_value)   // El movimiento es a la izquierda
+        {
+            speed[1] = trigger_diff * 100.0 / max_trigger_value;
+            // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+            speed[0] = speed[1] - (speed[1] * (xbox_controller->JoystickX + min_joystick_value) / (-32768.0 + min_joystick_value));
+            // Velocidad - (Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+        }
+        else        // El movimiento es recto
+            speed[0] = speed[1] = trigger_diff * 100.0 / max_trigger_value;
+            // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
     }
 
     // Enviamos movimiento a las llantas //

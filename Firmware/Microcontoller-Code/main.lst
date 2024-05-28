@@ -1,16 +1,16 @@
-CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
+CCS PCH C Compiler, Version 5.112, 29001               01-may.-24 12:00
 
                Filename:   C:\Users\diego\Desktop\Mordu\Firmware\Microcontoller-Code\main.lst
 
-               ROM used:   4460 bytes (7%)
-                           Largest free fragment is 61072
+               ROM used:   4776 bytes (7%)
+                           Largest free fragment is 60756
                RAM used:   62 (2%) at main() level
                            139 (4%) worst case
                Stack used: 1 locations (0 in main + 1 for interrupts)
                Stack size: 31
 
 *
-00000:  GOTO   1052
+00000:  GOTO   118E
 *
 00008:  MOVWF  04
 0000A:  MOVFF  FD8,05
@@ -161,10 +161,10 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 *
 0052E:  MOVLW  8E
 00530:  MOVWF  00
-00532:  MOVFF  50,01
-00536:  MOVFF  4F,02
+00532:  MOVFF  4C,01
+00536:  MOVFF  4B,02
 0053A:  CLRF   03
-0053C:  BTFSS  50.7
+0053C:  BTFSS  4C.7
 0053E:  BRA    054A
 00540:  COMF   01,F
 00542:  COMF   02,F
@@ -188,7 +188,7 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 00568:  RLCF   01,F
 0056A:  DECF   00,F
 0056C:  BRA    0560
-0056E:  BTFSC  50.7
+0056E:  BTFSC  4C.7
 00570:  BRA    0574
 00572:  BCF    01.7
 00574:  RETURN 0
@@ -862,7 +862,7 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 00474:  BRA    0476
 00476:  DECFSZ FEF,F
 00478:  BRA    045E
-0047A:  GOTO   1120 (RETURN)
+0047A:  GOTO   125C (RETURN)
 .................... #use        rs232(rcv = pin_c7, xmit = pin_c6, baud = 9600, bits = 8, parity = n) 
 .................... 
 .................... #include    <stdlib.h>
@@ -3012,6 +3012,7 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 .................... 
 .................... #define     max_trigger_value   255
 .................... #define     max_joystick_value  32767.0
+.................... #define     min_joystick_value  1200
 .................... 
 .................... // -------------------- Direcciones de registros -------------------- //
 .................... #BYTE       CCPTMRS0        = 0xF49
@@ -3118,7 +3119,7 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 0044A:  INCF   3F,F
 0044C:  BRA    03EC
 0044E:  MOVLB  0
-00450:  GOTO   10F6 (RETURN)
+00450:  GOTO   1232 (RETURN)
 .................... }
 .................... 
 .................... void motor_movement(struct motor_t *motor, float speed)   // Modo de movimiento normal
@@ -3395,9 +3396,9 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 00CD0:  MOVFF  01,4D
 00CD4:  CALL   04BC
 ....................         return;
-00CD8:  BRA    104E
+00CD8:  BRA    118A
 ....................     }
-.................... 
+....................     
 ....................     /*  Notas para comprender
 ....................     * Llanta contraria al giro, avanza con normalidad a la velocidad indicada (speed)
 ....................     * Llanta de apoyo, gira a menor velocidad en funcion de que tan desviado hacia la direccion esta el joystick 
@@ -3407,306 +3408,466 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 ....................     // Si no se aplico freno de corto, calculamos velocidad y direccion de movimiento
 ....................     
 ....................     float speed[2];
-....................     signed long trigger_diff = (signed long) xbox_controller->Triggers[1] - xbox_controller->Triggers[0];
-00CDA:  MOVLW  03
+....................     
+....................     if((xbox_controller->Triggers[0] == 0) && (xbox_controller->Triggers[1] == 0))
+00CDA:  MOVLW  02
 00CDC:  ADDWF  3D,W
 00CDE:  MOVWF  FE9
 00CE0:  MOVLW  00
 00CE2:  ADDWFC 3E,W
 00CE4:  MOVWF  FEA
-00CE6:  MOVF   FEF,W
-00CE8:  CLRF   4C
-00CEA:  MOVWF  4B
-00CEC:  MOVLW  02
-00CEE:  ADDWF  3D,W
-00CF0:  MOVWF  FE9
-00CF2:  MOVLW  00
-00CF4:  ADDWFC 3E,W
-00CF6:  MOVWF  FEA
-00CF8:  MOVF   FEF,W
-00CFA:  SUBWF  4B,W
-00CFC:  MOVWF  49
-00CFE:  MOVLW  00
-00D00:  SUBWFB 4C,W
-00D02:  MOVWF  4A
+00CE6:  MOVF   FEF,F
+00CE8:  BNZ   0D92
+00CEA:  MOVLW  03
+00CEC:  ADDWF  3D,W
+00CEE:  MOVWF  FE9
+00CF0:  MOVLW  00
+00CF2:  ADDWFC 3E,W
+00CF4:  MOVWF  FEA
+00CF6:  MOVF   FEF,F
+00CF8:  BNZ   0D92
+....................     {
+....................         // Giro en propio eje
 .................... 
-....................     if(xbox_controller->JoystickX >= 0)        // El movimiento es a la derecha o al centro
-00D04:  MOVFF  3D,FE9
-00D08:  MOVFF  3E,FEA
-00D0C:  MOVFF  FEC,4C
-00D10:  MOVF   FED,F
-00D12:  MOVFF  FEF,4B
-00D16:  BTFSC  4C.7
-00D18:  BRA    0E62
-....................     {
-....................         speed[0] = trigger_diff * 100.0 / max_trigger_value;
-00D1A:  MOVFF  4A,50
-00D1E:  MOVFF  49,4F
-00D22:  RCALL  052E
-00D24:  MOVFF  03,59
-00D28:  MOVFF  02,58
-00D2C:  MOVFF  01,57
-00D30:  MOVFF  00,56
-00D34:  CLRF   5D
-00D36:  CLRF   5C
-00D38:  MOVLW  48
-00D3A:  MOVWF  5B
-00D3C:  MOVLW  85
-00D3E:  MOVWF  5A
-00D40:  RCALL  0576
-00D42:  MOVFF  03,4E
-00D46:  MOVFF  02,4D
-00D4A:  MOVFF  01,4C
-00D4E:  MOVFF  00,4B
-00D52:  MOVFF  03,5D
-00D56:  MOVFF  02,5C
-00D5A:  MOVFF  01,5B
-00D5E:  MOVFF  00,5A
-00D62:  CLRF   x61
-00D64:  CLRF   x60
-00D66:  MOVLW  7F
-00D68:  MOVWF  5F
-00D6A:  MOVLW  86
-00D6C:  MOVWF  5E
-00D6E:  RCALL  0668
-00D70:  MOVFF  03,44
-00D74:  MOVFF  02,43
-00D78:  MOVFF  01,42
-00D7C:  MOVFF  00,41
-....................         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-....................         speed[1] = speed[0] - (2 * speed[0] * xbox_controller->JoystickX / max_joystick_value);
-00D80:  CLRF   59
-00D82:  CLRF   58
-00D84:  CLRF   57
-00D86:  MOVLW  80
-00D88:  MOVWF  56
-00D8A:  MOVFF  44,5D
-00D8E:  MOVFF  43,5C
-00D92:  MOVFF  42,5B
-00D96:  MOVFF  41,5A
-00D9A:  CALL   0576
-00D9E:  MOVFF  03,4E
-00DA2:  MOVFF  02,4D
-00DA6:  MOVFF  01,4C
-00DAA:  MOVFF  00,4B
-00DAE:  MOVFF  3D,FE9
-00DB2:  MOVFF  3E,FEA
-00DB6:  MOVFF  FEC,03
-00DBA:  MOVF   FED,F
-00DBC:  MOVFF  FEF,4F
-00DC0:  MOVFF  03,50
-00DC4:  CALL   052E
-00DC8:  MOVFF  4E,59
-00DCC:  MOVFF  4D,58
-00DD0:  MOVFF  4C,57
-00DD4:  MOVFF  4B,56
-00DD8:  MOVFF  03,5D
-00DDC:  MOVFF  02,5C
-00DE0:  MOVFF  01,5B
-00DE4:  MOVFF  00,5A
-00DE8:  CALL   0576
-00DEC:  MOVFF  03,4E
-00DF0:  MOVFF  02,4D
-00DF4:  MOVFF  01,4C
-00DF8:  MOVFF  00,4B
-00DFC:  MOVFF  03,5D
-00E00:  MOVFF  02,5C
-00E04:  MOVFF  01,5B
-00E08:  MOVFF  00,5A
-00E0C:  CLRF   x61
-00E0E:  MOVLW  FE
-00E10:  MOVWF  x60
-00E12:  MOVLW  7F
-00E14:  MOVWF  5F
-00E16:  MOVLW  8D
-00E18:  MOVWF  5E
-00E1A:  RCALL  0668
-00E1C:  MOVFF  FEA,4C
-00E20:  MOVFF  FE9,4B
-00E24:  BSF    FD8.1
-00E26:  MOVFF  44,5D
-00E2A:  MOVFF  43,5C
-00E2E:  MOVFF  42,5B
-00E32:  MOVFF  41,5A
-00E36:  MOVFF  03,61
-00E3A:  MOVFF  02,60
-00E3E:  MOVFF  01,5F
-00E42:  MOVFF  00,5E
-00E46:  RCALL  07C2
-00E48:  MOVFF  4C,FEA
-00E4C:  MOVFF  4B,FE9
-00E50:  MOVFF  03,48
-00E54:  MOVFF  02,47
-00E58:  MOVFF  01,46
-00E5C:  MOVFF  00,45
-....................         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+....................         if(xbox_controller->JoystickX > 15000)        // El movimiento es a la derecha
+00CFA:  MOVFF  3D,FE9
+00CFE:  MOVFF  3E,FEA
+00D02:  MOVFF  FEC,4C
+00D06:  MOVF   FED,F
+00D08:  MOVFF  FEF,4B
+00D0C:  BTFSC  4C.7
+00D0E:  BRA    0D3A
+00D10:  MOVF   4C,W
+00D12:  SUBLW  39
+00D14:  BC    0D3A
+00D16:  XORLW  FF
+00D18:  BNZ   0D20
+00D1A:  MOVF   4B,W
+00D1C:  SUBLW  98
+00D1E:  BC    0D3A
+....................         {
+....................             speed[0] = 50;
+00D20:  CLRF   44
+00D22:  CLRF   43
+00D24:  MOVLW  48
+00D26:  MOVWF  42
+00D28:  MOVLW  84
+00D2A:  MOVWF  41
+....................             // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+....................             speed[1] = -50;
+00D2C:  CLRF   48
+00D2E:  CLRF   47
+00D30:  MOVLW  C8
+00D32:  MOVWF  46
+00D34:  MOVLW  84
+00D36:  MOVWF  45
+....................             // Velocidad - (Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+....................         }
+00D38:  BRA    0D90
+....................         else if(xbox_controller->JoystickX < -15000)   // El movimiento es a la izquierda
+00D3A:  MOVFF  3D,FE9
+00D3E:  MOVFF  3E,FEA
+00D42:  MOVFF  FEC,4C
+00D46:  MOVF   FED,F
+00D48:  MOVFF  FEF,4B
+00D4C:  BTFSS  4C.7
+00D4E:  BRA    0D78
+00D50:  MOVF   4C,W
+00D52:  SUBLW  C5
+00D54:  BNC   0D78
+00D56:  BNZ   0D5E
+00D58:  MOVF   4B,W
+00D5A:  SUBLW  67
+00D5C:  BNC   0D78
+....................         {
+....................             speed[1] = 50;
+00D5E:  CLRF   48
+00D60:  CLRF   47
+00D62:  MOVLW  48
+00D64:  MOVWF  46
+00D66:  MOVLW  84
+00D68:  MOVWF  45
+....................             // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+....................             speed[0] = -50;
+00D6A:  CLRF   44
+00D6C:  CLRF   43
+00D6E:  MOVLW  C8
+00D70:  MOVWF  42
+00D72:  MOVLW  84
+00D74:  MOVWF  41
+....................             // Velocidad - (Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+....................         }
+00D76:  BRA    0D90
+....................         else        // El movimiento es recto
+....................             speed[0] = speed[1] = 0;
+00D78:  CLRF   48
+00D7A:  CLRF   47
+00D7C:  CLRF   46
+00D7E:  CLRF   45
+00D80:  MOVFF  48,44
+00D84:  MOVFF  47,43
+00D88:  MOVFF  46,42
+00D8C:  MOVFF  45,41
+....................             // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
 ....................     }
-00E60:  BRA    0FAE
-....................     else                                        // El movimiento es a la izquierda
+00D90:  BRA    10EA
+....................     else
 ....................     {
-....................         speed[1] = trigger_diff * 100.0 / max_trigger_value;
-00E62:  MOVFF  4A,50
-00E66:  MOVFF  49,4F
-00E6A:  CALL   052E
-00E6E:  MOVFF  03,59
-00E72:  MOVFF  02,58
-00E76:  MOVFF  01,57
-00E7A:  MOVFF  00,56
-00E7E:  CLRF   5D
-00E80:  CLRF   5C
-00E82:  MOVLW  48
-00E84:  MOVWF  5B
-00E86:  MOVLW  85
-00E88:  MOVWF  5A
-00E8A:  CALL   0576
-00E8E:  MOVFF  03,4E
-00E92:  MOVFF  02,4D
-00E96:  MOVFF  01,4C
-00E9A:  MOVFF  00,4B
-00E9E:  MOVFF  03,5D
-00EA2:  MOVFF  02,5C
-00EA6:  MOVFF  01,5B
-00EAA:  MOVFF  00,5A
-00EAE:  CLRF   x61
-00EB0:  CLRF   x60
-00EB2:  MOVLW  7F
-00EB4:  MOVWF  5F
-00EB6:  MOVLW  86
-00EB8:  MOVWF  5E
-00EBA:  CALL   0668
-00EBE:  MOVFF  03,48
-00EC2:  MOVFF  02,47
-00EC6:  MOVFF  01,46
-00ECA:  MOVFF  00,45
-....................         // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
-....................         speed[0] = speed[1] - (2 * speed[1] * xbox_controller->JoystickX / -32768.0);
-00ECE:  CLRF   59
-00ED0:  CLRF   58
-00ED2:  CLRF   57
-00ED4:  MOVLW  80
-00ED6:  MOVWF  56
-00ED8:  MOVFF  48,5D
-00EDC:  MOVFF  47,5C
-00EE0:  MOVFF  46,5B
-00EE4:  MOVFF  45,5A
-00EE8:  CALL   0576
-00EEC:  MOVFF  03,4E
-00EF0:  MOVFF  02,4D
-00EF4:  MOVFF  01,4C
-00EF8:  MOVFF  00,4B
-00EFC:  MOVFF  3D,FE9
-00F00:  MOVFF  3E,FEA
-00F04:  MOVFF  FEC,03
-00F08:  MOVF   FED,F
-00F0A:  MOVFF  FEF,4F
-00F0E:  MOVFF  03,50
-00F12:  CALL   052E
-00F16:  MOVFF  4E,59
-00F1A:  MOVFF  4D,58
-00F1E:  MOVFF  4C,57
-00F22:  MOVFF  4B,56
-00F26:  MOVFF  03,5D
-00F2A:  MOVFF  02,5C
-00F2E:  MOVFF  01,5B
-00F32:  MOVFF  00,5A
-00F36:  CALL   0576
-00F3A:  MOVFF  03,4E
-00F3E:  MOVFF  02,4D
-00F42:  MOVFF  01,4C
-00F46:  MOVFF  00,4B
-00F4A:  MOVFF  03,5D
-00F4E:  MOVFF  02,5C
-00F52:  MOVFF  01,5B
-00F56:  MOVFF  00,5A
-00F5A:  CLRF   x61
-00F5C:  CLRF   x60
-00F5E:  MOVLW  80
-00F60:  MOVWF  5F
-00F62:  MOVLW  8E
-00F64:  MOVWF  5E
-00F66:  CALL   0668
-00F6A:  MOVFF  FEA,4C
-00F6E:  MOVFF  FE9,4B
-00F72:  BSF    FD8.1
-00F74:  MOVFF  48,5D
-00F78:  MOVFF  47,5C
-00F7C:  MOVFF  46,5B
-00F80:  MOVFF  45,5A
-00F84:  MOVFF  03,61
-00F88:  MOVFF  02,60
-00F8C:  MOVFF  01,5F
-00F90:  MOVFF  00,5E
-00F94:  RCALL  07C2
-00F96:  MOVFF  4C,FEA
-00F9A:  MOVFF  4B,FE9
-00F9E:  MOVFF  03,44
-00FA2:  MOVFF  02,43
-00FA6:  MOVFF  01,42
-00FAA:  MOVFF  00,41
-....................         // Velocidad - (2 veces Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+....................         signed long trigger_diff = (signed long) xbox_controller->Triggers[1] - xbox_controller->Triggers[0];
+00D92:  MOVLW  03
+00D94:  ADDWF  3D,W
+00D96:  MOVWF  FE9
+00D98:  MOVLW  00
+00D9A:  ADDWFC 3E,W
+00D9C:  MOVWF  FEA
+00D9E:  MOVF   FEF,W
+00DA0:  CLRF   4C
+00DA2:  MOVWF  4B
+00DA4:  MOVLW  02
+00DA6:  ADDWF  3D,W
+00DA8:  MOVWF  FE9
+00DAA:  MOVLW  00
+00DAC:  ADDWFC 3E,W
+00DAE:  MOVWF  FEA
+00DB0:  MOVF   FEF,W
+00DB2:  SUBWF  4B,W
+00DB4:  MOVWF  49
+00DB6:  MOVLW  00
+00DB8:  SUBWFB 4C,W
+00DBA:  MOVWF  4A
+.................... 
+....................         if(xbox_controller->JoystickX > min_joystick_value)        // El movimiento es a la derecha
+00DBC:  MOVFF  3D,FE9
+00DC0:  MOVFF  3E,FEA
+00DC4:  MOVFF  FEC,4C
+00DC8:  MOVF   FED,F
+00DCA:  MOVFF  FEF,4B
+00DCE:  BTFSC  4C.7
+00DD0:  BRA    0F14
+00DD2:  MOVF   4C,W
+00DD4:  SUBLW  03
+00DD6:  BTFSC  FD8.0
+00DD8:  BRA    0F14
+00DDA:  XORLW  FF
+00DDC:  BNZ   0DE6
+00DDE:  MOVF   4B,W
+00DE0:  SUBLW  B0
+00DE2:  BTFSC  FD8.0
+00DE4:  BRA    0F14
+....................         {
+....................             speed[0] = trigger_diff * 100.0 / max_trigger_value;
+00DE6:  MOVFF  4A,4C
+00DEA:  MOVFF  49,4B
+00DEE:  CALL   052E
+00DF2:  MOVFF  03,59
+00DF6:  MOVFF  02,58
+00DFA:  MOVFF  01,57
+00DFE:  MOVFF  00,56
+00E02:  CLRF   5D
+00E04:  CLRF   5C
+00E06:  MOVLW  48
+00E08:  MOVWF  5B
+00E0A:  MOVLW  85
+00E0C:  MOVWF  5A
+00E0E:  CALL   0576
+00E12:  MOVFF  03,4E
+00E16:  MOVFF  02,4D
+00E1A:  MOVFF  01,4C
+00E1E:  MOVFF  00,4B
+00E22:  MOVFF  03,5D
+00E26:  MOVFF  02,5C
+00E2A:  MOVFF  01,5B
+00E2E:  MOVFF  00,5A
+00E32:  CLRF   x61
+00E34:  CLRF   x60
+00E36:  MOVLW  7F
+00E38:  MOVWF  5F
+00E3A:  MOVLW  86
+00E3C:  MOVWF  5E
+00E3E:  RCALL  0668
+00E40:  MOVFF  03,44
+00E44:  MOVFF  02,43
+00E48:  MOVFF  01,42
+00E4C:  MOVFF  00,41
+....................             // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+....................             speed[1] = speed[0] - (speed[0] * (xbox_controller->JoystickX - min_joystick_value) / (max_joystick_value - min_joystick_value));
+00E50:  MOVFF  3D,FE9
+00E54:  MOVFF  3E,FEA
+00E58:  MOVFF  FEC,4C
+00E5C:  MOVF   FED,F
+00E5E:  MOVFF  FEF,4B
+00E62:  MOVLW  B0
+00E64:  SUBWF  4B,W
+00E66:  MOVWF  00
+00E68:  MOVLW  04
+00E6A:  SUBWFB 4C,W
+00E6C:  MOVWF  03
+00E6E:  MOVFF  00,4B
+00E72:  MOVWF  4C
+00E74:  CALL   052E
+00E78:  MOVFF  44,59
+00E7C:  MOVFF  43,58
+00E80:  MOVFF  42,57
+00E84:  MOVFF  41,56
+00E88:  MOVFF  03,5D
+00E8C:  MOVFF  02,5C
+00E90:  MOVFF  01,5B
+00E94:  MOVFF  00,5A
+00E98:  CALL   0576
+00E9C:  MOVFF  03,4E
+00EA0:  MOVFF  02,4D
+00EA4:  MOVFF  01,4C
+00EA8:  MOVFF  00,4B
+00EAC:  MOVFF  03,5D
+00EB0:  MOVFF  02,5C
+00EB4:  MOVFF  01,5B
+00EB8:  MOVFF  00,5A
+00EBC:  CLRF   x61
+00EBE:  MOVLW  9E
+00EC0:  MOVWF  x60
+00EC2:  MOVLW  76
+00EC4:  MOVWF  5F
+00EC6:  MOVLW  8D
+00EC8:  MOVWF  5E
+00ECA:  CALL   0668
+00ECE:  MOVFF  FEA,4C
+00ED2:  MOVFF  FE9,4B
+00ED6:  BSF    FD8.1
+00ED8:  MOVFF  44,5D
+00EDC:  MOVFF  43,5C
+00EE0:  MOVFF  42,5B
+00EE4:  MOVFF  41,5A
+00EE8:  MOVFF  03,61
+00EEC:  MOVFF  02,60
+00EF0:  MOVFF  01,5F
+00EF4:  MOVFF  00,5E
+00EF8:  RCALL  07C2
+00EFA:  MOVFF  4C,FEA
+00EFE:  MOVFF  4B,FE9
+00F02:  MOVFF  03,48
+00F06:  MOVFF  02,47
+00F0A:  MOVFF  01,46
+00F0E:  MOVFF  00,45
+....................             // Velocidad - (Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+....................         }
+00F12:  BRA    10EA
+....................         else if(xbox_controller->JoystickX < -min_joystick_value)   // El movimiento es a la izquierda
+00F14:  MOVFF  3D,FE9
+00F18:  MOVFF  3E,FEA
+00F1C:  MOVFF  FEC,4C
+00F20:  MOVF   FED,F
+00F22:  MOVFF  FEF,4B
+00F26:  BTFSS  4C.7
+00F28:  BRA    106E
+00F2A:  MOVF   4C,W
+00F2C:  SUBLW  FB
+00F2E:  BTFSS  FD8.0
+00F30:  BRA    106E
+00F32:  BNZ   0F3C
+00F34:  MOVF   4B,W
+00F36:  SUBLW  4F
+00F38:  BTFSS  FD8.0
+00F3A:  BRA    106E
+....................         {
+....................             speed[1] = trigger_diff * 100.0 / max_trigger_value;
+00F3C:  MOVFF  4A,4C
+00F40:  MOVFF  49,4B
+00F44:  CALL   052E
+00F48:  MOVFF  03,59
+00F4C:  MOVFF  02,58
+00F50:  MOVFF  01,57
+00F54:  MOVFF  00,56
+00F58:  CLRF   5D
+00F5A:  CLRF   5C
+00F5C:  MOVLW  48
+00F5E:  MOVWF  5B
+00F60:  MOVLW  85
+00F62:  MOVWF  5A
+00F64:  CALL   0576
+00F68:  MOVFF  03,4E
+00F6C:  MOVFF  02,4D
+00F70:  MOVFF  01,4C
+00F74:  MOVFF  00,4B
+00F78:  MOVFF  03,5D
+00F7C:  MOVFF  02,5C
+00F80:  MOVFF  01,5B
+00F84:  MOVFF  00,5A
+00F88:  CLRF   x61
+00F8A:  CLRF   x60
+00F8C:  MOVLW  7F
+00F8E:  MOVWF  5F
+00F90:  MOVLW  86
+00F92:  MOVWF  5E
+00F94:  CALL   0668
+00F98:  MOVFF  03,48
+00F9C:  MOVFF  02,47
+00FA0:  MOVFF  01,46
+00FA4:  MOVFF  00,45
+....................             // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
+....................             speed[0] = speed[1] - (speed[1] * (xbox_controller->JoystickX + min_joystick_value) / (-32768.0 + min_joystick_value));
+00FA8:  MOVFF  3D,FE9
+00FAC:  MOVFF  3E,FEA
+00FB0:  MOVFF  FEC,4C
+00FB4:  MOVF   FED,F
+00FB6:  MOVFF  FEF,4B
+00FBA:  MOVLW  B0
+00FBC:  ADDWF  4B,W
+00FBE:  MOVWF  01
+00FC0:  MOVLW  04
+00FC2:  ADDWFC 4C,W
+00FC4:  MOVWF  03
+00FC6:  MOVFF  01,4B
+00FCA:  MOVWF  4C
+00FCC:  CALL   052E
+00FD0:  MOVFF  48,59
+00FD4:  MOVFF  47,58
+00FD8:  MOVFF  46,57
+00FDC:  MOVFF  45,56
+00FE0:  MOVFF  03,5D
+00FE4:  MOVFF  02,5C
+00FE8:  MOVFF  01,5B
+00FEC:  MOVFF  00,5A
+00FF0:  CALL   0576
+00FF4:  MOVFF  03,4E
+00FF8:  MOVFF  02,4D
+00FFC:  MOVFF  01,4C
+01000:  MOVFF  00,4B
+01004:  MOVFF  03,5D
+01008:  MOVFF  02,5C
+0100C:  MOVFF  01,5B
+01010:  MOVFF  00,5A
+01014:  CLRF   x61
+01016:  MOVLW  A0
+01018:  MOVWF  x60
+0101A:  MOVLW  F6
+0101C:  MOVWF  5F
+0101E:  MOVLW  8D
+01020:  MOVWF  5E
+01022:  CALL   0668
+01026:  MOVFF  FEA,4C
+0102A:  MOVFF  FE9,4B
+0102E:  BSF    FD8.1
+01030:  MOVFF  48,5D
+01034:  MOVFF  47,5C
+01038:  MOVFF  46,5B
+0103C:  MOVFF  45,5A
+01040:  MOVFF  03,61
+01044:  MOVFF  02,60
+01048:  MOVFF  01,5F
+0104C:  MOVFF  00,5E
+01050:  CALL   07C2
+01054:  MOVFF  4C,FEA
+01058:  MOVFF  4B,FE9
+0105C:  MOVFF  03,44
+01060:  MOVFF  02,43
+01064:  MOVFF  01,42
+01068:  MOVFF  00,41
+....................             // Velocidad - (Velocidad * (Valor Joystick X / Valor maximo Joystick X))
+....................         }
+0106C:  BRA    10EA
+....................         else        // El movimiento es recto
+....................             speed[0] = speed[1] = trigger_diff * 100.0 / max_trigger_value;
+0106E:  MOVFF  4A,4C
+01072:  MOVFF  49,4B
+01076:  CALL   052E
+0107A:  MOVFF  03,59
+0107E:  MOVFF  02,58
+01082:  MOVFF  01,57
+01086:  MOVFF  00,56
+0108A:  CLRF   5D
+0108C:  CLRF   5C
+0108E:  MOVLW  48
+01090:  MOVWF  5B
+01092:  MOVLW  85
+01094:  MOVWF  5A
+01096:  CALL   0576
+0109A:  MOVFF  03,4E
+0109E:  MOVFF  02,4D
+010A2:  MOVFF  01,4C
+010A6:  MOVFF  00,4B
+010AA:  MOVFF  03,5D
+010AE:  MOVFF  02,5C
+010B2:  MOVFF  01,5B
+010B6:  MOVFF  00,5A
+010BA:  CLRF   x61
+010BC:  CLRF   x60
+010BE:  MOVLW  7F
+010C0:  MOVWF  5F
+010C2:  MOVLW  86
+010C4:  MOVWF  5E
+010C6:  CALL   0668
+010CA:  MOVFF  03,48
+010CE:  MOVFF  02,47
+010D2:  MOVFF  01,46
+010D6:  MOVFF  00,45
+010DA:  MOVFF  48,44
+010DE:  MOVFF  47,43
+010E2:  MOVFF  46,42
+010E6:  MOVFF  45,41
+....................             // Flotante de -100 a 100 que indica la velocidad y direccion de movimiento (+ adelante, - atras)
 ....................     }
 .................... 
 ....................     // Enviamos movimiento a las llantas //
 ....................     motor_movement(&tires[0][0], speed[0]);      // Llanta delantera izquierda
-00FAE:  MOVFF  3F,01
-00FB2:  MOVFF  40,03
-00FB6:  MOVFF  40,4E
-00FBA:  MOVFF  3F,4D
-00FBE:  MOVFF  44,52
-00FC2:  MOVFF  43,51
-00FC6:  MOVFF  42,50
-00FCA:  MOVFF  41,4F
-00FCE:  RCALL  0ADE
+010EA:  MOVFF  3F,01
+010EE:  MOVFF  40,03
+010F2:  MOVFF  40,4E
+010F6:  MOVFF  3F,4D
+010FA:  MOVFF  44,52
+010FE:  MOVFF  43,51
+01102:  MOVFF  42,50
+01106:  MOVFF  41,4F
+0110A:  RCALL  0ADE
 ....................     motor_movement(&tires[1][0], speed[0]);      // Llanta trasera izquierda
-00FD0:  MOVLW  0C
-00FD2:  ADDWF  3F,W
-00FD4:  MOVWF  01
-00FD6:  MOVLW  00
-00FD8:  ADDWFC 40,W
-00FDA:  MOVWF  03
-00FDC:  MOVFF  01,4B
-00FE0:  MOVWF  4C
-00FE2:  MOVWF  4E
-00FE4:  MOVFF  01,4D
-00FE8:  MOVFF  44,52
-00FEC:  MOVFF  43,51
-00FF0:  MOVFF  42,50
-00FF4:  MOVFF  41,4F
-00FF8:  RCALL  0ADE
+0110C:  MOVLW  0C
+0110E:  ADDWF  3F,W
+01110:  MOVWF  01
+01112:  MOVLW  00
+01114:  ADDWFC 40,W
+01116:  MOVWF  03
+01118:  MOVFF  01,4B
+0111C:  MOVWF  4C
+0111E:  MOVWF  4E
+01120:  MOVFF  01,4D
+01124:  MOVFF  44,52
+01128:  MOVFF  43,51
+0112C:  MOVFF  42,50
+01130:  MOVFF  41,4F
+01134:  RCALL  0ADE
 ....................     
 ....................     motor_movement(&tires[0][1], speed[1]);      // Llanta delantera derecha
-00FFA:  MOVLW  06
-00FFC:  ADDWF  3F,W
-00FFE:  MOVWF  01
-01000:  MOVLW  00
-01002:  ADDWFC 40,W
-01004:  MOVWF  03
-01006:  MOVFF  01,4B
-0100A:  MOVWF  4C
-0100C:  MOVWF  4E
-0100E:  MOVFF  01,4D
-01012:  MOVFF  48,52
-01016:  MOVFF  47,51
-0101A:  MOVFF  46,50
-0101E:  MOVFF  45,4F
-01022:  RCALL  0ADE
+01136:  MOVLW  06
+01138:  ADDWF  3F,W
+0113A:  MOVWF  01
+0113C:  MOVLW  00
+0113E:  ADDWFC 40,W
+01140:  MOVWF  03
+01142:  MOVFF  01,4B
+01146:  MOVWF  4C
+01148:  MOVWF  4E
+0114A:  MOVFF  01,4D
+0114E:  MOVFF  48,52
+01152:  MOVFF  47,51
+01156:  MOVFF  46,50
+0115A:  MOVFF  45,4F
+0115E:  RCALL  0ADE
 ....................     motor_movement(&tires[1][1], speed[1]);      // Llanta trasera derecha
-01024:  MOVLW  12
-01026:  ADDWF  3F,W
-01028:  MOVWF  01
-0102A:  MOVLW  00
-0102C:  ADDWFC 40,W
-0102E:  MOVWF  03
-01030:  MOVFF  01,4B
-01034:  MOVWF  4C
-01036:  MOVWF  4E
-01038:  MOVFF  01,4D
-0103C:  MOVFF  48,52
-01040:  MOVFF  47,51
-01044:  MOVFF  46,50
-01048:  MOVFF  45,4F
-0104C:  RCALL  0ADE
-0104E:  GOTO   116A (RETURN)
+01160:  MOVLW  12
+01162:  ADDWF  3F,W
+01164:  MOVWF  01
+01166:  MOVLW  00
+01168:  ADDWFC 40,W
+0116A:  MOVWF  03
+0116C:  MOVFF  01,4B
+01170:  MOVWF  4C
+01172:  MOVWF  4E
+01174:  MOVFF  01,4D
+01178:  MOVFF  48,52
+0117C:  MOVFF  47,51
+01180:  MOVFF  46,50
+01184:  MOVFF  45,4F
+01188:  RCALL  0ADE
+0118A:  GOTO   12A6 (RETURN)
 .................... }
 .................... 
 .................... /*
@@ -3729,6 +3890,7 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 .................... 
 .................... #BYTE       INTCON              = 0xFF2
 .................... #BIT        INT1IE              = 0xFF0.3   // INTCON3
+.................... 
 .................... #BIT        INTEDG1             = 0xFF1.5   // INTCON2
 .................... #BIT        RC1IE               = 0xF9D.5   // PIE1
 .................... #BIT        IPEN                = 0xFD0.7   // RCON
@@ -3916,181 +4078,181 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 003AE:  BSF    FD0.7
 ....................     TMR0IP = FALSE;
 003B0:  BCF    FF1.2
-003B2:  GOTO   10EC (RETURN)
+003B2:  GOTO   1228 (RETURN)
 .................... }
 .................... 
 .................... // ------------------------ Codigo Principal ----------------------- //
 .................... void main()
 *
-01052:  CLRF   FF8
-01054:  BCF    FD0.7
-01056:  BSF    07.7
-01058:  MOVLW  70
-0105A:  MOVWF  FD3
-0105C:  BCF    F9B.6
-0105E:  BCF    F9B.7
-01060:  BSF    FB8.3
-01062:  MOVLW  A0
-01064:  MOVWF  FAF
-01066:  MOVLW  01
-01068:  MOVWF  FB0
-0106A:  MOVLW  A6
-0106C:  MOVWF  FAC
-0106E:  MOVLW  90
-01070:  MOVWF  FAB
-01072:  MOVLB  F
-01074:  CLRF   x38
-01076:  CLRF   x39
-01078:  CLRF   x3A
-0107A:  CLRF   F77
-0107C:  CLRF   F78
-0107E:  CLRF   F79
-01080:  BRA    10A8
-01082:  DATA 02,00
-01084:  DATA 19,00
-01086:  DATA 00,18
-01088:  DATA 00,1F
-0108A:  DATA BE,0F
-0108C:  DATA 0B,7C
-0108E:  DATA 0C,7C
-01090:  DATA 67,0F
-01092:  DATA 0E,7C
-01094:  DATA 0F,7C
-01096:  DATA 5E,0F
-01098:  DATA 04,7C
-0109A:  DATA 05,7C
-0109C:  DATA 58,0F
-0109E:  DATA 06,7C
-010A0:  DATA 07,7C
-010A2:  DATA 01,00
-010A4:  DATA 3B,00
-010A6:  DATA 00,00
-010A8:  MOVLW  00
-010AA:  MOVWF  FF8
-010AC:  MOVLW  10
-010AE:  MOVWF  FF7
-010B0:  MOVLW  82
-010B2:  MOVWF  FF6
-010B4:  TBLRD*+
-010B6:  MOVF   FF5,W
-010B8:  MOVWF  00
-010BA:  XORLW  00
-010BC:  BZ    10E4
-010BE:  TBLRD*+
-010C0:  MOVF   FF5,W
-010C2:  MOVWF  01
-010C4:  BTFSC  FE8.7
-010C6:  BRA    10D2
-010C8:  ANDLW  3F
-010CA:  MOVWF  FEA
-010CC:  TBLRD*+
-010CE:  MOVFF  FF5,FE9
-010D2:  BTFSC  01.6
-010D4:  TBLRD*+
-010D6:  BTFSS  01.6
-010D8:  TBLRD*+
-010DA:  MOVFF  FF5,FEE
-010DE:  DCFSNZ 00,F
-010E0:  BRA    10B4
-010E2:  BRA    10D6
-010E4:  CLRF   FF8
+0118E:  CLRF   FF8
+01190:  BCF    FD0.7
+01192:  BSF    07.7
+01194:  MOVLW  70
+01196:  MOVWF  FD3
+01198:  BCF    F9B.6
+0119A:  BCF    F9B.7
+0119C:  BSF    FB8.3
+0119E:  MOVLW  A0
+011A0:  MOVWF  FAF
+011A2:  MOVLW  01
+011A4:  MOVWF  FB0
+011A6:  MOVLW  A6
+011A8:  MOVWF  FAC
+011AA:  MOVLW  90
+011AC:  MOVWF  FAB
+011AE:  MOVLB  F
+011B0:  CLRF   x38
+011B2:  CLRF   x39
+011B4:  CLRF   x3A
+011B6:  CLRF   F77
+011B8:  CLRF   F78
+011BA:  CLRF   F79
+011BC:  BRA    11E4
+011BE:  DATA 02,00
+011C0:  DATA 19,00
+011C2:  DATA 00,18
+011C4:  DATA 00,1F
+011C6:  DATA BE,0F
+011C8:  DATA 0B,7C
+011CA:  DATA 0C,7C
+011CC:  DATA 67,0F
+011CE:  DATA 0E,7C
+011D0:  DATA 0F,7C
+011D2:  DATA 5E,0F
+011D4:  DATA 04,7C
+011D6:  DATA 05,7C
+011D8:  DATA 58,0F
+011DA:  DATA 06,7C
+011DC:  DATA 07,7C
+011DE:  DATA 01,00
+011E0:  DATA 3B,00
+011E2:  DATA 00,00
+011E4:  MOVLW  00
+011E6:  MOVWF  FF8
+011E8:  MOVLW  11
+011EA:  MOVWF  FF7
+011EC:  MOVLW  BE
+011EE:  MOVWF  FF6
+011F0:  TBLRD*+
+011F2:  MOVF   FF5,W
+011F4:  MOVWF  00
+011F6:  XORLW  00
+011F8:  BZ    1220
+011FA:  TBLRD*+
+011FC:  MOVF   FF5,W
+011FE:  MOVWF  01
+01200:  BTFSC  FE8.7
+01202:  BRA    120E
+01204:  ANDLW  3F
+01206:  MOVWF  FEA
+01208:  TBLRD*+
+0120A:  MOVFF  FF5,FE9
+0120E:  BTFSC  01.6
+01210:  TBLRD*+
+01212:  BTFSS  01.6
+01214:  TBLRD*+
+01216:  MOVFF  FF5,FEE
+0121A:  DCFSNZ 00,F
+0121C:  BRA    11F0
+0121E:  BRA    1212
+01220:  CLRF   FF8
 .................... {
 ....................     log_init();
-010E6:  MOVLB  0
-010E8:  GOTO   0390
+01222:  MOVLB  0
+01224:  GOTO   0390
 ....................     motors_init(tires);
-010EC:  CLRF   3E
-010EE:  MOVLW  1F
-010F0:  MOVWF  3D
-010F2:  GOTO   03D4
+01228:  CLRF   3E
+0122A:  MOVLW  1F
+0122C:  MOVWF  3D
+0122E:  GOTO   03D4
 .................... 
 ....................     Connection_animation:    
 ....................     // Esperamos conexion bluetooth con una animacion del LED indicador
 ....................     for(int time = 0; !PC.IsConnected; time++, delay_ms(1))
-010F6:  CLRF   3C
-010F8:  BTFSC  3B.1
-010FA:  BRA    1124
+01232:  CLRF   3C
+01234:  BTFSC  3B.1
+01236:  BRA    1260
 ....................     {
 ....................         if(time == 200)
-010FC:  MOVF   3C,W
-010FE:  SUBLW  C8
-01100:  BNZ   1112
+01238:  MOVF   3C,W
+0123A:  SUBLW  C8
+0123C:  BNZ   124E
 ....................         {
 ....................             status_LED ^= TRUE;
-01102:  MOVLW  00
-01104:  BTFSC  F89.0
-01106:  MOVLW  01
-01108:  XORLW  01
-0110A:  BCF    F89.0
-0110C:  BTFSC  FE8.0
-0110E:  BSF    F89.0
+0123E:  MOVLW  00
+01240:  BTFSC  F89.0
+01242:  MOVLW  01
+01244:  XORLW  01
+01246:  BCF    F89.0
+01248:  BTFSC  FE8.0
+0124A:  BSF    F89.0
 ....................             time = 0;
-01110:  CLRF   3C
+0124C:  CLRF   3C
 ....................         }
-01112:  MOVF   3C,W
-01114:  INCF   3C,F
-01116:  MOVLW  01
-01118:  MOVWF  3D
-0111A:  MOVLB  0
-0111C:  GOTO   0454
-01120:  MOVLB  0
-01122:  BRA    10F8
+0124E:  MOVF   3C,W
+01250:  INCF   3C,F
+01252:  MOVLW  01
+01254:  MOVWF  3D
+01256:  MOVLB  0
+01258:  GOTO   0454
+0125C:  MOVLB  0
+0125E:  BRA    1234
 ....................     }
 .................... 
 ....................     status_LED = TRUE;      // Ya hubo conexion
-01124:  BSF    F89.0
+01260:  BSF    F89.0
 .................... 
 ....................     while (TRUE)
 ....................     {   
 ....................         //*/
 ....................         if(!PC.IsConnected)                 // Si se pierde la conexion
-01126:  BTFSC  3B.1
-01128:  BRA    1156
+01262:  BTFSC  3B.1
+01264:  BRA    1292
 ....................         {
 ....................             // Aplicamos freno de corto cuando no hay conexion
 ....................             motor_movement(&tires[0][0]), motor_movement(&tires[0][1]);
-0112A:  CLRF   4E
-0112C:  MOVLW  1F
-0112E:  MOVWF  4D
-01130:  MOVLB  0
-01132:  CALL   04BC
-01136:  CLRF   4E
-01138:  MOVLW  25
-0113A:  MOVWF  4D
-0113C:  CALL   04BC
+01266:  CLRF   4E
+01268:  MOVLW  1F
+0126A:  MOVWF  4D
+0126C:  MOVLB  0
+0126E:  CALL   04BC
+01272:  CLRF   4E
+01274:  MOVLW  25
+01276:  MOVWF  4D
+01278:  CALL   04BC
 ....................             motor_movement(&tires[1][0]), motor_movement(&tires[1][1]);
-01140:  CLRF   4E
-01142:  MOVLW  2B
-01144:  MOVWF  4D
-01146:  CALL   04BC
-0114A:  CLRF   4E
-0114C:  MOVLW  31
-0114E:  MOVWF  4D
-01150:  CALL   04BC
+0127C:  CLRF   4E
+0127E:  MOVLW  2B
+01280:  MOVWF  4D
+01282:  CALL   04BC
+01286:  CLRF   4E
+01288:  MOVLW  31
+0128A:  MOVWF  4D
+0128C:  CALL   04BC
 ....................             
 ....................             goto Connection_animation;
-01154:  BRA    10F6
+01290:  BRA    1232
 ....................         }
 .................... 
 ....................         // Si hay conexion
 ....................         if(PC.updated_data)                // Si se actualizo la posicion
-01156:  BTFSS  3B.0
-01158:  BRA    116C
+01292:  BTFSS  3B.0
+01294:  BRA    12A8
 ....................         {
 ....................             // Enviamos instrucciones a motores
 ....................             drive_tires(&xbox_controller, tires);
-0115A:  CLRF   3E
-0115C:  MOVLW  37
-0115E:  MOVWF  3D
-01160:  CLRF   40
-01162:  MOVLW  1F
-01164:  MOVWF  3F
-01166:  MOVLB  0
-01168:  BRA    0C56
+01296:  CLRF   3E
+01298:  MOVLW  37
+0129A:  MOVWF  3D
+0129C:  CLRF   40
+0129E:  MOVLW  1F
+012A0:  MOVWF  3F
+012A2:  MOVLB  0
+012A4:  BRA    0C56
 ....................             PC.updated_data = FALSE;
-0116A:  BCF    3B.0
+012A6:  BCF    3B.0
 ....................         }
-0116C:  BRA    1126
+012A8:  BRA    1262
 ....................         //*/
 .................... 
 ....................         /*/ Revision de  almacenamiento de variables
@@ -4101,7 +4263,7 @@ CCS PCH C Compiler, Version 5.112, 29001               28-abr.-24 23:23
 ....................     }
 .................... }
 .................... 
-0116E:  SLEEP 
+012AA:  SLEEP 
 .................... /*
 .................... El codigo esta compuesto de las siguientes partes
 .................... 

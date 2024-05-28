@@ -11,7 +11,7 @@ namespace Xbox_Controller_to_PIC
         public static Timer Send_timer = new Timer(40);
 
         // Puerto Serial
-        public static SerialPort Terreneitor = new SerialPort("COM8", 9600, Parity.None, 8, StopBits.One);
+        public static SerialPort Terreneitor = new SerialPort("COM8", 9600, Parity.None, 8, StopBits.One); 
         // Control de xbox
         public static Controller xbox_controller = new Controller(UserIndex.One);
         // Variables Globales
